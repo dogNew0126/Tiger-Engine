@@ -1,0 +1,12 @@
+﻿  main.cpp
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(15,15): warning C4244: “初始化”: 从“int”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(16,15): warning C4244: “初始化”: 从“int”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(114,26): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(115,26): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(119,19): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(120,19): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(121,27): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(122,27): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(89,19): warning C4101: “EBO”: 未引用的局部变量
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(177,23): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+  Tiger.vcxproj -> D:\xqb_workspace\internship\Tiger-Engine\x64\Debug\Tiger.exe
