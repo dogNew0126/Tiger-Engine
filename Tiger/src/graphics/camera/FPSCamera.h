@@ -50,6 +50,7 @@ namespace tiger {
 			inline GLfloat getMovementSpeed() { return m_MovementSpeed; }
 			inline GLfloat getMouseSensitivity() { return m_MouseSensitivity; }
 			inline GLfloat getFOV() { return m_FOV; }
+			inline glm::vec3 getPosition() { return m_Position; }
 		private:
 			void updateCameraVectors();
 		};
