@@ -1,6 +1,9 @@
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\camera\FPSCamera.cpp;D:\xqb_workspace\internship\Tiger-Engine\Tiger\x64\Debug\FPSCamera.obj
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\graphics\camera\FPSCamera.cpp;D:\xqb_workspace\internship\Tiger-Engine\Tiger\x64\Debug\FPSCamera.obj
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\graphics\Shader.cpp;D:\xqb_workspace\internship\Tiger-Engine\Tiger\x64\Debug\Shader.obj
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\graphics\Window.cpp;D:\xqb_workspace\internship\Tiger-Engine\Tiger\x64\Debug\Window.obj
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp;D:\xqb_workspace\internship\Tiger-Engine\Tiger\x64\Debug\main.obj
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\utils\FireUtils.cpp;D:\xqb_workspace\internship\Tiger-Engine\Tiger\x64\Debug\FireUtils.obj
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\utils\Time.cpp;D:\xqb_workspace\internship\Tiger-Engine\Tiger\x64\Debug\Time.obj
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\utils\Timer.cpp;D:\xqb_workspace\internship\Tiger-Engine\Tiger\x64\Debug\Timer.obj
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\utils\Timer.h;D:\xqb_workspace\internship\Tiger-Engine\Tiger\x64\Debug\Timer.obj
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\vendor\stb\stb_image.cpp;D:\xqb_workspace\internship\Tiger-Engine\Tiger\x64\Debug\stb_image.obj

@@ -8,16 +8,10 @@ namespace tiger {
 	private:
 		double startTime;
 	public:
-		Timer() {
-			startTime = glfwGetTime();
-		}
+		Timer();
 
-		void reset() {
-			startTime = glfwGetTime();
-		}
+		void reset();
 
-		double elapsed() {
-			return glfwGetTime() - startTime;
-		}
+		double elapsed();
 	};
 }
