@@ -1,4 +1,7 @@
-﻿  main.cpp
+﻿  Shader.cpp
+  Window.cpp
+  FPSCamera.cpp
+  main.cpp
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(142,16): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(143,16): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(152,28): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
@@ -7,10 +10,10 @@ D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(158,65): warning C42
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(158,50): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(159,27): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(160,27): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(163,57): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(165,58): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(167,54): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(169,55): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(163,70): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(165,71): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(167,67): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(169,68): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(171,49): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(177,22): warning C4244: “=”: 从“double”转换到“T”，可能丢失数据
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(177,22): warning C4244:         with
@@ -27,4 +30,13 @@ D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(179,22): warning C42
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(179,22): warning C4244:         [
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(179,22): warning C4244:             T=float
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(179,22): warning C4244:         ]
+  FireUtils.cpp
+  Time.cpp
+  Timer.cpp
+  Timer.h
+  正在生成代码...
+x64\Debug\Timer.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+glew32s.lib(glew.obj) : warning LNK4099: 未找到 PDB“”(使用“glew32s.lib(glew.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+LINK : warning LNK4098: 默认库“MSVCRT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
+LINK : warning LNK4098: 默认库“LIBCMT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
   Tiger.vcxproj -> D:\xqb_workspace\internship\Tiger-Engine\x64\Debug\Tiger.exe

@@ -3,7 +3,7 @@
 namespace tiger {
 
 	std::string FileUtils::readFile(const char* filepath) {
-		// Use the C library to read from a file (faster than fstream)
+		// Use the C library to read from a file
 		FILE* file = fopen(filepath, "rt");
 		fseek(file, 0, SEEK_END);
 		unsigned long length = ftell(file);

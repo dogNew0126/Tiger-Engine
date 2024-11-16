@@ -9,8 +9,4 @@ namespace tiger {
 	void Timer::reset() {
 		startTime = glfwGetTime();
 	}
-
-	double Timer::elapsed() {
-		return glfwGetTime() - startTime;
-	}
 };
