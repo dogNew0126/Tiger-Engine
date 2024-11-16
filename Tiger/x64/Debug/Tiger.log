@@ -1,15 +1,30 @@
 ﻿  main.cpp
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(15,15): warning C4244: “初始化”: 从“int”转换到“GLfloat”，可能丢失数据
 D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(16,15): warning C4244: “初始化”: 从“int”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(105,26): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(106,26): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(113,65): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(113,50): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(114,27): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(115,27): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(118,57): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(120,58): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(122,54): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(124,55): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
-D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(126,49): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(107,26): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(108,26): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(115,65): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(115,50): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(116,27): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(117,27): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(120,57): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(122,58): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(124,54): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(126,55): warning C4244: “参数”: 从“GLdouble”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(128,49): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(134,22): warning C4244: “=”: 从“double”转换到“T”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(134,22): warning C4244:         with
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(134,22): warning C4244:         [
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(134,22): warning C4244:             T=float
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(134,22): warning C4244:         ]
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(135,22): warning C4244: “=”: 从“double”转换到“T”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(135,22): warning C4244:         with
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(135,22): warning C4244:         [
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(135,22): warning C4244:             T=float
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(135,22): warning C4244:         ]
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(136,22): warning C4244: “=”: 从“double”转换到“T”，可能丢失数据
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(136,22): warning C4244:         with
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(136,22): warning C4244:         [
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(136,22): warning C4244:             T=float
+D:\xqb_workspace\internship\Tiger-Engine\Tiger\src\main.cpp(136,22): warning C4244:         ]
   Tiger.vcxproj -> D:\xqb_workspace\internship\Tiger-Engine\x64\Debug\Tiger.exe
