@@ -18,9 +18,6 @@
     <ClCompile Include="src\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\utils\Timer.h">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\Shader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -36,13 +33,13 @@
     <ClCompile Include="src\utils\Time.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\utils\Timer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\utils\FireUtils.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\utils\Logger.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\Timer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -69,6 +66,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\Logger.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Timer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

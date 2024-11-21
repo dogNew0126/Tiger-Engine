@@ -112,23 +112,25 @@ int main() {
 	glBindTexture(GL_TEXTURE_2D, diffuseMap);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
-	stbi_image_free(image);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	glBindTexture(GL_TEXTURE_2D, 0);
+	stbi_image_free(image);
+
 	// Specular map
 	image = stbi_load("res//container2_specular.png", &width, &height, &nrChannels, 0);
 	glBindTexture(GL_TEXTURE_2D, specularMap);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
-	stbi_image_free(image);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	glBindTexture(GL_TEXTURE_2D, 0);
+	stbi_image_free(image);
+
 	shader.enable();
 	shader.setUniform1i("material.diffuse", 0);
 	shader.setUniform1i("material.specular", 1);
@@ -171,9 +173,18 @@ int main() {
 			camera.processKeyboard(tiger::graphics::LEFT, time.getDeltaTime());
 		if (window.isKeyPressed(GLFW_KEY_D))
 			camera.processKeyboard(tiger::graphics::RIGHT, time.getDeltaTime());
+		if (window.isKeyPressed(GLFW_KEY_SPACE))
+			camera.processKeyboard(tiger::graphics::UPWARDS, time.getDeltaTime());
+		if (window.isKeyPressed(GLFW_KEY_LEFT_CONTROL))
+			camera.processKeyboard(tiger::graphics::DOWNWARDS, time.getDeltaTime());
 
 		camera.processMouseScroll(window.getScrollY() * 6);
 		window.resetScroll();
+
+		// Change lightPos
+		lightPos.x = sin(glfwGetTime()) * 2.0f;
+		lightPos.y = cos(glfwGetTime()) * 1.5f;
+		lightPos.z = -2.0f;
 
 		// Cube
 		shader.enable();
@@ -187,8 +198,8 @@ int main() {
 		shader.setUniform3f("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
 
 		glm::mat4 model(1);
-
-		model = glm::rotate(model, (GLfloat)count.elapsed(), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -7.0f));
+		model = glm::rotate(model, (GLfloat)count.elapsed(), glm::vec3(1.0f, 0.5f, 0.2f));
 		model = glm::scale(model, glm::vec3(2, 2, 2));
 
 		glm::mat4 view;

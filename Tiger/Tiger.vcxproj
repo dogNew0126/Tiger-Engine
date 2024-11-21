@@ -147,7 +147,6 @@
     <ClCompile Include="src\utils\Logger.cpp" />
     <ClCompile Include="src\utils\Time.cpp" />
     <ClCompile Include="src\utils\Timer.cpp" />
-    <ClCompile Include="src\utils\Timer.h" />
     <ClCompile Include="vendor\stb\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +157,7 @@
     <ClInclude Include="src\utils\FileUtils.h" />
     <ClInclude Include="src\utils\Logger.h" />
     <ClInclude Include="src\utils\Time.h" />
+    <ClInclude Include="src\utils\Timer.h" />
     <ClInclude Include="vendor\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
