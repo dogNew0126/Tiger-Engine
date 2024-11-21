@@ -10,6 +10,7 @@
 #include "utils/Time.h"
 #include "graphics/camera/FPSCamera.h"
 #include "utils/Logger.h"
+#include "graphics/Model.h"
 
 tiger::graphics::FPSCamera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 tiger::graphics::Window window("Arcane Engine", 1366, 768);
@@ -85,7 +86,7 @@ int main() {
 	};
 
 	glm::vec3 pointLightPositions[] = {
-		glm::vec3(0.7f,  0.2f,  2.0f),
+		glm::vec3(3.0f,  0.2f,  -1.0f),
 		glm::vec3(2.3f, -3.3f, -4.0f),
 		glm::vec3(-4.0f,  2.0f, -12.0f),
 		glm::vec3(0.0f,  0.0f, -3.0f)
@@ -163,19 +164,9 @@ int main() {
 
 
 	shader.enable();
-	shader.setUniform1i("material.diffuse", 0);
-	shader.setUniform1i("material.specular", 1);
-	shader.setUniform1i("material.emission", 2);
-
-	// Activate a bind to texture unit 0 with our diffuse map
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, diffuseMap);
-	// Activate a bind to texture unit 1 with our specular map
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, specularMap);
-	// Activate a bind to texture unit 2 with our emission map
-	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, emissionMap);
+	// Load model
+	std::string test = "res/3D_Models/Sponza/sponza.obj";
+	tiger::graphics::Model nanosuitModel(test.c_str());
 
 	// Prepare the fps counter right before the first tick
 	tiger::Timer timer;
@@ -191,7 +182,7 @@ int main() {
 	GLfloat lastY = window.getMouseY();
 
 	while (!window.closed()) {
-		glClearColor(0.2f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.2f, 1.0f);
 		window.clear();
 		time.update();
 
@@ -288,15 +279,12 @@ int main() {
 		shader.setUniformMat4("projection", projection);
 		shader.setUniform1f("time", glfwGetTime());
 
-		glBindVertexArray(VAO);
-		for (unsigned int i = 0; i < 10; i++) {
-			glm::mat4 model;
-			model = glm::translate(model, cubePositions[i]);
-			model = glm::rotate(model, glm::radians(20.0f * (i + (float)glfwGetTime())), glm::vec3(0.3f, 0.5f, 1.0f));
-			shader.setUniformMat4("model", model);
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-		}
-		glBindVertexArray(0);
+		// Draw model
+		glm::mat4 model;
+		model = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.01f));
+		model = glm::translate(model, glm::vec3(0.0f, -11.0f, 0.0f));
+		shader.setUniformMat4("model", model);
+		nanosuitModel.Draw(shader);
 
 		glBindVertexArray(lightVAO);
 		lampShader.enable();
@@ -304,7 +292,7 @@ int main() {
 		lampShader.setUniformMat4("projection", projection);
 
 		// LightCube
-		for (unsigned int i = 0; i < 4; ++i) {
+		for (unsigned int i = 0; i < 1; ++i) {
 			glm::mat4 model = glm::mat4();
 			model = glm::translate(model, pointLightPositions[i]);
 			model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));

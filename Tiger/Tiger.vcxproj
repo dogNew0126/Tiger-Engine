@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLFW\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLEW\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLM\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\SOIL\include;D:\xqb_workspace\internship\Tiger-Engine\Tiger\vendor\stb;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLFW\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLEW\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLFW\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLEW\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLM\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\SOIL\include;D:\xqb_workspace\internship\Tiger-Engine\Tiger\vendor\stb;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\Assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLFW\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLEW\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\Assimp\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLFW\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLEW\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLM\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\SOIL\include;D:\xqb_workspace\internship\Tiger-Engine\Tiger\vendor\stb;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLFW\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLEW\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLFW\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLEW\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLM\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\SOIL\include;D:\xqb_workspace\internship\Tiger-Engine\Tiger\vendor\stb;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\Assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLFW\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLEW\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\Assimp\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -117,7 +117,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -135,11 +135,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\graphics\camera\FPSCamera.cpp" />
+    <ClCompile Include="src\graphics\Mesh.cpp" />
+    <ClCompile Include="src\graphics\Model.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -151,6 +153,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\camera\FPSCamera.h" />
+    <ClInclude Include="src\graphics\Mesh.h" />
+    <ClInclude Include="src\graphics\Model.h" />
     <ClInclude Include="src\graphics\Shader.h" />
     <ClInclude Include="src\graphics\Window.h" />
     <ClInclude Include="src\shaders\basic.vert" />
