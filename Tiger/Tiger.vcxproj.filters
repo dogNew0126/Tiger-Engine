@@ -73,9 +73,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\directionalLight.frag" />
+    <None Include="src\shaders\multipleLight.frag" />
     <None Include="src\shaders\lightCube.frag" />
-    <None Include="src\shaders\pointlight.frag" />
-    <None Include="src\shaders\spotlight.frag" />
   </ItemGroup>
 </Project>

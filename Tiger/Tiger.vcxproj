@@ -161,10 +161,8 @@
     <ClInclude Include="vendor\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\directionalLight.frag" />
+    <None Include="src\shaders\multipleLight.frag" />
     <None Include="src\shaders\lightCube.frag" />
-    <None Include="src\shaders\pointlight.frag" />
-    <None Include="src\shaders\spotlight.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
