@@ -9,6 +9,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "utils/Time.h"
 #include "graphics/camera/FPSCamera.h"
+#include "utils/Logger.h"
 
 tiger::graphics::FPSCamera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 tiger::graphics::Window window("Arcane Engine", 1366, 768);
@@ -16,6 +17,9 @@ GLfloat yaw = -90.0f;
 GLfloat pitch = 0.0f;
 
 int main() {
+	tiger::Logger log;
+	log.info("Shader Initialization", "Shader successfully initialized");
+
 	glEnable(GL_DEPTH_TEST);
 
 	tiger::graphics::Shader shader("src/shaders/basic.vert", "src/shaders/basic.frag");
@@ -143,7 +147,7 @@ int main() {
 	GLfloat lastY = window.getMouseY();
 
 	while (!window.closed()) {
-		glClearColor(0.0f, 0.05f, 0.15f, 1.0f);
+		glClearColor(0.2f, 0.0f, 0.0f, 1.0f);
 		window.clear();
 		time.update();
 
@@ -173,20 +177,19 @@ int main() {
 
 		// Cube
 		shader.enable();
-		glm::vec3 lightColour = glm::vec3(1.0f, 1.0f, 1.0f);
-		lightColour.x = sin(count.elapsed() * 2.0f);
-		lightColour.y = sin(count.elapsed() * 0.7f);
-		lightColour.z = sin(count.elapsed() * 1.3f);
 
 		glm::vec3 cameraPosition = camera.getPosition();
 		shader.setUniform3f("viewPos", glm::vec3(cameraPosition.x, cameraPosition.y, cameraPosition.z));
 		shader.setUniform1f("material.shininess", 32.0f);
 		shader.setUniform3f("light.position", glm::vec3(lightPos.x, lightPos.y, lightPos.z));
-		shader.setUniform3f("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
+		shader.setUniform3f("light.ambient", glm::vec3(0.15f, 0.15f, 0.15f));
 		shader.setUniform3f("light.diffuse", glm::vec3(0.6f, 0.6f, 0.6f));
 		shader.setUniform3f("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
 
 		glm::mat4 model(1);
+
+		model = glm::rotate(model, (GLfloat)count.elapsed(), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(2, 2, 2));
 
 		glm::mat4 view;
 		view = camera.getViewMatrix();

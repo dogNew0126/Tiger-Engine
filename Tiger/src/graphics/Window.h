@@ -51,7 +51,7 @@ namespace tiger {
 			bool closed() const;
 
 			/**
-			* Function that checks if a key is being pressed
+			* checks if a key is being pressed
 			*
 			* @param keycode The keycode of the key that you want to check if it is being pressed
 			* @return returns true if the key is being pressed
@@ -59,7 +59,7 @@ namespace tiger {
 			bool isKeyPressed(unsigned int keycode) const;
 
 			/**
-			* Function that checks if a mouse button is being pressed
+			* checks if a mouse button is being pressed
 			*
 			* @param code The code of the mouse button that you want to check if it is being pressed
 			* @return returns true if the mouse button is being pressed
