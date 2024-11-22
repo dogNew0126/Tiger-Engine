@@ -48,6 +48,21 @@
     <ClCompile Include="src\graphics\Model.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\OpenGL\Buffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\OpenGL\IndexBuffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\OpenGL\VertexArray.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\Terrain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\OpenGL\Utility.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Shader.h">
@@ -83,9 +98,25 @@
     <ClInclude Include="src\graphics\Model.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\OpenGL\Buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\OpenGL\IndexBuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\OpenGL\VertexArray.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\terrain\Terrain.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\OpenGL\Utility.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\multipleLight.frag" />
     <None Include="src\shaders\lightCube.frag" />
+    <None Include="src\shaders\terrain.frag" />
   </ItemGroup>
 </Project>

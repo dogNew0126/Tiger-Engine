@@ -66,7 +66,7 @@ namespace tiger {
 		}
 
 		void FPSCamera::processMouseScroll(GLfloat offset) {
-			if (m_FOV >= 1.0f && m_FOV <= FOV) {
+			if (offset != 0 && m_FOV >= 1.0f && m_FOV <= FOV) {
 				m_FOV -= offset;
 			}
 			if (m_FOV < 1.0f) {
