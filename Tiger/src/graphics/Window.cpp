@@ -16,6 +16,8 @@ namespace tiger {
 				glfwDestroyWindow(m_Window);
 				glfwTerminate();
 			}
+			memset(m_Keys, 0, sizeof(bool) * MAX_KEYS);
+			memset(m_Buttons, 0, sizeof(bool) * MAX_BUTTONS);
 		}
 
 		Window::~Window() {
@@ -125,7 +127,7 @@ namespace tiger {
 		/*                   Getters                    */
 		bool Window::isKeyPressed(unsigned int keycode) const {
 			if (keycode >= MAX_KEYS) {
-				//TODO: LOG THIS
+				utils::Logger::getInstance().error("logged_files/input_errors.txt", "Input Check", "Key checked is out of bounds (ie not supported)");
 				return false;
 			}
 			else {
@@ -135,7 +137,7 @@ namespace tiger {
 
 		bool Window::isMouseButtonPressed(unsigned int code) const {
 			if (code >= MAX_BUTTONS) {
-				//TODO: LOG THIS
+				utils::Logger::getInstance().error("logged_files/input_errors.txt", "Input Check", "Key checked is out of bounds (ie not supported)");
 				return false;
 			}
 			else {

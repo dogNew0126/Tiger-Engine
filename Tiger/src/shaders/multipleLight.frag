@@ -1,7 +1,6 @@
 #version 430 core
 
 struct Material {
-	sampler2D emission;
 	sampler2D texture_diffuse1;
 	sampler2D texture_diffuse2;
 	sampler2D texture_diffuse3;
@@ -46,7 +45,7 @@ struct SpotLight {
 	vec3 specular;
 };
 
-#define NR_POINT_LIGHTS 4
+#define NR_POINT_LIGHTS 1
 
 in vec2 TexCoords;
 in vec3 Normal;
