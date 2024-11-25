@@ -17,6 +17,7 @@ namespace tiger {
 			GLuint m_VertexSideCount;
 			GLushort m_HeightMapScale;
 
+			glm::mat4 m_ModelMatrix;
 			glm::vec3 m_Position;
 			graphics::Mesh* m_Mesh;
 

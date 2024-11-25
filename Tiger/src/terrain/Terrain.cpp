@@ -1,6 +1,9 @@
 #include "Terrain.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "../platform/OpenGL/Utility.h"
+#include "../utils/Logger.h"
 
 namespace tiger {
 	namespace terrain {
@@ -8,6 +11,8 @@ namespace tiger {
 		Terrain::Terrain(const glm::vec3& worldPosition)
 			: m_Position(worldPosition)
 		{
+			m_ModelMatrix = glm::translate(m_ModelMatrix, worldPosition);
+
 			std::vector<graphics::Vertex> vertices;
 			std::vector<unsigned int> indices;
 			std::vector<graphics::Texture> textures;
@@ -17,7 +22,7 @@ namespace tiger {
 			unsigned char* heightMapImage = stbi_load("res/terrain/heightMap.png", &mapWidth, &mapHeight, &nrChannels, 1);
 			if (mapWidth != mapHeight) {
 				std::cout << "ERROR: Can't use a heightmap with a different width and height" << std::endl;
-				// TODO: Log this
+				utils::Logger::getInstance().error("logged_files/terrain_creation.txt", "terrain initialization", "Can't use a heightmap with a different width and height");
 				return;
 			}
 
@@ -78,6 +83,7 @@ namespace tiger {
 			delete m_Mesh;
 		}
 		void Terrain::Draw(graphics::Shader& shader) const {
+			shader.setUniformMat4("model", m_ModelMatrix);
 			m_Mesh->Draw(shader);
 		}
 

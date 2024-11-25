@@ -113,6 +113,9 @@
     <ClInclude Include="src\platform\OpenGL\Utility.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\utils\Singleton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\multipleLight.frag" />

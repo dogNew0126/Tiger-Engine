@@ -1,5 +1,7 @@
 #include "Shader.h"
 
+#include "../utils/Logger.h"
+
 namespace tiger {
 	namespace graphics {
 
@@ -42,6 +44,8 @@ namespace tiger {
 				std::vector<char> error(length);
 				glGetShaderInfoLog(vertex, length, &length, &error[0]);
 				std::cout << "Failed to compile vertex shader!" << std::endl << &error[0] << std::endl;
+				utils::Logger::getInstance().error("logged_files/shader_creation.txt", "shader initialization", "failed to compile vertex shader " + error[0]);
+
 				glDeleteShader(vertex);
 				return 0;
 			}
@@ -59,6 +63,8 @@ namespace tiger {
 				std::vector<char> error(length);
 				glGetShaderInfoLog(fragment, length, &length, &error[0]);
 				std::cout << "Failed to compile fragment shader!" << std::endl << &error[0] << std::endl;
+				utils::Logger::getInstance().error("logged_files/shader_creation.txt", "shader initialization", "failed to compile fragment shader " + error[0]);
+
 				glDeleteShader(fragment);
 				return 0;
 			}

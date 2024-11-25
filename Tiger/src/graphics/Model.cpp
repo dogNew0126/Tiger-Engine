@@ -4,6 +4,7 @@
 #include <stb_image.h>
 
 #include "../platform/OpenGL/Utility.h"
+#include "../utils/Logger.h"
 
 namespace tiger {
 	namespace graphics {
@@ -22,7 +23,8 @@ namespace tiger {
 			Assimp::Importer import;
 			const aiScene * scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
 			if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
-				std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl; // TODO Log this
+				std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
+				utils::Logger::getInstance().error("logged_files/model_loading.txt", "model initialization", import.GetErrorString());
 				return;
 			}
 			m_Directory = path.substr(0, path.find_last_of('/'));

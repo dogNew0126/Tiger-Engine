@@ -3,6 +3,7 @@
 #define SHOW_MOUSE 0
 
 #include "Window.h"
+#include "../utils/Logger.h"
 
 namespace tiger {
 	namespace graphics {
@@ -11,6 +12,7 @@ namespace tiger {
 			: m_Title(title), m_Width(width), m_Height(height)
 		{
 			if (!init()) {
+				utils::Logger::getInstance().error("logged_files/window_creation.txt", "Window Initialization", "Could not initialize window class");
 				glfwDestroyWindow(m_Window);
 				glfwTerminate();
 			}
@@ -24,6 +26,7 @@ namespace tiger {
 		bool Window::init() {
 			if (!glfwInit()) {
 				std::cout << "GLFW Failed To Initialize" << std::endl;
+				utils::Logger::getInstance().error("logged_files/window_creation.txt", "Window Initialization", "Could not initialize the GLFW window");
 			}
 
 			// Create the window
@@ -37,6 +40,7 @@ namespace tiger {
 
 			if (!m_Window) {
 				std::cout << "GLFW Window Couldn't Be Created" << std::endl;
+				utils::Logger::getInstance().error("logged_files/window_creation.txt", "Window Initialization", "Could not create the GLFW window");
 			}
 
 			// Setup the mouse settings
@@ -84,6 +88,7 @@ namespace tiger {
 			// Initialize GLEW (allows us to use newer versions of OpenGL)
 			if (glewInit() != GLEW_OK) {
 				std::cout << "Could not Initialize GLEW" << std::endl;
+				utils::Logger::getInstance().error("logged_files/window_creation.txt", "Window Initialization", "Could not initialize the GLEW");
 				return 0;
 			}
 			std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
