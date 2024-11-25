@@ -7,11 +7,16 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
 #include "utils/Time.h"
 #include "graphics/camera/FPSCamera.h"
 #include "utils/Logger.h"
 #include "graphics/Model.h"
 #include "terrain/Terrain.h"
+
+#include <ft2build.h>
+#include FT_FREETYPE_H
+#include <freetype-gl.h>
 
 tiger::graphics::FPSCamera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 tiger::graphics::Window window("Arcane Engine", 1366, 768);
