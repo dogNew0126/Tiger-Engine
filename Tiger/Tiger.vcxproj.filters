@@ -139,5 +139,6 @@
     <None Include="src\shaders\multipleLight.frag" />
     <None Include="src\shaders\lightCube.frag" />
     <None Include="src\shaders\terrain.frag" />
+    <None Include="src\shaders\basic.frag" />
   </ItemGroup>
 </Project>

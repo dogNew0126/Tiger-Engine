@@ -9,8 +9,10 @@ namespace tiger {
 
 		class Renderer {
 		public:
+			Renderer();
+
 			void submit(Renderable3D* renderable);
-			void flush(Shader& shader);
+			void flush(Shader& shader, Shader &outlineShader);
 
 		private:
 

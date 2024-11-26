@@ -19,7 +19,7 @@ namespace tiger {
 		//std::vector<Entity*> m_Entities;
 
 		std::vector<graphics::Renderable3D*> m_Renderables;
-		graphics::Shader terrainShader, modelShader;
+		graphics::Shader terrainShader, modelShader, outlineShader;
 
 	public:
 		Scene3D(graphics::FPSCamera* camera, graphics::Window* window);
