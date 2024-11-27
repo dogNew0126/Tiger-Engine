@@ -29,7 +29,7 @@ namespace tiger {
 			// Map Information
 			m_VertexSideCount = mapWidth;
 			m_TerrainSize = 4;
-			m_HeightMapScale = 100;
+			m_HeightMapScale = 150;
 
 			// Vertex generation
 			for (GLuint z = 0; z < m_VertexSideCount; z++) {

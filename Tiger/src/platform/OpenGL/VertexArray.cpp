@@ -17,12 +17,12 @@ namespace tiger {
 		void VertexArray::addBuffer(Buffer* buffer, int index) {
 
 			bind();
+
 			buffer->bind();
-
 			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);
-
+			glVertexAttribPointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, buffer->getComponentCount() * sizeof(GL_FLOAT), nullptr);
 			buffer->unbind();
+
 			unbind();
 		}
 

@@ -3,12 +3,13 @@
 namespace tiger {
 	namespace opengl {
 
-		IndexBuffer::IndexBuffer(GLuint* data, GLsizei amount) : m_Count(amount)
-		{
+		IndexBuffer::IndexBuffer() {
 			glGenBuffers(1, &m_BufferID);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_BufferID);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, amount * sizeof(GLuint), data, GL_STATIC_DRAW);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		}
+
+		IndexBuffer::IndexBuffer(GLuint* data, GLsizei amount){
+			glGenBuffers(1, &m_BufferID);
+			load(data, amount);
 		}
 
 		IndexBuffer::~IndexBuffer() {
@@ -19,6 +20,14 @@ namespace tiger {
 		}
 		void IndexBuffer::unbind() const {
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		}
+
+		void IndexBuffer::load(GLuint* data, GLsizei amount) {
+			m_Count = amount;
+
+			bind();
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, amount * sizeof(GLuint), data, GL_STATIC_DRAW);
+			unbind();
 		}
 
 	}

@@ -30,17 +30,26 @@ void main() {
 	//);
 	
 	// Sharpen kernel
-	float kernel[9] = float[] (
-		-1, -1, -1,
-		-1,  9, -1,
-		-1, -1, -1
-	);
+	//float kernel[9] = float[] (
+	//	-1, -1, -1,
+	//	-1,  9, -1,
+	//	-1, -1, -1
+	//);
+
 	// Edge Highlight kernel
 	//float kernel[9] = float[] (
 	//	-2, -2, -2,
 	//	-2, 15, -2,
 	//	-2, -2, -2
 	//);
+
+	// No Post Processing Kernel
+	float kernel[9] = float[] (
+		0, 0, 0,
+		0, 1, 0,
+		0, 0, 0
+	);
+
 	vec3 colour = vec3(0.0);
 	// Apply the kernel
 	for(int i = 0; i < 9; ++i) {
