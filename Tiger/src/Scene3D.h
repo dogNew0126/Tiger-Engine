@@ -1,10 +1,11 @@
 #pragma once
 
-#include "graphics\renderer\Renderable3D.h"
-#include "graphics\camera\FPSCamera.h"
-#include "graphics\renderer\Renderer.h"
-#include "terrain\Terrain.h"
-#include "graphics\Window.h"
+#include "graphics/renderer/Renderable3D.h"
+#include "graphics/camera/FPSCamera.h"
+#include "graphics/renderer/Renderer.h"
+#include "terrain/Terrain.h"
+#include "graphics/Window.h"
+#include "graphics/MeshFactory.h"
 
 namespace tiger {
 
@@ -15,6 +16,7 @@ namespace tiger {
 		graphics::FPSCamera* m_Camera;
 		graphics::Renderer* m_Renderer;
 		terrain::Terrain* m_Terrain;
+		graphics::MeshFactory m_meshFactory;
 		// Some sort of list of entities (tied to models that are in the Renderer (should this be changed to Renderer3D?))
 		//std::vector<Entity*> m_Entities;
 

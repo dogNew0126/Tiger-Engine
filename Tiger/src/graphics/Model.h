@@ -15,6 +15,7 @@ namespace tiger {
 		class Model {
 		public:
 			Model(const char* path);
+			Model(const std::vector<Mesh>& meshes);
 
 			void Draw(Shader& shader) const;
 

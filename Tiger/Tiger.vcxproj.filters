@@ -72,6 +72,9 @@
     <ClCompile Include="src\Scene3D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\MeshFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Shader.h">
@@ -134,9 +137,12 @@
     <ClInclude Include="src\graphics\renderer\Renderable3D.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\MeshFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\multipleLight.frag" />
+    <None Include="src\shaders\model.frag" />
     <None Include="src\shaders\lightCube.frag" />
     <None Include="src\shaders\terrain.frag" />
     <None Include="src\shaders\basic.frag" />
