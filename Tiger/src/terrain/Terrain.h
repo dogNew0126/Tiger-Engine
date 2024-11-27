@@ -27,7 +27,7 @@ namespace tiger {
 
 			void Draw(graphics::Shader& shader) const;
 
-			inline glm::vec3 getPosition() { return m_Position; }
+			inline const glm::vec3& getPosition() const { return m_Position; }
 
 		private:
 

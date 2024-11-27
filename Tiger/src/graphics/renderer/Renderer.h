@@ -1,15 +1,17 @@
 #pragma once
 
 #include "../Model.h"
+#include "../camera/FPSCamera.h"
 #include "Renderable3D.h"
 #include <deque>
+#include <glm/gtx/norm.hpp>
 
 namespace tiger {
 	namespace graphics {
 
 		class Renderer {
 		public:
-			Renderer();
+			Renderer(FPSCamera* camera);
 
 			void submitOpaque(Renderable3D* renderable);
 			void submitTransparent(Renderable3D* renderable);
@@ -20,6 +22,8 @@ namespace tiger {
 
 			std::deque<Renderable3D*> m_OpaqueRenderQueue;
 			std::deque<Renderable3D*> m_TransparentRenderQueue;
+
+			FPSCamera* m_Camera;
 
 		};
 

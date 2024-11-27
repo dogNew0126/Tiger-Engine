@@ -67,14 +67,14 @@ namespace tiger {
 			bool isMouseButtonPressed(unsigned int keycode) const;
 
 			// Getters and setters
-			inline double getMouseX() { return mx; }
-			inline double getMouseY() { return my; }
-			inline double getScrollX() { return scrollX; }
-			inline double getScrollY() { return scrollY; }
+			inline double getMouseX() const { return mx; }
+			inline double getMouseY() const { return my; }
+			inline double getScrollX() const { return scrollX; }
+			inline double getScrollY() const { return scrollY; }
 			inline void resetScroll() { scrollX = 0; scrollY = 0; }
-			inline void getMousePosition(double& x, double& y) { x = mx; y = my; }
-			inline int getWidth() { return m_Width; }
-			inline int getHeight() { return m_Height; }
+			inline void getMousePosition(double& x, double& y) const { x = mx; y = my; }
+			inline int getWidth() const { return m_Width; }
+			inline int getHeight() const { return m_Height; }
 
 		private:
 			/**

@@ -9,7 +9,7 @@ namespace tiger {
 	Scene3D::Scene3D(graphics::FPSCamera* camera, graphics::Window* window)
 		: terrainShader("src/shaders/basic.vert", "src/shaders/terrain.frag"), modelShader("src/shaders/basic.vert", "src/shaders/model.frag"), m_Camera(camera), m_Window(window), outlineShader("src/shaders/basic.vert", "src/shaders/basic.frag")
 	{
-		m_Renderer = new graphics::Renderer();
+		m_Renderer = new graphics::Renderer(camera);
 		m_Terrain = new terrain::Terrain(glm::vec3(0.0f, -20.0f, 0.0f));
 
 		init();
