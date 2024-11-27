@@ -22,7 +22,7 @@ namespace tiger {
 	void Scene3D::init() {
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_STENCIL_TEST);
-		//glEnable(GL_CULL_FACE);
+		glEnable(GL_CULL_FACE);
 
 		// Load models
 		std::vector<graphics::Mesh> meshes;
@@ -32,6 +32,8 @@ namespace tiger {
 		//Add(new graphics::Renderable3D(glm::vec3(90.0f, -10.0f, 90.0f), glm::vec3(3.0f, 3.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0, new tiger::graphics::Model("res/3D_Models/Crysis/nanosuit.obj"), false));
 		//Add(new graphics::Renderable3D(glm::vec3(200.0f, 200.0f, 100.0f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec3(0.0f, 0.0f, 0.0f), 0, new tiger::graphics::Model("res/3D_Models/Sponza/sponza.obj"), true));
 		Add(new graphics::Renderable3D(glm::vec3(40, 10, 40), glm::vec3(10, 10, 10), glm::vec3(1.0, 0.0, 0.0), glm::radians(90.0f), new graphics::Model(meshes), false, true));
+		Add(new graphics::Renderable3D(glm::vec3(80, 20, 80), glm::vec3(15, 15, 15), glm::vec3(1.0, 0.0, 0.0), glm::radians(90.0f), new graphics::Model(meshes), false, true));
+		Add(new graphics::Renderable3D(glm::vec3(120, 20, 120), glm::vec3(15, 15, 15), glm::vec3(1.0, 0.0, 0.0), glm::radians(90.0f), new graphics::Model(meshes), false, true));
 
 
 		// Terrain shader

@@ -75,6 +75,9 @@
     <ClCompile Include="src\graphics\MeshFactory.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\OpenGL\Framebuffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Shader.h">
@@ -140,11 +143,16 @@
     <ClInclude Include="src\graphics\MeshFactory.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\OpenGL\Framebuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\model.frag" />
     <None Include="src\shaders\lightCube.frag" />
     <None Include="src\shaders\terrain.frag" />
     <None Include="src\shaders\basic.frag" />
+    <None Include="src\shaders\framebufferColourBuffer.vert" />
+    <None Include="src\shaders\framebufferColourBuffer.frag" />
   </ItemGroup>
 </Project>

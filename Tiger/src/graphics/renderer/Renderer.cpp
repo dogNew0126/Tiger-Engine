@@ -19,6 +19,7 @@ namespace tiger {
 
 		void Renderer::flush(Shader& shader, Shader &outlineShader) {
 			// Render opaque objects
+			glEnable(GL_CULL_FACE);
 			while (!m_OpaqueRenderQueue.empty()) {
 
 				Renderable3D* current = m_OpaqueRenderQueue.front();
@@ -62,6 +63,9 @@ namespace tiger {
 			}
 
 			// Sort then render transparent objects (from back to front)
+
+			glDisable(GL_CULL_FACE); // Don't backface cull transparent objects
+
 			std::sort(m_TransparentRenderQueue.begin(), m_TransparentRenderQueue.end(),
 				[this](Renderable3D* a, Renderable3D* b) -> bool
 			{

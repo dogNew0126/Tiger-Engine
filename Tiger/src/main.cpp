@@ -14,6 +14,8 @@
 #include "graphics/Model.h"
 #include "terrain/Terrain.h"
 #include "Scene3D.h"
+#include "platform/OpenGL/Framebuffer.h"
+#include "graphics/MeshFactory.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -24,6 +26,10 @@ int main() {
 	tiger::graphics::FPSCamera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 	tiger::graphics::Window window("Tiger Engine", 1366, 768);
 	tiger::Scene3D scene(&camera, &window);
+	tiger::opengl::Framebuffer framebuffer(window.getWidth(), window.getHeight());
+	tiger::graphics::Shader framebufferShader("src/shaders/framebufferColourBuffer.vert", "src/shaders/framebufferColourBuffer.frag");
+	tiger::graphics::MeshFactory meshFactory;
+	tiger::graphics::Mesh* colourBufferMesh = meshFactory.CreateScreenQuad(framebuffer.getColourBufferTexture());
 
 	tiger::Timer fpsTimer;
 
@@ -37,7 +43,7 @@ int main() {
 	GLfloat lastY = window.getMouseY();
 
 	while (!window.closed()) {
-		glClearColor(0.5f, 0.0f, 0.0f, 1.0f);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		window.clear();
 		deltaTime.update();
 
@@ -69,8 +75,19 @@ int main() {
 		camera.processMouseScroll(window.getScrollY() * 6);
 		window.resetScroll();
 
+		// Draw the scene to our custom framebuffer
+		framebuffer.bind();
+		window.clear();
+
 		scene.onUpdate(deltaTime.getDeltaTime());
 		scene.onRender();
+
+		// Draw to the default scene buffer
+		framebuffer.unbind();
+		glClear(GL_COLOR_BUFFER_BIT);
+		framebufferShader.enable();
+		colourBufferMesh->Draw(framebufferShader);
+		framebufferShader.disable();
 
 		window.update();
 		if (fpsTimer.elapsed() >= 1) {
