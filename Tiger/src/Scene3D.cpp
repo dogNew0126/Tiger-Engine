@@ -22,6 +22,7 @@ namespace tiger {
 	void Scene3D::init() {
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_STENCIL_TEST);
+		//glEnable(GL_CULL_FACE);
 
 		// Load models
 		std::vector<graphics::Mesh> meshes;
