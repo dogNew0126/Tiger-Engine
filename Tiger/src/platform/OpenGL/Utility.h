@@ -6,7 +6,9 @@
 #include <stb_image.h>
 #include <iostream>
 #include <vector>
+#include <glm/common.hpp>
 #include "../../utils/Logger.h"
+#include "../../Defs.h"
 
 namespace tiger {
 	namespace opengl {
