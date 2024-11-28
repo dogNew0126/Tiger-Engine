@@ -17,18 +17,19 @@ namespace tiger {
 			m_TransparentRenderQueue.push_back(renderable);
 		}
 
-		void Renderer::flush(Shader& shader, Shader &outlineShader) {
-			// Render opaque objects
-			glEnable(GL_CULL_FACE);
-			while (!m_OpaqueRenderQueue.empty()) {
+		void Renderer::flushOpaque(Shader& shader, Shader& outlineShader) {
 
-				Renderable3D* current = m_OpaqueRenderQueue.front();
+			glEnable(GL_CULL_FACE);
+			// Render opaque objects
+			while (!m_OpaqueRenderQueue.empty()) {
 
 				// Drawing prepration
 				glEnable(GL_DEPTH_TEST);
 				glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 				glStencilFunc(GL_ALWAYS, 1, 0xFF);
 				glStencilMask(0xFF);
+
+				Renderable3D* current = m_OpaqueRenderQueue.front();
 
 				// Draw the renderable 3d
 				glm::mat4 model(1);
@@ -61,6 +62,9 @@ namespace tiger {
 
 				m_OpaqueRenderQueue.pop_front();
 			}
+		}
+
+		void Renderer::flushTransparent(Shader& shader, Shader& outlineShader) {
 
 			// Sort then render transparent objects (from back to front)
 
@@ -75,10 +79,7 @@ namespace tiger {
 			// Sort then render transparent objects
 			while (!m_TransparentRenderQueue.empty()) {
 
-				Renderable3D* current = m_TransparentRenderQueue.front();
-
 				// Drawing prepration
-				glEnable(GL_DEPTH_TEST);
 				glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 				glStencilFunc(GL_ALWAYS, 1, 0xFF);
 				glStencilMask(0xFF);
@@ -87,6 +88,8 @@ namespace tiger {
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Tell OpenGL how to blend, in this case make the new object have the transparency of its alpha and the object in the back is 1-alpha
 				
+				Renderable3D* current = m_TransparentRenderQueue.front();
+
 				// Draw the renderable 3d
 				glm::mat4 model(1);
 				model = glm::translate(model, current->getPosition());

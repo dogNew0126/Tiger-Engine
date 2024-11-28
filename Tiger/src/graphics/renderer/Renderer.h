@@ -16,7 +16,8 @@ namespace tiger {
 			void submitOpaque(Renderable3D* renderable);
 			void submitTransparent(Renderable3D* renderable);
 
-			void flush(Shader& shader, Shader &outlineShader);
+			void flushOpaque(Shader& shader, Shader& outlineShader);
+			void flushTransparent(Shader& shader, Shader& outlineShader);
 
 		private:
 

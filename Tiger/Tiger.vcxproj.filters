@@ -162,5 +162,7 @@
     <None Include="src\shaders\framebufferColourBuffer.frag" />
     <None Include="src\shaders\skybox.vert" />
     <None Include="src\shaders\skybox.frag" />
+    <None Include="src\shaders\modelReflection.frag" />
+    <None Include="src\shaders\modelRefraction.frag" />
   </ItemGroup>
 </Project>

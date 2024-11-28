@@ -193,6 +193,8 @@
     <None Include="src\shaders\framebufferColourBuffer.vert" />
     <None Include="src\shaders\model.frag" />
     <None Include="src\shaders\lightCube.frag" />
+    <None Include="src\shaders\modelReflection.frag" />
+    <None Include="src\shaders\modelRefraction.frag" />
     <None Include="src\shaders\skybox.frag" />
     <None Include="src\shaders\skybox.vert" />
     <None Include="src\shaders\terrain.frag" />
