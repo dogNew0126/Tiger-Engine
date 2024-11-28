@@ -32,6 +32,9 @@ namespace tiger {
 				return false;
 			}
 
+			// Anti-aliasing
+			glfwWindowHint(GLFW_SAMPLES, MSAA_SAMPLE_AMOUNT);
+
 			// Create the window
 			if (FULLSCREEN_MODE) {
 				setFullScreenResolution();

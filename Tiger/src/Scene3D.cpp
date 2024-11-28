@@ -20,6 +20,7 @@ namespace tiger {
 	}
 
 	void Scene3D::init() {
+		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_STENCIL_TEST);
 		glEnable(GL_CULL_FACE);

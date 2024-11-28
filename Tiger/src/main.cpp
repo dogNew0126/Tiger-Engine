@@ -27,12 +27,12 @@ int main() {
 	tiger::graphics::Window window("Tiger Engine", 1366, 768);
 	tiger::Scene3D scene(&camera, &window);
 	tiger::opengl::Framebuffer framebuffer(window.getWidth(), window.getHeight());
-	tiger::graphics::Shader framebufferShader("src/shaders/framebufferColourBuffer.vert", "src/shaders/framebufferColourBuffer.frag");
+	tiger::opengl::Framebuffer blitFramebuffer(window.getWidth(), window.getHeight(), false);
+	tiger::graphics::Shader framebufferShader("src/shaders/framebuffer.vert", "src/shaders/framebuffer.frag");
 	tiger::graphics::MeshFactory meshFactory;
-	tiger::graphics::Mesh* colourBufferMesh = meshFactory.CreateScreenQuad(framebuffer.getColourBufferTexture());
+	tiger::graphics::Mesh* colourBufferMesh = meshFactory.CreateScreenQuad(blitFramebuffer.getColourBufferTexture());
 
 	tiger::Timer fpsTimer;
-
 	int frames = 0;
 
 	tiger::Time deltaTime;
@@ -75,16 +75,21 @@ int main() {
 		camera.processMouseScroll(window.getScrollY() * 6);
 		window.resetScroll();
 
-		// Draw the scene to our custom framebuffer
+		// Draw the scene to our custom multisampled framebuffer
 		framebuffer.bind();
 		window.clear();
 
 		scene.onUpdate(deltaTime.getDeltaTime());
 		scene.onRender();
 
+		// Blit the multisampled framebuffer over to a non-multisampled buffer
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer.getFramebuffer());
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, blitFramebuffer.getFramebuffer());
+		glBlitFramebuffer(0, 0, window.getWidth(), window.getHeight(), 0, 0, window.getWidth(), window.getHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
 		// Draw to the default scene buffer
 		framebuffer.unbind();
-		glClear(GL_COLOR_BUFFER_BIT);
+		window.clear();
 		framebufferShader.enable();
 		colourBufferMesh->Draw(framebufferShader);
 		framebufferShader.disable();

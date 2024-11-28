@@ -5,6 +5,9 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+#include "../Defs.h"
+#include "../utils/Logger.h"
+
 namespace tiger {
 	namespace graphics {
 
