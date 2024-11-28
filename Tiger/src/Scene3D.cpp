@@ -30,7 +30,7 @@ namespace tiger {
 		/*Add(new graphics::Renderable3D(glm::vec3(30.0f, -10.0f, 30.0f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec3(0.0f, 1.0f, 0.0f), 0, new tiger::graphics::Model("res/3D_Models/Overwatch/Reaper/Reaper.obj"), false));
 		Add(new graphics::Renderable3D(glm::vec3(60.0f, -10.0f, 60.0f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec3(0.0f, 1.0f, 0.0f), 0, new tiger::graphics::Model("res/3D_Models/Overwatch/McCree/McCree.obj"), false));*/
 		//Add(new graphics::Renderable3D(glm::vec3(90.0f, -10.0f, 90.0f), glm::vec3(3.0f, 3.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0, new tiger::graphics::Model("res/3D_Models/Crysis/nanosuit.obj"), false));
-		//Add(new graphics::Renderable3D(glm::vec3(200.0f, 200.0f, 100.0f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec3(0.0f, 0.0f, 0.0f), 0, new tiger::graphics::Model("res/3D_Models/Sponza/sponza.obj"), true));
+		//Add(new graphics::Renderable3D(glm::vec3(200.0f, 200.0f, 100.0f), glm::vec3(0.05f, 0.05f, 0.05f), glm::vec3(0.0f, 0.0f, 1.0f), glm::radians(0.0f), new tiger::graphics::Model("res/3D_Models/Sponza/sponza.obj")));
 		Add(new graphics::Renderable3D(glm::vec3(40, 10, 40), glm::vec3(10, 10, 10), glm::vec3(1.0, 0.0, 0.0), glm::radians(90.0f), new graphics::Model(meshes), false, true));
 		Add(new graphics::Renderable3D(glm::vec3(80, 20, 80), glm::vec3(15, 15, 15), glm::vec3(1.0, 0.0, 0.0), glm::radians(90.0f), new graphics::Model(meshes), false, true));
 		Add(new graphics::Renderable3D(glm::vec3(120, 20, 120), glm::vec3(15, 15, 15), glm::vec3(1.0, 0.0, 0.0), glm::radians(90.0f), new graphics::Model(meshes), false, true));
@@ -108,20 +108,6 @@ namespace tiger {
 		m_ModelReflectionShader.setUniformMat4("view", m_Camera->getViewMatrix());
 		m_ModelReflectionShader.setUniformMat4("projection", glm::perspective(glm::radians(m_Camera->getFOV()), (float)m_Window->getWidth() / (float)m_Window->getHeight(), 0.1f, 1000.0f));
 
-		// Terrain
-		glStencilMask(0x00); // Don't update the stencil buffer
-		m_TerrainShader.enable();
-		m_TerrainShader.setUniform3f("pointLight.position", glm::vec3(200.0f, 200.0f, 100.0f));
-		m_TerrainShader.setUniform3f("spotLight.position", m_Camera->getPosition());
-		m_TerrainShader.setUniform3f("spotLight.direction", m_Camera->getFront());
-		m_TerrainShader.setUniform3f("viewPos", m_Camera->getPosition());
-		glm::mat4 modelMatrix(1);
-		modelMatrix = glm::translate(modelMatrix, m_Terrain->getPosition());
-		m_TerrainShader.setUniformMat4("model", modelMatrix);
-		m_TerrainShader.setUniformMat4("view", m_Camera->getViewMatrix());
-		m_TerrainShader.setUniformMat4("projection", glm::perspective(glm::radians(m_Camera->getFOV()), (float)m_Window->getWidth() / (float)m_Window->getHeight(), 0.1f, 1000.0f));
-		m_Terrain->Draw(m_TerrainShader);
-
 		// Models
 		m_ModelShader.enable();
 		m_ModelShader.setUniform3f("pointLights[0].position", glm::vec3(200.0f, 215.0f, 100.0f));
@@ -149,8 +135,25 @@ namespace tiger {
 		//m_Renderer->flushOpaque(m_ModelReflectionShader, m_OutlineShader);
 
 		m_Renderer->flushOpaque(m_ModelShader, m_OutlineShader);
+
+		// Terrain
+		glStencilMask(0x00); // Don't update the stencil buffer
+		m_TerrainShader.enable();
+		m_TerrainShader.setUniform3f("pointLight.position", glm::vec3(200.0f, 200.0f, 100.0f));
+		m_TerrainShader.setUniform3f("spotLight.position", m_Camera->getPosition());
+		m_TerrainShader.setUniform3f("spotLight.direction", m_Camera->getFront());
+		m_TerrainShader.setUniform3f("viewPos", m_Camera->getPosition());
+		glm::mat4 modelMatrix(1);
+		modelMatrix = glm::translate(modelMatrix, m_Terrain->getPosition());
+		m_TerrainShader.setUniformMat4("model", modelMatrix);
+		m_TerrainShader.setUniformMat4("view", m_Camera->getViewMatrix());
+		m_TerrainShader.setUniformMat4("projection", glm::perspective(glm::radians(m_Camera->getFOV()), (float)m_Window->getWidth() / (float)m_Window->getHeight(), 0.1f, 1000.0f));
+		m_Terrain->Draw(m_TerrainShader);
+
+		// skybox
 		m_Skybox->Draw();
 
+		// Transparent objects
 		m_ModelShader.enable();
 		m_Renderer->flushTransparent(m_ModelShader, m_OutlineShader);
 	}
