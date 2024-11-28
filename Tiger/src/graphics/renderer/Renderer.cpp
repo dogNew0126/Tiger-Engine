@@ -4,7 +4,7 @@
 namespace tiger {
 	namespace graphics {
 
-		Renderer::Renderer(FPSCamera* camera) : m_Camera(camera)
+		Renderer::Renderer(Camera* camera) : m_Camera(camera)
 		{
 
 		}
@@ -31,28 +31,18 @@ namespace tiger {
 
 				Renderable3D* current = m_OpaqueRenderQueue.front();
 
-				// Draw the renderable 3d
-				glm::mat4 model(1);
-				model = glm::translate(model, current->getPosition());
-				if ((current->getRotationAxis().x != 0 || current->getRotationAxis().y != 0 || current->getRotationAxis().z != 0) && current->getRadianRotation() != 0)
-					model = glm::rotate(model, current->getRadianRotation(), current->getRotationAxis());
-				model = glm::scale(model, current->getScale());
-				shader.setUniformMat4("model", model);
-
+				setupModelMatrix(current, shader);
 				current->draw(shader);
-				// Draw the outline
+
 				if (current->getShouldOutline()) {
 					glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 					glStencilMask(0x00);
 					outlineShader.enable();
-					model = glm::mat4(1);
-					model = glm::translate(model, current->getPosition());
-					if ((current->getRotationAxis().x != 0 || current->getRotationAxis().y != 0 || current->getRotationAxis().z != 0) && current->getRadianRotation() != 0)
-						model = glm::rotate(model, current->getRadianRotation(), current->getRotationAxis());
-					model = glm::scale(model, current->getScale() + glm::vec3(0.025f, 0.025f, 0.025f));
-					outlineShader.setUniformMat4("model", model);
+					setupModelMatrix(current, outlineShader, 1.05f);
+
 					current->draw(outlineShader);
 					outlineShader.disable();
+
 					glEnable(GL_DEPTH_TEST);
 					glStencilMask(0xFF);
 					shader.enable();
@@ -89,38 +79,51 @@ namespace tiger {
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Tell OpenGL how to blend, in this case make the new object have the transparency of its alpha and the object in the back is 1-alpha
 				
 				Renderable3D* current = m_TransparentRenderQueue.front();
-
-				// Draw the renderable 3d
-				glm::mat4 model(1);
-				model = glm::translate(model, current->getPosition());
-				if ((current->getRotationAxis().x != 0 || current->getRotationAxis().y != 0 || current->getRotationAxis().z != 0) && current->getRadianRotation() != 0)
-					model = glm::rotate(model, current->getRadianRotation(), current->getRotationAxis());
-				model = glm::scale(model, current->getScale());
-				shader.setUniformMat4("model", model);
+				setupModelMatrix(current, shader);
 				current->draw(shader);
 
 				// Draw the outline
 				if (current->getShouldOutline()) {
 					glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+
 					outlineShader.enable();
-					model = glm::mat4(1);
-					model = glm::translate(model, current->getPosition());
-					if ((current->getRotationAxis().x != 0 || current->getRotationAxis().y != 0 || current->getRotationAxis().z != 0) && current->getRadianRotation() != 0)
-						model = glm::rotate(model, current->getRadianRotation(), current->getRotationAxis());
-					model = glm::scale(model, current->getScale() + glm::vec3(0.025f, 0.025f, 0.025f));
-					outlineShader.setUniformMat4("model", model);
+					setupModelMatrix(current, outlineShader, 1.05f);
+
 					current->draw(outlineShader);
 					outlineShader.disable();
+
 					glEnable(GL_DEPTH_TEST);
 					glStencilMask(0xFF);
+
 					shader.enable();
+
 					glClear(GL_STENCIL_BUFFER_BIT);
 				}
 
 				glDisable(GL_BLEND);
+
 				m_TransparentRenderQueue.pop_front();
 			}
 		}
+
+		// TODO: Currently only support two levels in a hierarchical scene graph
+		void Renderer::setupModelMatrix(Renderable3D* renderable, Shader& shader, float scaleFactor) {
+			glm::mat4 model(1);
+			glm::mat4 translate = glm::translate(glm::mat4(1.0f), renderable->getPosition());
+			glm::mat4 rotate = glm::toMat4(renderable->getOrientation());
+			glm::mat4 scale = glm::scale(glm::mat4(1.0f), renderable->getScale() * scaleFactor);
+
+			if (!renderable->getParent()) {
+				model = translate * rotate * scale;
+			}
+			else {
+				// Only apply scale locally
+				model = glm::translate(glm::mat4(1.0f), renderable->getParent()->getPosition()) * glm::toMat4(renderable->getParent()->getOrientation()) * translate * rotate * scale;
+			}
+
+			shader.setUniformMat4("model", model);
+		}
+
 
 	}
 }

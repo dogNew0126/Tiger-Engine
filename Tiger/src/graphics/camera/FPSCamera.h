@@ -24,7 +24,7 @@ namespace tiger {
 		const GLfloat SENSITIVITY = 0.10f;
 		const GLfloat FOV = 80.0f;
 
-		class FPSCamera {
+		class Camera {
 		private:
 			// Camera Attributes
 			glm::vec3 m_Position, m_Front, m_Up, m_Right, m_WorldUp;
@@ -48,7 +48,7 @@ namespace tiger {
 			* @param yaw Optional. Initial yaw of the camera. Default is determined by the FPSCamera class
 			* @param pitch Optional. Initial pitch of the camera. Default is determined by the FPSCamera class
 			*/
-			FPSCamera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch);
+			Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch);
 
 			/**
 			* Constructs a camera using floats to represent the position and up vectors of the camera
@@ -63,7 +63,7 @@ namespace tiger {
 			* @param yaw Optional. Initial yaw of the camera. Default is determined by the FPSCamera class
 			* @param pitch Optional. Initial pitch of the camera. Default is determined by the FPSCamera class
 			*/
-			FPSCamera(GLfloat xPos, GLfloat yPos, GLfloat zPos, GLfloat xUp, GLfloat yUp, GLfloat zUp, GLfloat yaw, GLfloat pitch);
+			Camera(GLfloat xPos, GLfloat yPos, GLfloat zPos, GLfloat xUp, GLfloat yUp, GLfloat zUp, GLfloat yaw, GLfloat pitch);
 
 			/**
 			* Returns the view matrix for the camera's position, yaw, and pitch

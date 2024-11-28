@@ -23,7 +23,7 @@
 
 int main() {
 
-	tiger::graphics::FPSCamera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+	tiger::graphics::Camera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 	tiger::graphics::Window window("Tiger Engine", 1366, 768);
 	tiger::Scene3D scene(&camera, &window);
 	tiger::opengl::Framebuffer framebuffer(window.getWidth(), window.getHeight());
@@ -34,6 +34,9 @@ int main() {
 
 	tiger::Timer fpsTimer;
 	int frames = 0;
+
+	framebufferShader.enable();
+	framebufferShader.setUniform2f("readOffset", glm::vec2(1.0f / window.getWidth(), 1.0f / window.getHeight()));
 
 	tiger::Time deltaTime;
 

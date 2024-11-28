@@ -14,8 +14,7 @@ namespace tiger {
 		class Shader {
 		private: 
 			GLuint m_ShaderID;
-			const char* m_VertPath;
-			const char* m_FragPath;
+			const char* m_VertPath, * m_FragPath, * m_GeomPath;
 
 		public:
 
@@ -26,6 +25,15 @@ namespace tiger {
 			* @param fragPath The path of the fragment/pixel shader.
 			*/
 			Shader(const char *vertPath, const char *fragPath);
+
+			/**
+			* Loads the shader by calling the load function and stores its shader ID
+			*
+			* @param vertPath The path of the vertex shader.
+			* @param fragPath The path of the fragment/pixel shader.
+			* @param geoPath The path of the geometry shader.
+			*/
+			Shader(const char* vertPath, const char* fragPath, const char* geoPath);
 			~Shader();
 
 			/**

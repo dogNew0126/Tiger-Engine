@@ -3,26 +3,26 @@
 namespace tiger {
 	namespace graphics {
 
-		FPSCamera::FPSCamera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), GLfloat yaw = YAW, GLfloat pitch = PITCH)
+		Camera::Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), GLfloat yaw = YAW, GLfloat pitch = PITCH)
 			: m_Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseSensitivity(SENSITIVITY), m_FOV(FOV), 
 				m_Position(position), m_WorldUp(up), m_Yaw(yaw), m_Pitch(pitch)
 		{
 			updateCameraVectors();
 		}
 
-		FPSCamera::FPSCamera(GLfloat xPos, GLfloat yPos, GLfloat zPos, GLfloat xUp, GLfloat yUp, GLfloat zUp, GLfloat yaw = YAW, GLfloat pitch = PITCH)
+		Camera::Camera(GLfloat xPos, GLfloat yPos, GLfloat zPos, GLfloat xUp, GLfloat yUp, GLfloat zUp, GLfloat yaw = YAW, GLfloat pitch = PITCH)
 			: m_Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseSensitivity(SENSITIVITY), m_FOV(FOV),
 				m_Position(glm::vec3(xPos, yPos, zPos)), m_WorldUp(glm::vec3(xUp, yUp, zUp)), m_Yaw(yaw), m_Pitch(pitch)
 		{
 			updateCameraVectors();
 		}
 
-		glm::mat4 FPSCamera::getViewMatrix() 
+		glm::mat4 Camera::getViewMatrix() 
 		{
 			return glm::lookAt(m_Position, m_Position + m_Front, m_Up);
 		}
 
-		void FPSCamera::processKeyboard(Camera_Movement direction, GLfloat deltaTime) 
+		void Camera::processKeyboard(Camera_Movement direction, GLfloat deltaTime) 
 		{
 			GLfloat velocity = m_MovementSpeed * deltaTime;
 			switch (direction) {
@@ -47,7 +47,7 @@ namespace tiger {
 			}
 		}
 
-		void FPSCamera::processMouseMovement(GLfloat xOffset, GLfloat yOffset, GLboolean constrainPitch = true)
+		void Camera::processMouseMovement(GLfloat xOffset, GLfloat yOffset, GLboolean constrainPitch = true)
 		{
 			xOffset *= m_MouseSensitivity;
 			yOffset *= m_MouseSensitivity;
@@ -65,7 +65,7 @@ namespace tiger {
 			updateCameraVectors();
 		}
 
-		void FPSCamera::processMouseScroll(GLfloat offset) {
+		void Camera::processMouseScroll(GLfloat offset) {
 			if (offset != 0 && m_FOV >= 1.0f && m_FOV <= FOV) {
 				m_FOV -= offset;
 			}
@@ -77,7 +77,7 @@ namespace tiger {
 			}
 		}
 
-		void FPSCamera::updateCameraVectors() {
+		void Camera::updateCameraVectors() {
 			glm::vec3 front;
 			front.x = cos(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch));
 			front.y = sin(glm::radians(m_Pitch));

@@ -11,7 +11,7 @@ namespace tiger {
 
 		class Renderer {
 		public:
-			Renderer(FPSCamera* camera);
+			Renderer(Camera* camera);
 
 			void submitOpaque(Renderable3D* renderable);
 			void submitTransparent(Renderable3D* renderable);
@@ -21,10 +21,12 @@ namespace tiger {
 
 		private:
 
+			void setupModelMatrix(Renderable3D* renderable, Shader& shader, float scaleFactor = 1.0f);
+
 			std::deque<Renderable3D*> m_OpaqueRenderQueue;
 			std::deque<Renderable3D*> m_TransparentRenderQueue;
 
-			FPSCamera* m_Camera;
+			Camera* m_Camera;
 
 		};
 
