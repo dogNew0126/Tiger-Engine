@@ -14,7 +14,7 @@
 #include "graphics/Model.h"
 #include "terrain/Terrain.h"
 #include "Scene3D.h"
-#include "platform/OpenGL/Framebuffer.h"
+#include "platform/OpenGL/Framebuffers/Framebuffer.h"
 #include "graphics/MeshFactory.h"
 
 #include <ft2build.h>
@@ -22,12 +22,19 @@
 #include <freetype-gl.h>
 
 int main() {
-
+	// Prepare the game
 	tiger::graphics::Camera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 	tiger::graphics::Window window("Tiger Engine", 1366, 768);
 	tiger::Scene3D scene(&camera, &window);
+
+	// Construct framebuffers
 	tiger::opengl::Framebuffer framebuffer(window.getWidth(), window.getHeight());
-	tiger::opengl::Framebuffer blitFramebuffer(window.getWidth(), window.getHeight(), false);
+	framebuffer.addColorAttachment(true).addDepthStencilRBO(true).createFramebuffer();
+
+	tiger::opengl::Framebuffer blitFramebuffer(window.getWidth(), window.getHeight());
+	blitFramebuffer.addColorAttachment(false).addDepthStencilRBO(false).createFramebuffer();
+
+	// Instantiate the shaders and mesh factories
 	tiger::graphics::Shader framebufferShader("src/shaders/framebuffer.vert", "src/shaders/framebuffer.frag");
 	tiger::graphics::MeshFactory meshFactory;
 	tiger::graphics::Mesh* colourBufferMesh = meshFactory.CreateScreenQuad(blitFramebuffer.getColourBufferTexture());

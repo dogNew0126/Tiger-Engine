@@ -75,7 +75,7 @@
     <ClCompile Include="src\graphics\MeshFactory.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\OpenGL\Framebuffer.cpp">
+    <ClCompile Include="src\platform\OpenGL\Framebuffers\Framebuffer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\Skybox.cpp">
@@ -94,6 +94,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\dynamic_lights\DynamicLightManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\OpenGL\Framebuffers\ShadowMap.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,7 +164,7 @@
     <ClInclude Include="src\graphics\MeshFactory.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\platform\OpenGL\Framebuffer.h">
+    <ClInclude Include="src\platform\OpenGL\Framebuffers\Framebuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\Skybox.h">
@@ -185,6 +188,9 @@
     <ClInclude Include="src\graphics\dynamic_lights\DynamicLightManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\OpenGL\Framebuffers\ShadowMap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\model.frag" />
@@ -197,5 +203,7 @@
     <None Include="src\shaders\skybox.frag" />
     <None Include="src\shaders\modelReflection.frag" />
     <None Include="src\shaders\modelRefraction.frag" />
+    <None Include="src\shaders\shadowmap.vert" />
+    <None Include="src\shaders\shadowmap.frag" />
   </ItemGroup>
 </Project>

@@ -20,11 +20,11 @@ namespace tiger {
 		void Renderer::flushOpaque(Shader& shader, Shader& outlineShader) {
 
 			glEnable(GL_CULL_FACE);
+			glEnable(GL_DEPTH_TEST);
 			// Render opaque objects
 			while (!m_OpaqueRenderQueue.empty()) {
 
 				// Drawing prepration
-				glEnable(GL_DEPTH_TEST);
 				glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 				glStencilFunc(GL_ALWAYS, 1, 0xFF);
 				glStencilMask(0xFF);
@@ -35,17 +35,10 @@ namespace tiger {
 				current->draw(shader);
 
 				if (current->getShouldOutline()) {
-					glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-					glStencilMask(0x00);
-					outlineShader.enable();
-					setupModelMatrix(current, outlineShader, 1.05f);
 
-					current->draw(outlineShader);
-					outlineShader.disable();
-
-					glStencilMask(0xFF);
+					drawOutline(outlineShader, current);
 					shader.enable();
-					glClear(GL_STENCIL_BUFFER_BIT);
+
 				}
 
 
@@ -83,20 +76,10 @@ namespace tiger {
 
 				// Draw the outline
 				if (current->getShouldOutline()) {
-					glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 
-					outlineShader.enable();
-					setupModelMatrix(current, outlineShader, 1.05f);
-
-					current->draw(outlineShader);
-					outlineShader.disable();
-
-					glEnable(GL_DEPTH_TEST);
-					glStencilMask(0xFF);
+					drawOutline(outlineShader, current);
 
 					shader.enable();
-
-					glClear(GL_STENCIL_BUFFER_BIT);
 				}
 
 				glDisable(GL_BLEND);
@@ -121,6 +104,22 @@ namespace tiger {
 			}
 
 			shader.setUniformMat4("model", model);
+		}
+
+		void Renderer::drawOutline(Shader& outlineShader, Renderable3D* renderable) {
+
+			glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+
+			outlineShader.enable();
+			setupModelMatrix(renderable, outlineShader, 1.005f);
+
+			renderable->draw(outlineShader);
+			outlineShader.disable();
+
+			glEnable(GL_DEPTH_TEST);
+			glStencilMask(0xFF);
+
+			glClear(GL_STENCIL_BUFFER_BIT);
 		}
 
 
