@@ -6,7 +6,11 @@ namespace tiger {
 
 		Renderer::Renderer(Camera* camera) : m_Camera(camera)
 		{
-
+			// Configure and cache OpenGL state
+			m_GLCache = GLCache::getInstance();
+			m_GLCache->setDepthTest(true);
+			m_GLCache->setBlend(false);
+			m_GLCache->setCull(true);
 		}
 
 		void Renderer::submitOpaque(Renderable3D* renderable) {
@@ -18,18 +22,21 @@ namespace tiger {
 		}
 
 		void Renderer::flushOpaque(Shader& shader, Shader& outlineShader) {
-
-			glEnable(GL_CULL_FACE);
-			glEnable(GL_DEPTH_TEST);
+			m_GLCache->switchShader(shader.getShaderID());
+			m_GLCache->setCull(true);
+			m_GLCache->setDepthTest(true);
+			m_GLCache->setBlend(false);
+			m_GLCache->setStencilTest(true);
+			m_GLCache->setStencilWriteMask(0xFF);
 			// Render opaque objects
 			while (!m_OpaqueRenderQueue.empty()) {
 
-				// Drawing prepration
-				glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-				glStencilFunc(GL_ALWAYS, 1, 0xFF);
-				glStencilMask(0xFF);
-
 				Renderable3D* current = m_OpaqueRenderQueue.front();
+
+				m_GLCache->setStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+				m_GLCache->setStencilFunc(GL_ALWAYS, 1, 0xFF);
+				if (current->getShouldOutline()) m_GLCache->setStencilWriteMask(0xFF);
+				else m_GLCache->setStencilWriteMask(0x00);
 
 				setupModelMatrix(current, shader);
 				current->draw(shader);
@@ -37,7 +44,7 @@ namespace tiger {
 				if (current->getShouldOutline()) {
 
 					drawOutline(outlineShader, current);
-					shader.enable();
+					m_GLCache->switchShader(shader.getShaderID());
 
 				}
 
@@ -50,7 +57,8 @@ namespace tiger {
 
 			// Sort then render transparent objects (from back to front)
 
-			glDisable(GL_CULL_FACE); // Don't backface cull transparent objects
+			m_GLCache->setCull(false);
+			m_GLCache->setStencilTest(true);
 
 			std::sort(m_TransparentRenderQueue.begin(), m_TransparentRenderQueue.end(),
 				[this](Renderable3D* a, Renderable3D* b) -> bool
@@ -61,16 +69,17 @@ namespace tiger {
 			// Sort then render transparent objects
 			while (!m_TransparentRenderQueue.empty()) {
 
-				// Drawing prepration
-				glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-				glStencilFunc(GL_ALWAYS, 1, 0xFF);
-				glStencilMask(0xFF);
+				Renderable3D* current = m_TransparentRenderQueue.front();
+
+				m_GLCache->setStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+				m_GLCache->setStencilFunc(GL_ALWAYS, 1, 0xFF);
+				if (current->getShouldOutline()) m_GLCache->setStencilWriteMask(0xFF);
+				else m_GLCache->setStencilWriteMask(0x00);
 
 				// Enable blending (note: You will still need to sort from back to front when rendering)
-				glEnable(GL_BLEND);
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Tell OpenGL how to blend, in this case make the new object have the transparency of its alpha and the object in the back is 1-alpha
+				m_GLCache->setBlend(true);
+				m_GLCache->setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				
-				Renderable3D* current = m_TransparentRenderQueue.front();
 				setupModelMatrix(current, shader);
 				current->draw(shader);
 
@@ -79,10 +88,8 @@ namespace tiger {
 
 					drawOutline(outlineShader, current);
 
-					shader.enable();
+					m_GLCache->switchShader(shader.getShaderID());
 				}
-
-				glDisable(GL_BLEND);
 
 				m_TransparentRenderQueue.pop_front();
 			}
@@ -108,16 +115,14 @@ namespace tiger {
 
 		void Renderer::drawOutline(Shader& outlineShader, Renderable3D* renderable) {
 
-			glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+			m_GLCache->switchShader(outlineShader.getShaderID());
+			m_GLCache->setStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 
-			outlineShader.enable();
 			setupModelMatrix(renderable, outlineShader, 1.005f);
 
 			renderable->draw(outlineShader);
-			outlineShader.disable();
 
-			glEnable(GL_DEPTH_TEST);
-			glStencilMask(0xFF);
+			m_GLCache->setDepthTest(true);
 
 			glClear(GL_STENCIL_BUFFER_BIT);
 		}

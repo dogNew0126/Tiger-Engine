@@ -24,7 +24,7 @@
     <ClCompile Include="src\graphics\Window.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\camera\FPSCamera.cpp">
+    <ClCompile Include="src\graphics\camera\Camera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="vendor\stb\stb_image.cpp">
@@ -99,6 +99,9 @@
     <ClCompile Include="src\platform\OpenGL\Framebuffers\ShadowMap.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\renderer\GLCache.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Shader.h">
@@ -110,7 +113,7 @@
     <ClInclude Include="src\graphics\Window.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\camera\FPSCamera.h">
+    <ClInclude Include="src\graphics\camera\Camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\shaders\basic.vert">
@@ -189,6 +192,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\OpenGL\Framebuffers\ShadowMap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderer\GLCache.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

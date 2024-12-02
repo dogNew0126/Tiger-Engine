@@ -6,7 +6,7 @@
 #include "../platform/OpenGL/Buffer.h"
 #include "../platform/OpenGL/Utility.h"
 #include "Shader.h"
-#include "camera/FPSCamera.h"
+#include "camera/Camera.h"
 #include "window.h"
 
 namespace tiger {

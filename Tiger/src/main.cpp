@@ -9,7 +9,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "utils/Time.h"
-#include "graphics/camera/FPSCamera.h"
+#include "graphics/camera/Camera.h"
 #include "utils/Logger.h"
 #include "graphics/Model.h"
 #include "terrain/Terrain.h"
@@ -24,7 +24,7 @@
 int main() {
 	// Prepare the game
 	tiger::graphics::Camera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
-	tiger::graphics::Window window("Tiger Engine", 1366, 768);
+	tiger::graphics::Window window("Tiger Engine", WINDOW_X_RESOLUTION, WINDOW_Y_RESOLUTION);
 	tiger::Scene3D scene(&camera, &window);
 
 	// Construct framebuffers
@@ -106,7 +106,8 @@ int main() {
 
 		window.update();
 		if (fpsTimer.elapsed() >= 1) {
-			std::cout << "FPS: " << frames << std::endl;
+			std::cout << "FPS: " << frames << "\n";
+			std::cout << "AVG Frame Time: " << (1.0 / frames) * 1000.0 << "ms \n";
 			frames = 0;
 			fpsTimer.reset();
 		}

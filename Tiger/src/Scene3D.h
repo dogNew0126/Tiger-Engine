@@ -1,13 +1,15 @@
 #pragma once
 
 #include "graphics/renderer/Renderable3D.h"
-#include "graphics/camera/FPSCamera.h"
+#include "graphics/camera/Camera.h"
 #include "graphics/renderer/Renderer.h"
+#include "graphics/renderer/GLCache.h"
 #include "terrain/Terrain.h"
 #include "graphics/Window.h"
 #include "graphics/MeshFactory.h"
 #include "graphics/Skybox.h"
 #include "graphics/dynamic_lights/DynamicLightManager.h"
+#include "Defs.h"
 
 namespace tiger {
 
@@ -21,6 +23,8 @@ namespace tiger {
 		graphics::MeshFactory m_MeshFactory;
 		graphics::Skybox* m_Skybox;
 		graphics::DynamicLightManager m_DynamicLightManager;
+		graphics::GLCache* m_GLCache;
+
 		// Some sort of list of entities (tied to models that are in the Renderer (should this be changed to Renderer3D?))
 		//std::vector<Entity*> m_Entities;
 

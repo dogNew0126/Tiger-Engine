@@ -10,6 +10,7 @@ namespace tiger {
 		: m_TerrainShader("src/shaders/basic.vert", "src/shaders/terrain.frag"), m_ModelShader("src/shaders/basic.vert", "src/shaders/model.frag"), m_Camera(camera), m_Window(window), m_OutlineShader("src/shaders/basic.vert", "src/shaders/basic.frag"), m_DynamicLightManager()
 	{
 		m_Renderer = new graphics::Renderer(camera);
+		m_GLCache = graphics::GLCache::getInstance();
 		m_Terrain = new terrain::Terrain(glm::vec3(0.0f, -20.0f, 0.0f));
 
 		init();
@@ -20,10 +21,10 @@ namespace tiger {
 	}
 
 	void Scene3D::init() {
-		glEnable(GL_MULTISAMPLE);
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_STENCIL_TEST);
-		glEnable(GL_CULL_FACE);
+		m_GLCache->setMultisample(true);
+		m_GLCache->setDepthTest(true);
+		m_GLCache->setStencilTest(true);
+		m_GLCache->setCull(true);
 
 		// Load models
 		std::vector<graphics::Mesh> meshes;
@@ -37,11 +38,11 @@ namespace tiger {
 		Add(new graphics::Renderable3D(glm::vec3(120, 20, 120), glm::vec3(15, 15, 15), glm::vec3(1.0, 0.0, 0.0), glm::radians(90.0f), new graphics::Model(meshes), nullptr, false, true));
 
 		// Terrain shader
-		m_TerrainShader.enable();
+		m_GLCache->switchShader(m_TerrainShader.getShaderID());
 		m_TerrainShader.setUniform1f("material.shininess", 128.0f);
 
 		// Model shader
-		m_ModelShader.enable();
+		m_GLCache->switchShader(m_ModelShader.getShaderID());
 		m_ModelShader.setUniform1f("material.shininess", 128.0f);
 
 		// Skybox
@@ -61,20 +62,22 @@ namespace tiger {
 
 	void Scene3D::onRender() {
 
+		glm::mat4 projectionMatrix = glm::perspective(glm::radians(m_Camera->getFOV()), (float)m_Window->getWidth() / (float)m_Window->getHeight(), NEAR_PLANE, FAR_PLANE);
+
 		// Setup
 		m_DynamicLightManager.setSpotLightDirection(m_Camera->getFront());
 		m_DynamicLightManager.setSpotLightPosition(m_Camera->getPosition());
 
-		m_OutlineShader.enable();
+		m_GLCache->switchShader(m_OutlineShader.getShaderID());
 		m_OutlineShader.setUniformMat4("view", m_Camera->getViewMatrix());
-		m_OutlineShader.setUniformMat4("projection", glm::perspective(glm::radians(m_Camera->getFOV()), (float)m_Window->getWidth() / (float)m_Window->getHeight(), 0.1f, 1000.0f));
+		m_OutlineShader.setUniformMat4("projection", projectionMatrix);
 
 		// Models
-		m_ModelShader.enable();
+		m_GLCache->switchShader(m_ModelShader.getShaderID());
 		m_DynamicLightManager.setupLightingUniforms(m_ModelShader);
 		m_ModelShader.setUniform3f("viewPos", m_Camera->getPosition());
 		m_ModelShader.setUniformMat4("view", m_Camera->getViewMatrix());
-		m_ModelShader.setUniformMat4("projection", glm::perspective(glm::radians(m_Camera->getFOV()), (float)m_Window->getWidth() / (float)m_Window->getHeight(), 0.1f, 1000.0f));
+		m_ModelShader.setUniformMat4("projection", projectionMatrix);
 
 		std::vector<graphics::Renderable3D*>::iterator iter = m_Renderables.begin();
 		while (iter != m_Renderables.end()) {
@@ -91,22 +94,22 @@ namespace tiger {
 		m_Renderer->flushOpaque(m_ModelShader, m_OutlineShader);
 
 		// Terrain
-		glStencilMask(0x00); // Don't update the stencil buffer
-		m_TerrainShader.enable();
+		m_GLCache->setStencilWriteMask(0x00); // Don't update the stencil buffer
+		m_GLCache->switchShader(m_TerrainShader.getShaderID());
 		m_DynamicLightManager.setupLightingUniforms(m_TerrainShader);
 		m_TerrainShader.setUniform3f("viewPos", m_Camera->getPosition());
 		glm::mat4 modelMatrix(1);
 		modelMatrix = glm::translate(modelMatrix, m_Terrain->getPosition());
 		m_TerrainShader.setUniformMat4("model", modelMatrix);
 		m_TerrainShader.setUniformMat4("view", m_Camera->getViewMatrix());
-		m_TerrainShader.setUniformMat4("projection", glm::perspective(glm::radians(m_Camera->getFOV()), (float)m_Window->getWidth() / (float)m_Window->getHeight(), 0.1f, 1000.0f));
+		m_TerrainShader.setUniformMat4("projection", projectionMatrix);
 		m_Terrain->Draw(m_TerrainShader);
 
 		// skybox
 		m_Skybox->Draw();
 
 		// Transparent objects
-		m_ModelShader.enable();
+		m_GLCache->switchShader(m_ModelShader.getShaderID());
 		m_Renderer->flushTransparent(m_ModelShader, m_OutlineShader);
 	}
 
