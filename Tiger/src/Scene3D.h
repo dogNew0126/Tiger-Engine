@@ -7,6 +7,7 @@
 #include "graphics/Window.h"
 #include "graphics/MeshFactory.h"
 #include "graphics/Skybox.h"
+#include "graphics/dynamic_lights/DynamicLightManager.h"
 
 namespace tiger {
 
@@ -19,11 +20,12 @@ namespace tiger {
 		terrain::Terrain* m_Terrain;
 		graphics::MeshFactory m_MeshFactory;
 		graphics::Skybox* m_Skybox;
+		graphics::DynamicLightManager m_DynamicLightManager;
 		// Some sort of list of entities (tied to models that are in the Renderer (should this be changed to Renderer3D?))
 		//std::vector<Entity*> m_Entities;
 
 		std::vector<graphics::Renderable3D*> m_Renderables;
-		graphics::Shader m_TerrainShader, m_ModelShader, m_OutlineShader, m_ModelReflectionShader;
+		graphics::Shader m_TerrainShader, m_ModelShader, m_OutlineShader;
 
 	public:
 		Scene3D(graphics::Camera* camera, graphics::Window* window);

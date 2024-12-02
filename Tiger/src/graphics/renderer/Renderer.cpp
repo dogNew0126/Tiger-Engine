@@ -43,7 +43,6 @@ namespace tiger {
 					current->draw(outlineShader);
 					outlineShader.disable();
 
-					glEnable(GL_DEPTH_TEST);
 					glStencilMask(0xFF);
 					shader.enable();
 					glClear(GL_STENCIL_BUFFER_BIT);
