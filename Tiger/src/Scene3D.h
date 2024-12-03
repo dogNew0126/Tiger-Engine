@@ -16,7 +16,6 @@ namespace tiger {
 	class Scene3D {
 
 	private:
-		graphics::Window* m_Window;
 		graphics::Camera* m_Camera;
 		graphics::Renderer* m_Renderer;
 		terrain::Terrain* m_Terrain;
@@ -32,7 +31,7 @@ namespace tiger {
 		graphics::Shader m_TerrainShader, m_ModelShader, m_OutlineShader;
 
 	public:
-		Scene3D(graphics::Camera* camera, graphics::Window* window);
+		Scene3D(graphics::Camera* camera);
 		~Scene3D();
 
 		void Add(graphics::Renderable3D* renderable);

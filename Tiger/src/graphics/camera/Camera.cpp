@@ -17,9 +17,29 @@ namespace tiger {
 			updateCameraVectors();
 		}
 
-		glm::mat4 Camera::getViewMatrix() 
+		glm::mat4 Camera::getViewMatrix() const
 		{
 			return glm::lookAt(m_Position, m_Position + m_Front, m_Up);
+		}
+
+		void Camera::processInput(GLfloat deltaTime) {
+			// Keyboard input
+			if (Window::isKeyPressed(GLFW_KEY_W))
+				processKeyboard(tiger::graphics::FORWARD, deltaTime);
+			if (Window::isKeyPressed(GLFW_KEY_S))
+				processKeyboard(tiger::graphics::BACKWARD, deltaTime);
+			if (Window::isKeyPressed(GLFW_KEY_A))
+				processKeyboard(tiger::graphics::LEFT, deltaTime);
+			if (Window::isKeyPressed(GLFW_KEY_D))
+				processKeyboard(tiger::graphics::RIGHT, deltaTime);
+			if (Window::isKeyPressed(GLFW_KEY_SPACE))
+				processKeyboard(tiger::graphics::UPWARDS, deltaTime);
+			if (Window::isKeyPressed(GLFW_KEY_LEFT_CONTROL))
+				processKeyboard(tiger::graphics::DOWNWARDS, deltaTime);
+			// Mouse scrolling
+			processMouseScroll(Window::getScrollY() * 6);
+			// Mouse movement
+			processMouseMovement(Window::getMouseXDelta(), -Window::getMouseYDelta(), true);
 		}
 
 		void Camera::processKeyboard(Camera_Movement direction, GLfloat deltaTime) 

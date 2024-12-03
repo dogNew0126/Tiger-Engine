@@ -8,6 +8,10 @@
 #include "../Defs.h"
 #include "../utils/Logger.h"
 
+#include <imgui.h>
+#include <examples/imgui_impl_glfw.h>
+#include <examples/imgui_impl_opengl3.h>
+
 namespace tiger {
 	namespace graphics {
 
@@ -17,13 +21,13 @@ namespace tiger {
 		class Window {
 		private:
 			const char* m_Title;
-			int m_Width, m_Height;
 			GLFWwindow* m_Window;
 
-			bool m_Keys[MAX_KEYS];
-			bool m_Buttons[MAX_BUTTONS];
-			double mx, my;
-			double scrollX, scrollY;
+			static int s_Width, s_Height;
+			static bool s_Keys[MAX_KEYS];
+			static bool s_Buttons[MAX_BUTTONS];
+			static double s_MouseX, s_MouseY, s_MouseXDelta, s_MouseYDelta;
+			static double s_ScrollX, s_ScrollY;
 
 		public:
 
@@ -59,7 +63,7 @@ namespace tiger {
 			* @param keycode The keycode of the key that you want to check if it is being pressed
 			* @return returns true if the key is being pressed
 			*/
-			bool isKeyPressed(unsigned int keycode) const;
+			static bool isKeyPressed(unsigned int keycode);
 
 			/**
 			* checks if a mouse button is being pressed
@@ -67,17 +71,19 @@ namespace tiger {
 			* @param code The code of the mouse button that you want to check if it is being pressed
 			* @return returns true if the mouse button is being pressed
 			*/
-			bool isMouseButtonPressed(unsigned int keycode) const;
+			static bool isMouseButtonPressed(unsigned int code);
 
 			// Getters and setters
-			inline double getMouseX() const { return mx; }
-			inline double getMouseY() const { return my; }
-			inline double getScrollX() const { return scrollX; }
-			inline double getScrollY() const { return scrollY; }
-			inline void resetScroll() { scrollX = 0; scrollY = 0; }
-			inline void getMousePosition(double& x, double& y) const { x = mx; y = my; }
-			inline int getWidth() const { return m_Width; }
-			inline int getHeight() const { return m_Height; }
+			static inline double getMouseX() { return s_MouseX; }
+			static inline double getMouseY() { return s_MouseY; }
+			static inline double getMouseXDelta() { return s_MouseXDelta; }
+			static inline double getMouseYDelta() { return s_MouseYDelta; }
+			static inline double getScrollX() { return s_ScrollX; }
+			static inline double getScrollY() { return s_ScrollY; }
+			static inline void resetScroll() { s_ScrollX = 0; s_ScrollY = 0; }
+			static inline void getMousePosition(double& x, double& y) { x = s_MouseX; y = s_MouseY; }
+			static inline int getWidth() { return s_Width; }
+			static inline int getHeight() { return s_Height; }
 
 		private:
 			/**

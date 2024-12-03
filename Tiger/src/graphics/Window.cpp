@@ -4,19 +4,33 @@
 namespace tiger {
 	namespace graphics {
 
+		bool Window::s_Keys[MAX_KEYS];
+		bool Window::s_Buttons[MAX_BUTTONS];
+		int Window::s_Width, Window::s_Height;
+		double Window::s_MouseX, Window::s_MouseY, Window::s_MouseXDelta, Window::s_MouseYDelta;
+		double Window::s_ScrollX, Window::s_ScrollY;
+
 		Window::Window(const char* title, int width, int height) 
-			: m_Title(title), m_Width(width), m_Height(height)
+			: m_Title(title)
 		{
+			s_Width = width;
+			s_Height = height;
+			s_ScrollX = s_ScrollY = 0;
+			s_MouseXDelta = s_MouseYDelta = 0;
 			if (!init()) {
 				utils::Logger::getInstance().error("logged_files/window_creation.txt", "Window Initialization", "Could not initialize window class");
 				glfwDestroyWindow(m_Window);
 				glfwTerminate();
 			}
-			memset(m_Keys, 0, sizeof(bool) * MAX_KEYS);
-			memset(m_Buttons, 0, sizeof(bool) * MAX_BUTTONS);
+			memset(s_Keys, 0, sizeof(bool) * MAX_KEYS);
+			memset(s_Buttons, 0, sizeof(bool) * MAX_BUTTONS);
 		}
 
 		Window::~Window() {
+			ImGui_ImplOpenGL3_Shutdown();
+			ImGui_ImplGlfw_Shutdown();
+			ImGui::DestroyContext();
+
 			glfwDestroyWindow(m_Window);
 			glfwTerminate();
 		}
@@ -34,10 +48,10 @@ namespace tiger {
 			// Create the window
 			if (FULLSCREEN_MODE) {
 				setFullScreenResolution();
-				m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, glfwGetPrimaryMonitor(), NULL);
+				m_Window = glfwCreateWindow(s_Width, s_Height, m_Title, glfwGetPrimaryMonitor(), NULL);
 			}
 			else {
-				m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
+				m_Window = glfwCreateWindow(s_Width, s_Height, m_Title, NULL, NULL);
 			}
 
 			if (!m_Window) {
@@ -58,28 +72,37 @@ namespace tiger {
 			});
 			glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 				Window* win = (Window*)glfwGetWindowUserPointer(window);
-				win->m_Width = width;
-				win->m_Height = height;
-				glViewport(0, 0, win->m_Width, win->m_Height);
+				win->s_Width = width;
+				win->s_Height = height;
+				glViewport(0, 0, win->s_Width, win->s_Height);
 			});
 			glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 				Window* win = (Window*)glfwGetWindowUserPointer(window);
-				win->m_Keys[key] = action != GLFW_RELEASE;
+				win->s_Keys[key] = action != GLFW_RELEASE;
+				ImGui_ImplGlfw_KeyCallback(window, key, scancode, action, mods);
 			});
 			glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
 				Window* win = (Window*)glfwGetWindowUserPointer(window);
-				win->m_Buttons[button] = action != GLFW_RELEASE;
+				win->s_Buttons[button] = action != GLFW_RELEASE;
+				ImGui_ImplGlfw_MouseButtonCallback(window, button, action, mods);
 			});
 			glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xpos, double ypos) {
 				Window* win = (Window*)glfwGetWindowUserPointer(window);
-				win->mx = xpos;
-				win->my = ypos;
+				win->s_MouseXDelta = xpos - win->s_MouseX;
+				win->s_MouseYDelta = ypos - win->s_MouseY;
+				win->s_MouseX = xpos;
+				win->s_MouseY = ypos;
 			});
 			glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xoffset, double yoffset) {
 				Window* win = (Window*)glfwGetWindowUserPointer(window);
-				win->scrollX = xoffset;
-				win->scrollY = yoffset;
+				win->s_ScrollX = xoffset;
+				win->s_ScrollY = yoffset;
+				ImGui_ImplGlfw_ScrollCallback(window, xoffset, yoffset);
 			});
+			glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int c) {
+				ImGui_ImplGlfw_CharCallback(window, c);
+			});
+			glfwGetCursorPos(m_Window, &s_MouseX, &s_MouseY);
 			// Check to see if v-sync was enabled and act accordingly
 			if (V_SYNC) {
 				glfwSwapInterval(1);
@@ -96,6 +119,12 @@ namespace tiger {
 			}
 			std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 
+			// Setup ImGui bindings
+			ImGui::CreateContext();
+			ImGui_ImplGlfw_InitForOpenGL(m_Window, false);
+			ImGui_ImplOpenGL3_Init("#version 430");
+			ImGui::StyleColorsDark();
+
 			// Everything was successful so return true
 			return 1;
 		}
@@ -107,6 +136,7 @@ namespace tiger {
 				std::cout << "OpenGL Error: " << error << std::endl;
 			}
 			glfwSwapBuffers(m_Window);
+			s_MouseXDelta = s_MouseYDelta = 0;
 			glfwPollEvents();
 		}
 
@@ -121,28 +151,28 @@ namespace tiger {
 		// Sets the Window's Size to the Primary Monitor's Resolution
 		void Window::setFullScreenResolution() {
 			const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-			m_Width = mode->width;
-			m_Height = mode->height;
+			s_Width = mode->width;
+			s_Height = mode->height;
 		}
 
 		/*                   Getters                    */
-		bool Window::isKeyPressed(unsigned int keycode) const {
+		bool Window::isKeyPressed(unsigned int keycode){
 			if (keycode >= MAX_KEYS) {
 				utils::Logger::getInstance().error("logged_files/input_errors.txt", "Input Check", "Key checked is out of bounds (ie not supported)");
 				return false;
 			}
 			else {
-				return m_Keys[keycode];
+				return s_Keys[keycode];
 			}
 		}
 
-		bool Window::isMouseButtonPressed(unsigned int code) const {
+		bool Window::isMouseButtonPressed(unsigned int code){
 			if (code >= MAX_BUTTONS) {
 				utils::Logger::getInstance().error("logged_files/input_errors.txt", "Input Check", "Key checked is out of bounds (ie not supported)");
 				return false;
 			}
 			else {
-				return m_Buttons[code];
+				return s_Buttons[code];
 			}
 		}
 
