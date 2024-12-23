@@ -13,7 +13,7 @@ namespace tiger {
 
 		class Shader {
 		private: 
-			GLuint m_ShaderID;
+			unsigned int m_ShaderID;
 			const char* m_VertPath, * m_FragPath, * m_GeomPath;
 
 		public:
@@ -42,7 +42,7 @@ namespace tiger {
 			* @param name Name of the uniform float that is being modified
 			* @param value The new value that gets assigned to the uniform float
 			*/
-			void setUniform1f(const GLchar* name, float value);
+			void setUniform1f(const char* name, float value);
 			
 			/**
 			* Assigns a new value to a uniform integer(or a texture's texture unit) in the shader
@@ -50,7 +50,7 @@ namespace tiger {
 			* @param name Name of the uniform integer that is being modified
 			* @param value The new value that gets assigned to the uniform integer
 			*/
-			void setUniform1i(const GLchar* name, int value);
+			void setUniform1i(const char* name, int value);
 
 			/**
 			* Assigns a new vector to a uniform vec2 in the shader
@@ -58,7 +58,7 @@ namespace tiger {
 			* @param name Name of the uniform vec2 that is being modified
 			* @param vector The new vector that gets assigned to the uniform vec2
 			*/
-			void setUniform2f(const GLchar* name, const glm::vec2& vector);
+			void setUniform2f(const char* name, const glm::vec2& vector);
 
 			/**
 			* Assigns a new vector to a uniform vec3 in the shader
@@ -66,7 +66,7 @@ namespace tiger {
 			* @param name Name of the uniform vec3 that is being modified
 			* @param vector The new vector that gets assigned to the uniform vec3
 			*/
-			void setUniform3f(const GLchar* name, const glm::vec3& vector);
+			void setUniform3f(const char* name, const glm::vec3& vector);
 
 			/**
 			* Assigns a new vector to a uniform vec4 in the shader
@@ -74,7 +74,7 @@ namespace tiger {
 			* @param name Name of the uniform vec4 that is being modified
 			* @param vector The new vector that gets assigned to the uniform vec4
 			*/
-			void setUniform4f(const GLchar* name, const glm::vec4& vector);
+			void setUniform4f(const char* name, const glm::vec4& vector);
 
 			/**
 			* Assigns a new matrix to a uniform mat4 in the shader
@@ -82,7 +82,7 @@ namespace tiger {
 			* @param name Name of the uniform mat4 that is being modified
 			* @param matrix The new matrix that gets assigned to the uniform mat4
 			*/
-			void setUniformMat4(const GLchar* name, const glm::mat4& matrix);
+			void setUniformMat4(const char* name, const glm::mat4& matrix);
 
 			/**
 			* Binds the shader
@@ -94,7 +94,7 @@ namespace tiger {
 			*/
 			void disable() const;
 
-			inline GLuint getShaderID() const { return m_ShaderID; }
+			inline unsigned int getShaderID() const { return m_ShaderID; }
 
 		private:
 
@@ -104,12 +104,12 @@ namespace tiger {
 			*
 			* @param name Name of the uniform variable that is being modified
 			*/
-			GLint getUniformLocation(const GLchar* name);
+			int getUniformLocation(const char* name);
 
 			/**
 			* Creates the shader program and will display any errors to the console
 			*/
-			GLuint load();
+			unsigned int load();
 		};
 	}
 }

@@ -68,7 +68,7 @@ namespace tiger {
 				glDepthFunc(m_DepthFunc);
 			}
 		}
-		void GLCache::setStencilFunc(GLenum testFunc, GLint stencilFragValue, GLuint stencilBitmask) {
+		void GLCache::setStencilFunc(GLenum testFunc, int stencilFragValue, unsigned int stencilBitmask) {
 			if (m_StencilTestFunc != testFunc || m_StencilFragValue != stencilFragValue || m_StencilFuncBitmask != stencilBitmask) {
 				m_StencilTestFunc = testFunc;
 				m_StencilFragValue = stencilFragValue;
@@ -84,7 +84,7 @@ namespace tiger {
 				glStencilOpSeparate(GL_FRONT_AND_BACK, m_StencilFailOperation, m_DepthFailOperation, m_DepthPassOperation);
 			}
 		}
-		void GLCache::setStencilWriteMask(GLuint bitmask) {
+		void GLCache::setStencilWriteMask(unsigned int bitmask) {
 			if (m_StencilWriteBitmask != bitmask) {
 				m_StencilWriteBitmask = bitmask;
 				glStencilMaskSeparate(GL_FRONT_AND_BACK, m_StencilWriteBitmask);
@@ -98,7 +98,7 @@ namespace tiger {
 			}
 		}
 
-		void GLCache::switchShader(GLuint shaderID) {
+		void GLCache::switchShader(unsigned int shaderID) {
 			if (m_ActiveShaderID != shaderID) {
 				m_ActiveShaderID = shaderID;
 				glUseProgram(shaderID);

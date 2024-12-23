@@ -3,14 +3,14 @@
 namespace tiger {
 	namespace graphics {
 
-		Camera::Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), GLfloat yaw = YAW, GLfloat pitch = PITCH)
+		Camera::Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH)
 			: m_Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseSensitivity(SENSITIVITY), m_FOV(FOV), 
 				m_Position(position), m_WorldUp(up), m_Yaw(yaw), m_Pitch(pitch)
 		{
 			updateCameraVectors();
 		}
 
-		Camera::Camera(GLfloat xPos, GLfloat yPos, GLfloat zPos, GLfloat xUp, GLfloat yUp, GLfloat zUp, GLfloat yaw = YAW, GLfloat pitch = PITCH)
+		Camera::Camera(float xPos, float yPos, float zPos, float xUp, float yUp, float zUp, float yaw = YAW, float pitch = PITCH)
 			: m_Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseSensitivity(SENSITIVITY), m_FOV(FOV),
 				m_Position(glm::vec3(xPos, yPos, zPos)), m_WorldUp(glm::vec3(xUp, yUp, zUp)), m_Yaw(yaw), m_Pitch(pitch)
 		{
@@ -22,7 +22,7 @@ namespace tiger {
 			return glm::lookAt(m_Position, m_Position + m_Front, m_Up);
 		}
 
-		void Camera::processInput(GLfloat deltaTime) {
+		void Camera::processInput(float deltaTime) {
 			// Keyboard input
 			if (Window::isKeyPressed(GLFW_KEY_W))
 				processKeyboard(tiger::graphics::FORWARD, deltaTime);
@@ -36,15 +36,19 @@ namespace tiger {
 				processKeyboard(tiger::graphics::UPWARDS, deltaTime);
 			if (Window::isKeyPressed(GLFW_KEY_LEFT_CONTROL))
 				processKeyboard(tiger::graphics::DOWNWARDS, deltaTime);
+			if (Window::isKeyPressed(GLFW_KEY_LEFT_SHIFT))
+				m_MovementSpeed = SPEED * 4.0f;
+			else
+				m_MovementSpeed = SPEED;
 			// Mouse scrolling
 			processMouseScroll(Window::getScrollY() * 6);
 			// Mouse movement
 			processMouseMovement(Window::getMouseXDelta(), -Window::getMouseYDelta(), true);
 		}
 
-		void Camera::processKeyboard(Camera_Movement direction, GLfloat deltaTime) 
+		void Camera::processKeyboard(Camera_Movement direction, float deltaTime) 
 		{
-			GLfloat velocity = m_MovementSpeed * deltaTime;
+			float velocity = m_MovementSpeed * deltaTime;
 			switch (direction) {
 			case FORWARD:
 				m_Position += m_Front * velocity;
@@ -67,7 +71,7 @@ namespace tiger {
 			}
 		}
 
-		void Camera::processMouseMovement(GLfloat xOffset, GLfloat yOffset, GLboolean constrainPitch = true)
+		void Camera::processMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch = true)
 		{
 			xOffset *= m_MouseSensitivity;
 			yOffset *= m_MouseSensitivity;
@@ -85,7 +89,7 @@ namespace tiger {
 			updateCameraVectors();
 		}
 
-		void Camera::processMouseScroll(GLfloat offset) {
+		void Camera::processMouseScroll(float offset) {
 			if (offset != 0 && m_FOV >= 1.0f && m_FOV <= FOV) {
 				m_FOV -= offset;
 			}

@@ -7,7 +7,7 @@ namespace tiger {
 			glGenBuffers(1, &m_BufferID);
 		}
 
-		Buffer::Buffer(GLfloat* data, GLsizei amount, GLuint componentCount){
+		Buffer::Buffer(float* data, int amount, unsigned int componentCount){
 			glGenBuffers(1, &m_BufferID);
 			load(data, amount, componentCount);
 		}
@@ -16,11 +16,10 @@ namespace tiger {
 			glDeleteBuffers(1, &m_BufferID);
 		}
 
-		void Buffer::load(GLfloat* data, GLsizei amount, GLuint componentCount) {
+		void Buffer::load(float* data, int amount, unsigned int componentCount) {
 			m_ComponentCount = componentCount;
 			bind();
-			glBufferData(GL_ARRAY_BUFFER, amount * sizeof(GL_FLOAT), data, GL_STATIC_DRAW);
-			unbind();
+			glBufferData(GL_ARRAY_BUFFER, amount * sizeof(float), data, GL_STATIC_DRAW);
 		}
 
 		void Buffer::bind() const {

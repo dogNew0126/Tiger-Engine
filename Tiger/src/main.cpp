@@ -11,11 +11,11 @@
 #include "utils/Time.h"
 #include "graphics/camera/Camera.h"
 #include "utils/Logger.h"
-#include "graphics/Model.h"
+#include "graphics/mesh/Model.h"
 #include "terrain/Terrain.h"
 #include "Scene3D.h"
 #include "platform/OpenGL/Framebuffers/Framebuffer.h"
-#include "graphics/MeshFactory.h"
+#include "graphics/mesh/MeshFactory.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -35,7 +35,7 @@ int main() {
 	blitFramebuffer.addColorAttachment(false).addDepthStencilRBO(false).createFramebuffer();
 
 	// Instantiate the shaders and mesh factories
-	tiger::graphics::Shader framebufferShader("src/shaders/framebuffer.vert", "src/shaders/framebuffer.frag");
+	tiger::graphics::Shader framebufferShader("src/shaders/postprocess.vert", "src/shaders/postprocess.frag");
 	tiger::graphics::MeshFactory meshFactory;
 	tiger::graphics::Mesh* colourBufferMesh = meshFactory.CreateScreenQuad(blitFramebuffer.getColourBufferTexture());
 
@@ -82,7 +82,8 @@ int main() {
 		framebuffer.unbind();
 		window.clear();
 		framebufferShader.enable();
-		colourBufferMesh->Draw(framebufferShader);
+		colourBufferMesh->getMaterial().BindMaterialInformation(framebufferShader);
+		colourBufferMesh->Draw();
 		framebufferShader.disable();
 
 #if DEBUG_ENABLED

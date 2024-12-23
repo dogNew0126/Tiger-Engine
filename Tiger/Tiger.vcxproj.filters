@@ -42,10 +42,10 @@
     <ClCompile Include="src\utils\Timer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\Mesh.cpp">
+    <ClCompile Include="src\graphics\mesh\Mesh.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\Model.cpp">
+    <ClCompile Include="src\graphics\mesh\Model.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\OpenGL\Buffer.cpp">
@@ -72,7 +72,7 @@
     <ClCompile Include="src\Scene3D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\MeshFactory.cpp">
+    <ClCompile Include="src\graphics\mesh\MeshFactory.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\OpenGL\Framebuffers\Framebuffer.cpp">
@@ -120,6 +120,12 @@
     <ClCompile Include="vendor\Imgui\examples\imgui_impl_opengl3.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\renderer\PostProcessor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\mesh\Material.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Shader.h">
@@ -149,10 +155,10 @@
     <ClInclude Include="src\utils\Timer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\Mesh.h">
+    <ClInclude Include="src\graphics\mesh\Mesh.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\Model.h">
+    <ClInclude Include="src\graphics\mesh\Model.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\OpenGL\Buffer.h">
@@ -182,7 +188,7 @@
     <ClInclude Include="src\graphics\renderer\Renderable3D.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\MeshFactory.h">
+    <ClInclude Include="src\graphics\mesh\MeshFactory.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\OpenGL\Framebuffers\Framebuffer.h">
@@ -239,14 +245,20 @@
     <ClInclude Include="vendor\Imgui\examples\imgui_impl_opengl3.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\renderer\PostProcessor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\mesh\Material.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\model.frag" />
     <None Include="src\shaders\lightCube.frag" />
     <None Include="src\shaders\terrain.frag" />
     <None Include="src\shaders\basic.frag" />
-    <None Include="src\shaders\framebuffer.vert" />
-    <None Include="src\shaders\framebuffer.frag" />
+    <None Include="src\shaders\postprocess.vert" />
+    <None Include="src\shaders\postprocess.frag" />
     <None Include="src\shaders\skybox.vert" />
     <None Include="src\shaders\skybox.frag" />
     <None Include="src\shaders\modelReflection.frag" />

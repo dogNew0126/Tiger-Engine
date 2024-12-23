@@ -22,13 +22,13 @@ namespace tiger {
 
 			void setDepthFunc(GLenum depthFunc);
 			void setStencilTest(bool choice);
-			void setStencilFunc(GLenum testFunc, GLint stencilFragValue, GLuint stencilBitmask);
+			void setStencilFunc(GLenum testFunc, int stencilFragValue, unsigned int stencilBitmask);
 			void setStencilOp(GLenum stencilFailOperation, GLenum depthFailOperation, GLenum depthPassOperation);
-			void setStencilWriteMask(GLuint bitmask);
+			void setStencilWriteMask(unsigned int bitmask);
 
 			void setBlendFunc(GLenum src, GLenum dst);
 			void setCullFace(GLenum faceToCull);
-			void switchShader(GLuint shaderID);
+			void switchShader(unsigned int shaderID);
 
 			void setMultisample(bool choice);
 
@@ -46,10 +46,10 @@ namespace tiger {
 
 			// Stencil State
 			GLenum m_StencilTestFunc;
-			GLint m_StencilFragValue;
-			GLuint m_StencilFuncBitmask;
+			int m_StencilFragValue;
+			unsigned int m_StencilFuncBitmask;
 			GLenum m_StencilFailOperation, m_DepthFailOperation, m_DepthPassOperation;
-			GLuint m_StencilWriteBitmask;
+			unsigned int m_StencilWriteBitmask;
 
 			// Blend State
 			GLenum m_BlendSrc, m_BlendDst;
@@ -58,7 +58,7 @@ namespace tiger {
 			GLenum m_FaceToCull;
 
 			// Active binds
-			GLuint m_ActiveShaderID;
+			unsigned int m_ActiveShaderID;
 		};
 	}
 }

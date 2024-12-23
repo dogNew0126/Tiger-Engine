@@ -6,7 +6,7 @@
 #include "graphics/renderer/GLCache.h"
 #include "terrain/Terrain.h"
 #include "graphics/Window.h"
-#include "graphics/MeshFactory.h"
+#include "graphics/mesh/MeshFactory.h"
 #include "graphics/Skybox.h"
 #include "graphics/dynamic_lights/DynamicLightManager.h"
 #include "Defs.h"
