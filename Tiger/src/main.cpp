@@ -15,7 +15,8 @@
 #include "terrain/Terrain.h"
 #include "Scene3D.h"
 #include "platform/OpenGL/Framebuffers/Framebuffer.h"
-#include "graphics/mesh/MeshFactory.h"
+#include "graphics/mesh/common/Quad.h"
+#include "graphics/renderer/GLCache.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -26,6 +27,7 @@ int main() {
 	tiger::graphics::Camera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 	tiger::graphics::Window window("Tiger Engine", WINDOW_X_RESOLUTION, WINDOW_Y_RESOLUTION);
 	tiger::Scene3D scene(&camera);
+	tiger::graphics::GLCache* glCache = tiger::graphics::GLCache::getInstance();
 
 	// Construct framebuffers
 	tiger::opengl::Framebuffer framebuffer(window.getWidth(), window.getHeight());
@@ -34,19 +36,19 @@ int main() {
 	tiger::opengl::Framebuffer blitFramebuffer(window.getWidth(), window.getHeight());
 	blitFramebuffer.addColorAttachment(false).addDepthStencilRBO(false).createFramebuffer();
 
-	// Instantiate the shaders and mesh factories
+	// Instantiate the shaders and a screenspace quad
 	tiger::graphics::Shader framebufferShader("src/shaders/postprocess.vert", "src/shaders/postprocess.frag");
-	tiger::graphics::MeshFactory meshFactory;
-	tiger::graphics::Mesh* colourBufferMesh = meshFactory.CreateScreenQuad(blitFramebuffer.getColourBufferTexture());
+	tiger::graphics::Quad screenQuad;
+	screenQuad.getMaterial().setDiffuseMapId(blitFramebuffer.getColourBufferTexture());
+	// Setup post processing information
+	glCache->switchShader(framebufferShader.getShaderID());
+	framebufferShader.setUniform2f("readOffset", glm::vec2(1.0f / (float)window.getWidth(), 1.0f / (float)window.getHeight()));
 
 	// Debug timers
 #if DEBUG_ENABLED
 	tiger::Timer timer;
 	float postProcessTime = 0.0f;
 #endif
-
-	framebufferShader.enable();
-	framebufferShader.setUniform2f("readOffset", glm::vec2(1.0f / (float)window.getWidth(), 1.0f / (float)window.getHeight()));
 
 	tiger::Time deltaTime;
 
@@ -82,9 +84,10 @@ int main() {
 		framebuffer.unbind();
 		window.clear();
 		framebufferShader.enable();
-		colourBufferMesh->getMaterial().BindMaterialInformation(framebufferShader);
-		colourBufferMesh->Draw();
-		framebufferShader.disable();
+
+		glCache->switchShader(framebufferShader.getShaderID());
+		screenQuad.getMaterial().BindMaterialInformation(framebufferShader);
+		screenQuad.Draw();
 
 #if DEBUG_ENABLED
 		glFinish();

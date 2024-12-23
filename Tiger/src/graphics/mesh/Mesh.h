@@ -37,7 +37,7 @@ namespace tiger {
 			inline void setIndices(std::vector<unsigned int> indices) { m_Indices = indices; }
 			inline Material& getMaterial() { return m_Material; }
 
-		private:
+		protected:
 			unsigned int m_VAO, m_VBO, m_IBO;
 
 			Material m_Material;

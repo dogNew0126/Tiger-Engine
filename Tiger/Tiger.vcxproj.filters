@@ -72,9 +72,6 @@
     <ClCompile Include="src\Scene3D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\mesh\MeshFactory.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\platform\OpenGL\Framebuffers\Framebuffer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -124,6 +121,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\mesh\Material.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\mesh\common\Cube.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\mesh\common\Quad.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\mesh\common\Sphere.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -188,9 +194,6 @@
     <ClInclude Include="src\graphics\renderer\Renderable3D.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\mesh\MeshFactory.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\platform\OpenGL\Framebuffers\Framebuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -249,6 +252,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\mesh\Material.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\mesh\common\Cube.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\mesh\common\Quad.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\mesh\common\Sphere.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
