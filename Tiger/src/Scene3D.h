@@ -8,6 +8,7 @@
 #include "graphics/Window.h"
 #include "graphics/Skybox.h"
 #include "graphics/dynamic_lights/DynamicLightManager.h"
+#include "utils/loaders/TextureLoader.h"
 #include "Defs.h"
 
 namespace tiger {

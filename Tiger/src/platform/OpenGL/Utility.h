@@ -15,7 +15,7 @@ namespace tiger {
 
 		class Utility {
 		public:
-			static unsigned int loadTextureFromFile(const char* path, bool containsTransparencyOnSides = false);
+			// static unsigned int loadTextureFromFile(const char* path, bool containsTransparencyOnSides = false);
 
 			static unsigned int loadCubemapFromFiles(const std::vector<const char*>& vec);
 		};

@@ -28,6 +28,7 @@ int main() {
 	tiger::graphics::Window window("Tiger Engine", WINDOW_X_RESOLUTION, WINDOW_Y_RESOLUTION);
 	tiger::Scene3D scene(&camera);
 	tiger::graphics::GLCache* glCache = tiger::graphics::GLCache::getInstance();
+	tiger::utils::TextureLoader::InitializeDefaultTextures();
 
 	// Construct framebuffers
 	tiger::opengl::Framebuffer framebuffer(window.getWidth(), window.getHeight());
@@ -39,7 +40,7 @@ int main() {
 	// Instantiate the shaders and a screenspace quad
 	tiger::graphics::Shader framebufferShader("src/shaders/postprocess.vert", "src/shaders/postprocess.frag");
 	tiger::graphics::Quad screenQuad;
-	screenQuad.getMaterial().setDiffuseMapId(blitFramebuffer.getColourBufferTexture());
+	screenQuad.getMaterial().setDiffuseMap(blitFramebuffer.getColourBufferTexture());
 	// Setup post processing information
 	glCache->switchShader(framebufferShader.getShaderID());
 	framebufferShader.setUniform2f("readOffset", glm::vec2(1.0f / (float)window.getWidth(), 1.0f / (float)window.getHeight()));

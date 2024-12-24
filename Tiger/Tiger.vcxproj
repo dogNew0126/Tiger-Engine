@@ -157,6 +157,7 @@
     <ClCompile Include="src\graphics\renderer\Renderer.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
     <ClCompile Include="src\graphics\Skybox.cpp" />
+    <ClCompile Include="src\graphics\texture\Texture.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\platform\OpenGL\Buffer.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="src\Scene3D.cpp" />
     <ClCompile Include="src\terrain\Terrain.cpp" />
     <ClCompile Include="src\utils\FireUtils.cpp" />
+    <ClCompile Include="src\utils\loaders\TextureLoader.cpp" />
     <ClCompile Include="src\utils\Logger.cpp" />
     <ClCompile Include="src\utils\Time.cpp" />
     <ClCompile Include="src\utils\Timer.cpp" />
@@ -199,6 +201,7 @@
     <ClInclude Include="src\graphics\renderer\Renderer.h" />
     <ClInclude Include="src\graphics\Shader.h" />
     <ClInclude Include="src\graphics\Skybox.h" />
+    <ClInclude Include="src\graphics\texture\Texture.h" />
     <ClInclude Include="src\graphics\Window.h" />
     <ClInclude Include="src\platform\OpenGL\Buffer.h" />
     <ClInclude Include="src\platform\OpenGL\Framebuffers\Framebuffer.h" />
@@ -210,6 +213,7 @@
     <ClInclude Include="src\shaders\basic.vert" />
     <ClInclude Include="src\terrain\Terrain.h" />
     <ClInclude Include="src\utils\FileUtils.h" />
+    <ClInclude Include="src\utils\loaders\TextureLoader.h" />
     <ClInclude Include="src\utils\Logger.h" />
     <ClInclude Include="src\utils\Singleton.h" />
     <ClInclude Include="src\utils\Time.h" />

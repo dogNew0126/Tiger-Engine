@@ -132,6 +132,12 @@
     <ClCompile Include="src\graphics\mesh\common\Sphere.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\texture\Texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\loaders\TextureLoader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Shader.h">
@@ -261,6 +267,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\mesh\common\Sphere.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\texture\Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\loaders\TextureLoader.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

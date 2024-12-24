@@ -5,6 +5,7 @@
 
 #include "../../../Defs.h"
 #include "../../../utils/Logger.h"
+#include "../../../utils/loaders/TextureLoader.h"
 
 namespace tiger {
 	namespace opengl {
@@ -22,11 +23,12 @@ namespace tiger {
 			void unbind();
 
 			inline unsigned int getFramebuffer() const { return m_FBO; }
-			inline unsigned int getColourBufferTexture() const { return m_ColourTexture; }
+			inline graphics::Texture* getColourBufferTexture() const { return m_ColourTexture; }
 			inline unsigned int getDepthStencilBufferTexture() const { return m_DepthStencilRBO; }
 
 		private:
-			unsigned int m_FBO, m_ColourTexture, m_DepthStencilRBO;
+			unsigned int m_FBO, m_DepthStencilRBO;
+			graphics::Texture* m_ColourTexture;
 
 			bool m_Created;
 

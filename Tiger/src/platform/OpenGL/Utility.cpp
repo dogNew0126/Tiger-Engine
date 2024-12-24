@@ -5,6 +5,8 @@
 namespace tiger {
 	namespace opengl {
 
+		/*
+
 		unsigned int Utility::loadTextureFromFile(const char* path, bool containsTransparencyOnSides) {
 
 			unsigned int textureID;
@@ -39,7 +41,7 @@ namespace tiger {
 				// Anisotropic filtering
 				float maxAnisotropy;
 				glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAnisotropy);
-				float anistropyAmount = glm::min(maxAnisotropy, ANISOTROPIC_FILTERING);
+				float anistropyAmount = glm::min(maxAnisotropy, ANISOTROPIC_FILTERING_LEVEL);
 				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, anistropyAmount);
 				// Free now that the memory is 
 				stbi_image_free(data);
@@ -52,6 +54,8 @@ namespace tiger {
 			return textureID;
 
 		}
+
+		*/
 
 		unsigned int Utility::loadCubemapFromFiles(const std::vector<const char*>& filePaths) {
 			// Size check
