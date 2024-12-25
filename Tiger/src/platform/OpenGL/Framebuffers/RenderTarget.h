@@ -32,8 +32,12 @@ namespace tiger {
 			inline graphics::Texture* getColourBufferTexture() const { return m_ColourTexture; }
 			inline unsigned int getDepthTexture() { return m_DepthTexture; }
 
+			inline bool isMultisampledColourBuffer() { return m_IsMultisampledColourBuffer; }
+
 		private:
 			unsigned int m_FBO;
+
+			bool m_IsMultisampledColourBuffer;
 
 			graphics::Texture* m_ColourTexture;
 			unsigned int m_DepthStencilRBO;

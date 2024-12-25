@@ -167,6 +167,9 @@
     <ClCompile Include="src\platform\OpenGL\VertexArray.cpp" />
     <ClCompile Include="src\Scene3D.cpp" />
     <ClCompile Include="src\terrain\Terrain.cpp" />
+    <ClCompile Include="src\ui\DebugPane.cpp" />
+    <ClCompile Include="src\ui\Pane.cpp" />
+    <ClCompile Include="src\ui\RuntimePane.cpp" />
     <ClCompile Include="src\utils\FireUtils.cpp" />
     <ClCompile Include="src\utils\loaders\TextureLoader.cpp" />
     <ClCompile Include="src\utils\Logger.cpp" />
@@ -211,6 +214,9 @@
     <ClInclude Include="src\Scene3D.h" />
     <ClInclude Include="src\shaders\basic.vert" />
     <ClInclude Include="src\terrain\Terrain.h" />
+    <ClInclude Include="src\ui\DebugPane.h" />
+    <ClInclude Include="src\ui\Pane.h" />
+    <ClInclude Include="src\ui\RuntimePane.h" />
     <ClInclude Include="src\utils\FileUtils.h" />
     <ClInclude Include="src\utils\loaders\TextureLoader.h" />
     <ClInclude Include="src\utils\Logger.h" />

@@ -4,7 +4,7 @@
 namespace tiger {
 	namespace graphics {
 
-		Renderer::Renderer(Camera* camera) : m_Camera(camera)
+		Renderer::Renderer(Camera* camera) : m_Camera(camera), NDC_Plane()
 		{
 			// Configure and cache OpenGL state
 			m_GLCache = GLCache::getInstance();

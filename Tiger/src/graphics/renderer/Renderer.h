@@ -6,6 +6,7 @@
 #include "../camera/Camera.h"
 #include "Renderable3D.h"
 #include "GLCache.h"
+#include "../mesh/common/Quad.h"
 
 
 namespace tiger {
@@ -21,6 +22,9 @@ namespace tiger {
 
 			void flushOpaque(Shader& shader, RenderPass pass);
 			void flushTransparent(Shader& shader, RenderPass pass);
+
+		public:
+			Quad NDC_Plane;
 
 		private:
 
