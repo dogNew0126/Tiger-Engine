@@ -43,9 +43,9 @@ namespace tiger {
 		//Add(new graphics::Renderable3D(glm::vec3(40, 20, 40), glm::vec3(15, 15, 15), glm::vec3(0.0, 1.0, 0.0), glm::radians(180.0f), glass, nullptr, false, true));
 		//Add(new graphics::Renderable3D(glm::vec3(80, 20, 80), glm::vec3(15, 15, 15), glm::vec3(0.0, 1.0, 0.0), glm::radians(180.0f), glass, nullptr, false, true));
 		//Add(new graphics::Renderable3D(glm::vec3(120, 20, 120), glm::vec3(15, 15, 15), glm::vec3(0.0, 1.0, 0.0), glm::radians(180.0f), glass, nullptr, false, true));
-		Add(new graphics::Renderable3D(glm::vec3(20, 20, 20), glm::vec3(10, 10, 10), glm::vec3(1, 0, 0), 0, new graphics::Model(graphics::Cube()), nullptr, false, false));
-		Add(new graphics::Renderable3D(glm::vec3(140, 20, 140), glm::vec3(10, 10, 10), glm::vec3(1, 0, 0), 0, new graphics::Model(graphics::Sphere()), nullptr, false, false));
-		Add(new graphics::Renderable3D(glm::vec3(-20, 20, -20), glm::vec3(10, 10, 10), glm::vec3(1, 0, 0), 0, new graphics::Model(graphics::Quad()), nullptr, false, false));
+		//Add(new graphics::Renderable3D(glm::vec3(20, 20, 20), glm::vec3(10, 10, 10), glm::vec3(1, 0, 0), 0, new graphics::Model(graphics::Cube()), nullptr, false, false));
+		//Add(new graphics::Renderable3D(glm::vec3(140, 20, 140), glm::vec3(10, 10, 10), glm::vec3(1, 0, 0), 0, new graphics::Model(graphics::Sphere()), nullptr, false, false));
+		//Add(new graphics::Renderable3D(glm::vec3(-20, 20, -20), glm::vec3(10, 10, 10), glm::vec3(1, 0, 0), 0, new graphics::Model(graphics::Quad()), nullptr, false, false));
 
 		// Skybox
 		std::vector<std::string> skyboxFilePaths;
@@ -113,6 +113,8 @@ namespace tiger {
 		m_TerrainShader.setUniform3f("viewPos", m_Camera->getPosition());
 		glm::mat4 modelMatrix(1);
 		modelMatrix = glm::translate(modelMatrix, m_Terrain->getPosition());
+		glm::mat3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(modelMatrix)));
+		m_TerrainShader.setUniformMat3("normalMatrix", normalMatrix);
 		m_TerrainShader.setUniformMat4("model", modelMatrix);
 		m_TerrainShader.setUniformMat4("view", m_Camera->getViewMatrix());
 		m_TerrainShader.setUniformMat4("projection", projectionMatrix);

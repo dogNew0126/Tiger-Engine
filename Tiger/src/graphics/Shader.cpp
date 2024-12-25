@@ -22,8 +22,7 @@ namespace tiger {
 			glDeleteProgram(m_ShaderID);
 		}
 
-		unsigned int Shader::load()
-		{
+		unsigned int Shader::load(){
 			// Create the program and shaders
 			unsigned int program = glCreateProgram();
 			unsigned int vertex = glCreateShader(GL_VERTEX_SHADER);
@@ -121,48 +120,43 @@ namespace tiger {
 			return program;
 		}
 
-		int Shader::getUniformLocation(const char* name)
-		{
+		int Shader::getUniformLocation(const char* name){
 			return glGetUniformLocation(m_ShaderID, name);
 		}
 
-		void Shader::setUniform1f(const char* name, float value)
-		{
+		void Shader::setUniform1f(const char* name, float value){
 			glUniform1f(getUniformLocation(name), value);
 		}
 
-		void Shader::setUniform1i(const char* name, int value)
-		{
+		void Shader::setUniform1i(const char* name, int value){
 			glUniform1i(getUniformLocation(name), value);
 		}
 
-		void Shader::setUniform2f(const char* name, const glm::vec2& vector)
-		{
+		void Shader::setUniform2f(const char* name, const glm::vec2& vector){
 			glUniform2f(getUniformLocation(name), vector.x, vector.y);
 		}
 
-		void Shader::setUniform3f(const char* name, const glm::vec3& vector)
-		{
+		void Shader::setUniform3f(const char* name, const glm::vec3& vector){
 			glUniform3f(getUniformLocation(name), vector.x, vector.y, vector.z);
 		}
 
-		void Shader::setUniform4f(const char* name, const glm::vec4& vector)
-		{
+		void Shader::setUniform4f(const char* name, const glm::vec4& vector){
 			glUniform4f(getUniformLocation(name), vector.x, vector.y, vector.z, vector.w);
 		}
 
-		void Shader::setUniformMat4(const char* name, const glm::mat4& matrix) 
-		{
+		void Shader::setUniformMat3(const char* name, const glm::mat3& matrix) {
+			glUniformMatrix3fv(glGetUniformLocation(m_ShaderID, name), 1, GL_FALSE, glm::value_ptr(matrix));
+		}
+
+		void Shader::setUniformMat4(const char* name, const glm::mat4& matrix) {
 			glUniformMatrix4fv(glGetUniformLocation(m_ShaderID, name), 1, GL_FALSE, glm::value_ptr(matrix));
 		}
 
-		void Shader::enable() const
-		{
+		void Shader::enable() const{
 			glUseProgram(m_ShaderID);
 		}
 
-		void Shader::disable() const
-		{
+		void Shader::disable() const{
 			glUseProgram(0);
 		}
 	}

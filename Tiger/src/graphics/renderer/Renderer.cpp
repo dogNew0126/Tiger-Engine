@@ -110,6 +110,10 @@ namespace tiger {
 				model = translate * rotate * scale;
 			}
 
+			glm::mat3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(model)));
+
+			shader.setUniformMat3("normalMatrix", normalMatrix);
+
 			shader.setUniformMat4("model", model);
 		}
 

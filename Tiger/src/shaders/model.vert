@@ -10,12 +10,12 @@ out mat3 TBN;
 out vec3 FragPos;
 out vec2 TexCoords;
 
+uniform mat3 normalMatrix;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
 void main() {
-	mat3 normalMatrix = mat3(transpose(inverse(model)));
 	vec3 T = normalize(normalMatrix * tangent);
 	vec3 B = normalize(normalMatrix * bitangent);
     vec3 N = normalize(normalMatrix * normal);

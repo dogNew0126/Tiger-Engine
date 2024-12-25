@@ -10,6 +10,7 @@ out vec3 Normal;
 out vec3 FragPos;
 out vec2 TexCoords;
 
+uniform mat3 normalMatrix;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
@@ -19,6 +20,5 @@ void main() {
 	FragPos = vec3(model * vec4(position, 1.0f));
 	TexCoords = texCoords;
 
-	// Inverse is a very costly function, maybe do it on the cpu then send it to the gpu as a uniform
-	Normal = mat3(transpose(inverse(model))) * normal;
+	Normal = normalMatrix * normal;
 }
