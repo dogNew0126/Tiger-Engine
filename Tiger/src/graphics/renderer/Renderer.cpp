@@ -10,7 +10,7 @@ namespace tiger {
 			m_GLCache = GLCache::getInstance();
 			m_GLCache->setDepthTest(true);
 			m_GLCache->setBlend(false);
-			m_GLCache->setCull(true);
+			m_GLCache->setFaceCull(true);
 		}
 
 		void Renderer::submitOpaque(Renderable3D* renderable) {
@@ -21,44 +21,35 @@ namespace tiger {
 			m_TransparentRenderQueue.push_back(renderable);
 		}
 
-		void Renderer::flushOpaque(Shader& shader, Shader& outlineShader, RenderPass pass) {
+		void Renderer::flushOpaque(Shader& shader, RenderPass pass) {
 			m_GLCache->switchShader(shader.getShaderID());
-			m_GLCache->setCull(true);
+
 			m_GLCache->setDepthTest(true);
 			m_GLCache->setBlend(false);
-			m_GLCache->setStencilTest(true);
-			m_GLCache->setStencilWriteMask(0xFF);
+			m_GLCache->setStencilTest(false);
+			m_GLCache->setFaceCull(true);
+			m_GLCache->setCullFace(GL_BACK);
+
 			// Render opaque objects
 			while (!m_OpaqueRenderQueue.empty()) {
 
 				Renderable3D* current = m_OpaqueRenderQueue.front();
 
-				m_GLCache->setStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-				m_GLCache->setStencilFunc(GL_ALWAYS, 1, 0xFF);
-				if (current->getShouldOutline()) m_GLCache->setStencilWriteMask(0xFF);
-				else m_GLCache->setStencilWriteMask(0x00);
-
-				setupModelMatrix(current, shader);
+				setupModelMatrix(current, shader, pass);
 				current->draw(shader, pass);
-
-				if (current->getShouldOutline()) {
-
-					drawOutline(outlineShader, current);
-					m_GLCache->switchShader(shader.getShaderID());
-
-				}
-
 
 				m_OpaqueRenderQueue.pop_front();
 			}
 		}
 
-		void Renderer::flushTransparent(Shader& shader, Shader& outlineShader, RenderPass pass) {
+		void Renderer::flushTransparent(Shader& shader, RenderPass pass) {
 
-			// Sort then render transparent objects (from back to front)
+			m_GLCache->switchShader(shader.getShaderID());
+			m_GLCache->setDepthTest(true);
+			m_GLCache->setBlend(true);
+			m_GLCache->setStencilTest(false);
+			m_GLCache->setFaceCull(false);
 
-			m_GLCache->setCull(false);
-			m_GLCache->setStencilTest(true);
 
 			std::sort(m_TransparentRenderQueue.begin(), m_TransparentRenderQueue.end(),
 				[this](Renderable3D* a, Renderable3D* b) -> bool
@@ -71,36 +62,23 @@ namespace tiger {
 
 				Renderable3D* current = m_TransparentRenderQueue.front();
 
-				m_GLCache->setStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-				m_GLCache->setStencilFunc(GL_ALWAYS, 1, 0xFF);
-				if (current->getShouldOutline()) m_GLCache->setStencilWriteMask(0xFF);
-				else m_GLCache->setStencilWriteMask(0x00);
-
 				// Enable blending (note: You will still need to sort from back to front when rendering)
 				m_GLCache->setBlend(true);
 				m_GLCache->setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				
-				setupModelMatrix(current, shader);
+				setupModelMatrix(current, shader, pass);
 				current->draw(shader, pass);
-
-				// Draw the outline
-				if (current->getShouldOutline()) {
-
-					drawOutline(outlineShader, current);
-
-					m_GLCache->switchShader(shader.getShaderID());
-				}
 
 				m_TransparentRenderQueue.pop_front();
 			}
 		}
 
 		// TODO: Currently only support two levels in a hierarchical scene graph
-		void Renderer::setupModelMatrix(Renderable3D* renderable, Shader& shader, float scaleFactor) {
+		void Renderer::setupModelMatrix(Renderable3D* renderable, Shader& shader, RenderPass pass) {
 			glm::mat4 model(1);
 			glm::mat4 translate = glm::translate(glm::mat4(1.0f), renderable->getPosition());
 			glm::mat4 rotate = glm::toMat4(renderable->getOrientation());
-			glm::mat4 scale = glm::scale(glm::mat4(1.0f), renderable->getScale() * scaleFactor);
+			glm::mat4 scale = glm::scale(glm::mat4(1.0f), renderable->getScale());
 
 			if (renderable->getParent()) {
 				// Only apply scale locally
@@ -110,25 +88,15 @@ namespace tiger {
 				model = translate * rotate * scale;
 			}
 
-			glm::mat3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(model)));
-
-			shader.setUniformMat3("normalMatrix", normalMatrix);
-
 			shader.setUniformMat4("model", model);
-		}
 
-		void Renderer::drawOutline(Shader& outlineShader, Renderable3D* renderable) {
+			if (pass != RenderPass::ShadowmapPass) {
 
-			m_GLCache->switchShader(outlineShader.getShaderID());
-			m_GLCache->setStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+				glm::mat3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(model)));
+				shader.setUniformMat3("normalMatrix", normalMatrix);
 
-			setupModelMatrix(renderable, outlineShader, 1.005f);
+			}
 
-			renderable->draw(outlineShader, RenderPass::ShadowmapPass);
-
-			m_GLCache->setDepthTest(true);
-
-			glClear(GL_STENCIL_BUFFER_BIT);
 		}
 
 

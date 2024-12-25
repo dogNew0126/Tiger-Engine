@@ -69,7 +69,7 @@
     <ClCompile Include="src\Scene3D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\OpenGL\Framebuffers\Framebuffer.cpp">
+    <ClCompile Include="src\platform\OpenGL\Framebuffers\RenderTarget.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\Skybox.cpp">
@@ -88,9 +88,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\dynamic_lights\DynamicLightManager.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\OpenGL\Framebuffers\ShadowMap.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\renderer\GLCache.cpp">
@@ -197,7 +194,7 @@
     <ClInclude Include="src\graphics\renderer\Renderable3D.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\platform\OpenGL\Framebuffers\Framebuffer.h">
+    <ClInclude Include="src\platform\OpenGL\Framebuffers\RenderTarget.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\Skybox.h">
@@ -219,9 +216,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\dynamic_lights\DynamicLightManager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\OpenGL\Framebuffers\ShadowMap.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\renderer\GLCache.h">

@@ -10,9 +10,9 @@ namespace tiger {
 			m_Blend = false;
 			m_Cull = false;
 			m_FaceToCull = GL_BACK;
-			m_Multisample = false;;
+			m_Multisample = false;
 			setDepthTest(true);
-			setCull(true);
+			setFaceCull(true);
 		}
 
 		GLCache::~GLCache() {
@@ -53,7 +53,7 @@ namespace tiger {
 			}
 		}
 
-		void GLCache::setCull(bool choice) {
+		void GLCache::setFaceCull(bool choice) {
 			if (m_Cull != choice) {
 				m_Cull = choice;
 				if (m_Cull)

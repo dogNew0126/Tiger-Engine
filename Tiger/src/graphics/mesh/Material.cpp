@@ -8,7 +8,9 @@ namespace tiger
 			: m_DiffuseMap(diffuseMap), m_SpecularMap(specularMap), m_NormalMap(normalMap), m_EmissionMap(emissionMap), m_Shininess(shininess) {}
 
 		void Material::BindMaterialInformation(Shader &shader) const {
-			int currentTextureUnit = 0;
+
+			// Texture unit 0 is reserved for the shadowmap
+			int currentTextureUnit = 1;
 
 			shader.setUniform1i("material.texture_diffuse", currentTextureUnit);
 			if (m_DiffuseMap) {

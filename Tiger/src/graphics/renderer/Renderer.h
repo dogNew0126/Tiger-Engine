@@ -19,14 +19,12 @@ namespace tiger {
 			void submitOpaque(Renderable3D* renderable);
 			void submitTransparent(Renderable3D* renderable);
 
-			void flushOpaque(Shader& shader, Shader& outlineShader, RenderPass pass);
-			void flushTransparent(Shader& shader, Shader& outlineShader, RenderPass pass);
+			void flushOpaque(Shader& shader, RenderPass pass);
+			void flushTransparent(Shader& shader, RenderPass pass);
 
 		private:
 
-			void setupModelMatrix(Renderable3D* renderable, Shader& shader, float scaleFactor = 1.0f);
-
-			void drawOutline(Shader& outlineShader, Renderable3D* renderable);
+			void setupModelMatrix(Renderable3D* renderable, Shader& shader, RenderPass pass);
 
 			std::deque<Renderable3D*> m_OpaqueRenderQueue;
 			std::deque<Renderable3D*> m_TransparentRenderQueue;

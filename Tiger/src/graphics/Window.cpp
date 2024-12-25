@@ -128,6 +128,9 @@ namespace tiger {
 			}
 			std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 
+			// Setup default OpenGL viewport
+			glViewport(0, 0, s_Width, s_Height);
+
 			// Setup ImGui bindings
 			ImGui::CreateContext();
 			ImGui_ImplGlfw_InitForOpenGL(m_Window, false);

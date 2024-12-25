@@ -18,7 +18,7 @@ namespace tiger {
 
 			void setDepthTest(bool choice);
 			void setBlend(bool choice);
-			void setCull(bool choice);
+			void setFaceCull(bool choice);
 
 			void setDepthFunc(GLenum depthFunc);
 			void setStencilTest(bool choice);

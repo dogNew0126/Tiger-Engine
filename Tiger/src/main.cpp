@@ -14,7 +14,7 @@
 #include "graphics/mesh/Model.h"
 #include "terrain/Terrain.h"
 #include "Scene3D.h"
-#include "platform/OpenGL/Framebuffers/Framebuffer.h"
+#include "platform/OpenGL/Framebuffers/RenderTarget.h"
 #include "graphics/mesh/common/Quad.h"
 #include "graphics/renderer/GLCache.h"
 
@@ -31,10 +31,14 @@ int main() {
 	tiger::utils::TextureLoader::initializeDefaultTextures();
 
 	// Construct framebuffers
-	tiger::opengl::Framebuffer framebuffer(window.getWidth(), window.getHeight());
+	tiger::opengl::RenderTarget framebuffer(window.getWidth(), window.getHeight());
 	framebuffer.addColorAttachment(true).addDepthStencilRBO(true).createFramebuffer();
 
-	tiger::opengl::Framebuffer blitFramebuffer(window.getWidth(), window.getHeight());
+	// TODO: MAKE MULTISAMPLE OPTION WORK OR INVESTIGATE
+	tiger::opengl::RenderTarget shadowmap(SHADOWMAP_RESOLUTION_X, SHADOWMAP_RESOLUTION_Y);
+	shadowmap.addDepthAttachment(false).createFramebuffer();
+
+	tiger::opengl::RenderTarget blitFramebuffer(window.getWidth(), window.getHeight());
 	blitFramebuffer.addColorAttachment(false).addDepthStencilRBO(false).createFramebuffer();
 
 	// Instantiate the shaders and a screenspace quad
@@ -50,7 +54,7 @@ int main() {
 	// Debug timers
 #if DEBUG_ENABLED
 	tiger::Timer timer;
-	float postProcessTime = 0.0f;
+	float postProcessTime = 0.0f, shadowmapGenerationTime = 0.0f;
 #endif
 
 	tiger::Time deltaTime;
@@ -72,15 +76,30 @@ int main() {
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
+		// Shadowmap Pass
+#if DEBUG_ENABLED
+		glFinish();
+		timer.reset();
+#endif
+		glViewport(0, 0, shadowmap.getWidth(), shadowmap.getHeight());
+		shadowmap.bind();
+		shadowmap.clear();
+		scene.shadowmapPass();
+#if DEBUG_ENABLED
+		glFinish();
+		shadowmapGenerationTime = timer.elapsed();
+#endif
+
 		// Camera Update
 		camera.processInput(deltaTime.getDeltaTime());
 
 		// Draw the scene to our custom multisampled framebuffer
+		glViewport(0, 0, framebuffer.getWidth(), framebuffer.getHeight());
 		framebuffer.bind();
-		window.clear();
+		framebuffer.clear();
 
 		scene.onUpdate(deltaTime.getDeltaTime());
-		scene.onRender();
+		scene.onRender(shadowmap.getDepthTexture());
 
 		// Blit the multisampled framebuffer over to a non-multisampled buffer and perform a post process pass on the default framebuffer
 #if DEBUG_ENABLED
@@ -99,8 +118,6 @@ int main() {
 
 		framebuffer.unbind();
 		window.clear();
-		framebufferShader.enable();
-
 		glCache->switchShader(framebufferShader.getShaderID());
 		screenQuad.getMaterial().BindMaterialInformation(framebufferShader);
 		screenQuad.draw();
@@ -116,6 +133,7 @@ int main() {
 			ImGui::Text("Frametime: %.3f ms (FPS %.1f)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 #if DEBUG_ENABLED
 			ImGui::Text("Post Process: %.6f ms", 1000.0f * postProcessTime);
+			ImGui::Text("Shadowmap Generation: %.6f ms", 1000.0f * shadowmapGenerationTime);
 #endif
 			ImGui::End();
 

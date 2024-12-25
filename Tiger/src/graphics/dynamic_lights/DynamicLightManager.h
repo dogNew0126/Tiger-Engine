@@ -22,7 +22,10 @@ namespace tiger {
 			inline void setDirectionalLightDirection(const glm::vec3& dir) { m_DirectionalLight.direction = dir; }
 			inline void setPointLightPosition(int index, const glm::vec3& pos) { m_PointLights[index].position = pos; }
 
+			inline const glm::vec3& getDirectionalLightDirection() { return m_DirectionalLight.direction; }
+		
 		private:
+
 			void init();
 
 			DirectionalLight m_DirectionalLight;

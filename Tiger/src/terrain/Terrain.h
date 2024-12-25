@@ -17,7 +17,7 @@ namespace tiger {
 			Terrain(const glm::vec3& worldPosition);
 			~Terrain();
 
-			void Draw(graphics::Shader& shader) const;
+			void Draw(graphics::Shader& shader, graphics::RenderPass pass) const;
 
 			inline const glm::vec3& getPosition() const { return m_Position; }
 
