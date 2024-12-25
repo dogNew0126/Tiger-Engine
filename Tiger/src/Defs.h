@@ -2,7 +2,6 @@
 
 // Developer Options
 #define DEBUG_ENABLED 1
-#define SHOW_MOUSE 0
 
 #define WINDOW_X_RESOLUTION 1366
 #define WINDOW_Y_RESOLUTION 768

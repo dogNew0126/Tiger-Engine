@@ -22,6 +22,7 @@ namespace tiger {
 		private:
 			const char* m_Title;
 			GLFWwindow* m_Window;
+			bool m_HideCursor;
 
 			static int s_Width, s_Height;
 			static bool s_Keys[MAX_KEYS];

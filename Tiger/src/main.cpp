@@ -45,6 +45,8 @@ int main() {
 	glCache->switchShader(framebufferShader.getShaderID());
 	framebufferShader.setUniform2f("readOffset", glm::vec2(1.0f / (float)window.getWidth(), 1.0f / (float)window.getHeight()));
 
+	bool wireframeMode = false;
+
 	// Debug timers
 #if DEBUG_ENABLED
 	tiger::Timer timer;
@@ -56,6 +58,13 @@ int main() {
 	while (!window.closed()) {
 
 		deltaTime.update();
+
+#if DEBUG_ENABLED
+		if (wireframeMode)
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		else
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+#endif
 
 		window.clear();
 
@@ -82,6 +91,12 @@ int main() {
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, blitFramebuffer.getFramebuffer());
 		glBlitFramebuffer(0, 0, window.getWidth(), window.getHeight(), 0, 0, window.getWidth(), window.getHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
+
+#if DEBUG_ENABLED
+		if (wireframeMode)
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+#endif
+
 		framebuffer.unbind();
 		window.clear();
 		framebufferShader.enable();
@@ -103,6 +118,13 @@ int main() {
 			ImGui::Text("Post Process: %.6f ms", 1000.0f * postProcessTime);
 #endif
 			ImGui::End();
+
+#if DEBUG_ENABLED
+			ImGui::Begin("Debug Controls");
+			ImGui::Text("Hit \"P\" to show/hide the cursor");
+			ImGui::Checkbox("Wireframe Mode", &wireframeMode);
+			ImGui::End();
+#endif
 		}
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
