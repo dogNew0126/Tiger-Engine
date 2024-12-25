@@ -21,7 +21,7 @@ namespace tiger {
 			m_TransparentRenderQueue.push_back(renderable);
 		}
 
-		void Renderer::flushOpaque(Shader& shader, Shader& outlineShader) {
+		void Renderer::flushOpaque(Shader& shader, Shader& outlineShader, RenderPass pass) {
 			m_GLCache->switchShader(shader.getShaderID());
 			m_GLCache->setCull(true);
 			m_GLCache->setDepthTest(true);
@@ -39,7 +39,7 @@ namespace tiger {
 				else m_GLCache->setStencilWriteMask(0x00);
 
 				setupModelMatrix(current, shader);
-				current->draw(shader);
+				current->draw(shader, pass);
 
 				if (current->getShouldOutline()) {
 
@@ -53,7 +53,7 @@ namespace tiger {
 			}
 		}
 
-		void Renderer::flushTransparent(Shader& shader, Shader& outlineShader) {
+		void Renderer::flushTransparent(Shader& shader, Shader& outlineShader, RenderPass pass) {
 
 			// Sort then render transparent objects (from back to front)
 
@@ -81,7 +81,7 @@ namespace tiger {
 				m_GLCache->setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				
 				setupModelMatrix(current, shader);
-				current->draw(shader);
+				current->draw(shader, pass);
 
 				// Draw the outline
 				if (current->getShouldOutline()) {
@@ -120,7 +120,7 @@ namespace tiger {
 
 			setupModelMatrix(renderable, outlineShader, 1.005f);
 
-			renderable->draw(outlineShader);
+			renderable->draw(outlineShader, RenderPass::ShadowmapPass);
 
 			m_GLCache->setDepthTest(true);
 

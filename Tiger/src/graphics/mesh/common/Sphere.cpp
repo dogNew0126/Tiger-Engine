@@ -34,7 +34,7 @@ namespace tiger {
 				}
 			}
 
-			LoadData();
+			loadData();
 		}
 	}
 }

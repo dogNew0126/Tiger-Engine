@@ -27,7 +27,7 @@ namespace tiger {
 		//std::vector<Entity*> m_Entities;
 
 		std::vector<graphics::Renderable3D*> m_Renderables;
-		graphics::Shader m_TerrainShader, m_ModelShader, m_OutlineShader;
+		graphics::Shader m_TerrainShader, m_ModelShader, m_OutlineShader, m_ShadowmapShader;
 
 	public:
 		Scene3D(graphics::Camera* camera);
@@ -35,6 +35,7 @@ namespace tiger {
 
 		void Add(graphics::Renderable3D* renderable);
 
+		void shadowmapGeneration();
 		void onUpdate(float deltaTime);
 		void onRender();
 

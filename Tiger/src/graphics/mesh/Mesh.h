@@ -25,9 +25,9 @@ namespace tiger {
 			Mesh(std::vector<glm::vec3> positions, std::vector<glm::vec2> uvs, std::vector<glm::vec3> normals, std::vector<glm::vec3> tangents, std::vector<glm::vec3> bitangents, std::vector<unsigned int> indices);
 			
 			// Commits all of the buffers their attributes to the GPU driver
-			void LoadData(bool interleaved = true);
+			void loadData(bool interleaved = true);
 
-			void Draw() const;
+			void draw() const;
 
 			inline void setPositions(std::vector<glm::vec3> positions) { m_Positions = positions; }
 			inline void setUVs(std::vector<glm::vec2> uvs) { m_UVs = uvs; }

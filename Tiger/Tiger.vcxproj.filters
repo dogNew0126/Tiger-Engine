@@ -60,9 +60,6 @@
     <ClCompile Include="src\terrain\Terrain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\OpenGL\Utility.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\renderer\Renderable3D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -138,6 +135,9 @@
     <ClCompile Include="src\utils\loaders\TextureLoader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\texture\Cubemap.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Shader.h">
@@ -152,7 +152,7 @@
     <ClInclude Include="src\graphics\camera\Camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\shaders\oldBasic.vert">
+    <ClInclude Include="src\shaders\basic.vert">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="vendor\stb\stb_image.h">
@@ -183,9 +183,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\terrain\Terrain.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\OpenGL\Utility.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\Singleton.h">
@@ -275,9 +272,14 @@
     <ClInclude Include="src\utils\loaders\TextureLoader.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\texture\Cubemap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderer\RenderPass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\oldBasic.frag" />
     <None Include="src\shaders\lightCube.frag" />
     <None Include="src\shaders\terrain.frag" />
     <None Include="src\shaders\basic.frag" />
@@ -289,7 +291,7 @@
     <None Include="src\shaders\modelRefraction.frag" />
     <None Include="src\shaders\shadowmap.vert" />
     <None Include="src\shaders\shadowmap.frag" />
-    <None Include="src\shaders\basic.vert" />
+    <None Include="src\shaders\model.vert" />
     <None Include="src\shaders\model.frag" />
   </ItemGroup>
   <ItemGroup>

@@ -28,7 +28,7 @@ int main() {
 	tiger::graphics::Window window("Tiger Engine", WINDOW_X_RESOLUTION, WINDOW_Y_RESOLUTION);
 	tiger::Scene3D scene(&camera);
 	tiger::graphics::GLCache* glCache = tiger::graphics::GLCache::getInstance();
-	tiger::utils::TextureLoader::InitializeDefaultTextures();
+	tiger::utils::TextureLoader::initializeDefaultTextures();
 
 	// Construct framebuffers
 	tiger::opengl::Framebuffer framebuffer(window.getWidth(), window.getHeight());
@@ -88,7 +88,7 @@ int main() {
 
 		glCache->switchShader(framebufferShader.getShaderID());
 		screenQuad.getMaterial().BindMaterialInformation(framebufferShader);
-		screenQuad.Draw();
+		screenQuad.draw();
 
 #if DEBUG_ENABLED
 		glFinish();

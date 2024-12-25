@@ -4,7 +4,7 @@
 #include "../platform/OpenGL/VertexArray.h"
 #include "../platform/OpenGL/IndexBuffer.h"
 #include "../platform/OpenGL/Buffer.h"
-#include "../platform/OpenGL/Utility.h"
+#include "../utils/loaders/TextureLoader.h"
 #include "Shader.h"
 #include "camera/Camera.h"
 #include "window.h"
@@ -16,10 +16,8 @@ namespace tiger {
 		class Skybox {
 
 		public:
-			Skybox(const std::vector<const char*>& filePaths, Camera* camera);
+			Skybox(const std::vector<std::string>& filePaths, Camera* camera);
 			void Draw();
-
-			inline unsigned int getSkyboxCubemap() const { return m_SkyboxCubemap; }
 
 		private:
 			Camera* m_Camera;
@@ -28,7 +26,7 @@ namespace tiger {
 			opengl::VertexArray m_SkyboxVAO;
 			opengl::IndexBuffer m_SkyboxIBO;
 			opengl::Buffer  m_SkyboxVBO;
-			unsigned int m_SkyboxCubemap; // Cubemap texture
+			graphics::Cubemap* m_SkyboxCubemap; // Cubemap texture
 
 		};
 	}

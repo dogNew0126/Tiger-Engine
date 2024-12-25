@@ -3,7 +3,6 @@
 #include <iostream>
 #include <stb_image.h>
 
-#include "../../platform/OpenGL/Utility.h"
 #include "../../utils/Logger.h"
 
 namespace tiger {
@@ -21,10 +20,12 @@ namespace tiger {
 			m_Meshes = meshes;
 		}
 
-		void Model::Draw(Shader& shader) const {
+		void Model::Draw(Shader& shader, RenderPass pass) const {
 			for (unsigned int i = 0; i < m_Meshes.size(); i++) {
-				m_Meshes[i].m_Material.BindMaterialInformation(shader);
-				m_Meshes[i].Draw();
+				if (pass != RenderPass::ShadowmapPass); {
+					m_Meshes[i].m_Material.BindMaterialInformation(shader);
+				}
+				m_Meshes[i].draw();
 			}
 		}
 
@@ -95,7 +96,7 @@ namespace tiger {
 			}
 
 			Mesh newMesh(positions, uvs, normals, tangents, bitangents, indices);
-			newMesh.LoadData();
+			newMesh.loadData();
 
 			// Process Materials (textures in this case)
 			if (mesh->mMaterialIndex >= 0) {
@@ -124,7 +125,7 @@ namespace tiger {
 				mat->GetTexture(type, 0, &str); // Grab only the first texture (standard shader only supports one texture of each type, it doesn't know how you want to do special blending)
 
 				// Assumption made: material stuff is located in the same directory as the model object
-				return utils::TextureLoader::Load2DTexture((m_Directory + "/" + std::string(str.C_Str())).c_str());
+				return utils::TextureLoader::load2DTexture((m_Directory + "/" + std::string(str.C_Str())).c_str());
 			}
 
 			return nullptr;

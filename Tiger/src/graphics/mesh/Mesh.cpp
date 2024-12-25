@@ -18,7 +18,7 @@ namespace tiger {
 			: m_Positions(positions), m_UVs(uvs), m_Normals(normals), m_Tangents(tangents), m_Bitangents(bitangents) {}
 
 
-		void Mesh::Draw() const {
+		void Mesh::draw() const {
 			glBindVertexArray(m_VAO);
 			if (m_Indices.size() > 0) {
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
@@ -31,7 +31,7 @@ namespace tiger {
 			glBindVertexArray(0);
 		}
 
-		void Mesh::LoadData(bool interleaved) {
+		void Mesh::loadData(bool interleaved) {
 			// Check for possible mesh initialization errors
 			{
 				unsigned int vertexCount = m_Positions.size();

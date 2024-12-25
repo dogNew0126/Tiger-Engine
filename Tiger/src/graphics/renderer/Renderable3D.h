@@ -3,6 +3,8 @@
 #include "../mesh/Model.h"
 #include <glm/glm.hpp>
 
+#include "RenderPass.h"
+
 namespace tiger {
 	namespace graphics {
 
@@ -12,7 +14,7 @@ namespace tiger {
 			Renderable3D(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotationAxis, float radianRotation, Model* model, Renderable3D* parent, bool shouldOutline = false, bool transparent = false);
 			~Renderable3D();
 
-			void draw(Shader& shader) const;
+			void draw(Shader& shader, RenderPass pass) const;
 
 			inline const glm::vec3& getPosition() const { return m_Position; }
 			inline const glm::vec3& getScale() const { return m_Scale; }

@@ -124,7 +124,7 @@ namespace tiger {
 				glm::vec2(0.0f, 0.0f)
 			};
 
-			LoadData();
+			loadData();
 		}
 
 	}

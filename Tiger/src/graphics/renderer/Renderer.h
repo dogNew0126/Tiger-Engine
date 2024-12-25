@@ -13,13 +13,14 @@ namespace tiger {
 
 		class Renderer {
 		public:
+
 			Renderer(Camera* camera);
 
 			void submitOpaque(Renderable3D* renderable);
 			void submitTransparent(Renderable3D* renderable);
 
-			void flushOpaque(Shader& shader, Shader& outlineShader);
-			void flushTransparent(Shader& shader, Shader& outlineShader);
+			void flushOpaque(Shader& shader, Shader& outlineShader, RenderPass pass);
+			void flushTransparent(Shader& shader, Shader& outlineShader, RenderPass pass);
 
 		private:
 
