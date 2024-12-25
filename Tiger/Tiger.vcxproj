@@ -210,7 +210,7 @@
     <ClInclude Include="src\platform\OpenGL\Utility.h" />
     <ClInclude Include="src\platform\OpenGL\VertexArray.h" />
     <ClInclude Include="src\Scene3D.h" />
-    <ClInclude Include="src\shaders\basic.vert" />
+    <ClInclude Include="src\shaders\oldBasic.vert" />
     <ClInclude Include="src\terrain\Terrain.h" />
     <ClInclude Include="src\utils\FileUtils.h" />
     <ClInclude Include="src\utils\loaders\TextureLoader.h" />
@@ -230,9 +230,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\basic.frag" />
+    <None Include="src\shaders\basic.vert" />
+    <None Include="src\shaders\model.frag" />
     <None Include="src\shaders\postprocess.frag" />
     <None Include="src\shaders\postprocess.vert" />
-    <None Include="src\shaders\model.frag" />
+    <None Include="src\shaders\oldBasic.frag" />
     <None Include="src\shaders\lightCube.frag" />
     <None Include="src\shaders\modelReflection.frag" />
     <None Include="src\shaders\modelRefraction.frag" />

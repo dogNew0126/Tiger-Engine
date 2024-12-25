@@ -152,7 +152,7 @@
     <ClInclude Include="src\graphics\camera\Camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\shaders\basic.vert">
+    <ClInclude Include="src\shaders\oldBasic.vert">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="vendor\stb\stb_image.h">
@@ -277,7 +277,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\model.frag" />
+    <None Include="src\shaders\oldBasic.frag" />
     <None Include="src\shaders\lightCube.frag" />
     <None Include="src\shaders\terrain.frag" />
     <None Include="src\shaders\basic.frag" />
@@ -289,6 +289,8 @@
     <None Include="src\shaders\modelRefraction.frag" />
     <None Include="src\shaders\shadowmap.vert" />
     <None Include="src\shaders\shadowmap.frag" />
+    <None Include="src\shaders\basic.vert" />
+    <None Include="src\shaders\model.frag" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vendor\Imgui\LICENSE.txt" />

@@ -3,6 +3,7 @@
 struct Material {
 	sampler2D texture_diffuse;
 	sampler2D texture_specular;
+	sampler2D texture_normal;
 	float shininess;
 };
 
@@ -43,8 +44,8 @@ struct SpotLight {
 
 #define MAX_POINT_LIGHTS 5
 
+in mat3 TBN;
 in vec2 TexCoords;
-in vec3 Normal;
 in vec3 FragPos;
 
 out vec4 color;
@@ -68,7 +69,10 @@ void main() {
 	float textureAlpha = texture(material.texture_diffuse, TexCoords).w;
 	if(textureAlpha < 0.1) discard;
 
-	vec3 norm = normalize(Normal);
+	// Normal mapping code. Opted out of tangent space normal mapping since I would have to convert all of my lights to tangent space
+	vec3 norm = texture(material.texture_normal, TexCoords).rgb;
+	norm = normalize(norm * 2.0f - 1.0f);
+	norm = normalize(TBN * norm);
 	vec3 fragToCam = normalize(viewPos - FragPos);
 	
 	vec3 result = CalcDirLight(dirLight, norm, fragToCam);
