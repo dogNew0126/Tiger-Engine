@@ -69,7 +69,7 @@ void main() {
 	vec3 norm = normalize(Normal);
 	vec3 fragToCam = normalize(viewPos - FragPos);
 
-		vec4 blendMapColour = texture(material.blendmap, TexCoords);
+	vec4 blendMapColour = texture(material.blendmap, TexCoords);
 	
 	float backTextureAmount = 1 - (blendMapColour.r + blendMapColour.g + blendMapColour.b);
 

@@ -212,7 +212,7 @@
     <ClInclude Include="src\platform\OpenGL\IndexBuffer.h" />
     <ClInclude Include="src\platform\OpenGL\VertexArray.h" />
     <ClInclude Include="src\Scene3D.h" />
-    <ClInclude Include="src\shaders\basic.vert" />
+    <ClInclude Include="src\shaders\terrain.vert" />
     <ClInclude Include="src\terrain\Terrain.h" />
     <ClInclude Include="src\ui\DebugPane.h" />
     <ClInclude Include="src\ui\Pane.h" />
@@ -234,9 +234,10 @@
     <ClInclude Include="vendor\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\basic.frag" />
     <None Include="src\shaders\model.vert" />
     <None Include="src\shaders\model.frag" />
+    <None Include="src\shaders\pbr_model.frag" />
+    <None Include="src\shaders\pbr_model.vert" />
     <None Include="src\shaders\postprocess.frag" />
     <None Include="src\shaders\postprocess.vert" />
     <None Include="src\shaders\lightCube.frag" />

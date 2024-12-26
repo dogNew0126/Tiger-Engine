@@ -7,7 +7,8 @@ namespace tiger {
 
 		struct DirectionalLight : public DynamicLight {
 
-			DirectionalLight(const glm::vec3& amb, const glm::vec3& diff, const glm::vec3& spec, const glm::vec3& dir);
+			DirectionalLight();
+			DirectionalLight(const glm::vec3& lightColour, const glm::vec3& dir);
 
 			virtual void setupUniforms(Shader& shader, int currentLightIndex) override;
 			glm::vec3 direction;
