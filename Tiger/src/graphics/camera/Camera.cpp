@@ -15,11 +15,16 @@ namespace tiger {
 				m_Position(glm::vec3(xPos, yPos, zPos)), m_WorldUp(glm::vec3(xUp, yUp, zUp)), m_Yaw(yaw), m_Pitch(pitch)
 		{
 			updateCameraVectors();
+			ui::DebugPane::bindCameraPositionValue(&m_Position);
 		}
 
 		glm::mat4 Camera::getViewMatrix() const
 		{
 			return glm::lookAt(m_Position, m_Position + m_Front, m_Up);
+		}
+
+		glm::mat4 Camera::getProjectionMatrix() {
+			return glm::perspective(glm::radians(m_FOV), (float)graphics::Window::getWidth() / (float)graphics::Window::getHeight(), NEAR_PLANE, FAR_PLANE);
 		}
 
 		void Camera::processInput(float deltaTime) {

@@ -78,6 +78,12 @@ namespace tiger {
 			bind();
 
 			// Generate depth attachment
+
+			if (multisampled) {
+			}
+			else {
+			}
+
 			glGenTextures(1, &m_DepthTexture);
 			glBindTexture(GL_TEXTURE_2D, m_DepthTexture);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, m_Width, m_Height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
