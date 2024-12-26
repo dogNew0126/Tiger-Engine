@@ -47,7 +47,7 @@ namespace tiger {
 			return &m_TextureCache[path];
 		}
 
-		graphics::Cubemap* TextureLoader::loadCubemapTexture(const std::string& right, const std::string& left, const std::string& top, const std::string& bottom, const std::string& back, const std::string& front, bool isSRGB, graphics::CubemapSettings* settings = nullptr) {
+		graphics::Cubemap* TextureLoader::loadCubemapTexture(const std::string& right, const std::string& left, const std::string& top, const std::string& bottom, const std::string& back, const std::string& front, bool isSRGB, graphics::CubemapSettings* settings) {
 			
 			graphics::Cubemap* cubemap = new graphics::Cubemap();
 			if (settings != nullptr)
