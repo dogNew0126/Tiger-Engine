@@ -17,7 +17,7 @@ namespace tiger {
 		}
 
 		void PostProcessor::postLightingPostProcess(opengl::RenderTarget* input) {
-			// TODO gamma correction and tone mapping for HDR need to be added to the post process shader
+
 #if DEBUG_ENABLED
 			glFinish();
 			m_Timer.reset();
@@ -42,7 +42,8 @@ namespace tiger {
 			m_PostProcessShader.setUniform2f("read_offset", glm::vec2(1.0f / (float)target->getWidth(), 1.0f / (float)target->getHeight()));
 			m_PostProcessShader.setUniform1i("blur_enabled", m_Blur);
 			m_PostProcessShader.setUniform1i("screen_texture", 0);
-			target->getColourBufferTexture()->bind(0);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, target->getColourBufferTexture());
 
 			Window::clear();
 			m_Renderer->NDC_Plane.draw();

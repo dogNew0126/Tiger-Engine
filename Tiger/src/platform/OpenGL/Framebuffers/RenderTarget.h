@@ -29,7 +29,7 @@ namespace tiger {
 			inline unsigned int getHeight() { return m_Height; }
 
 			inline unsigned int getFramebuffer() const { return m_FBO; }
-			inline graphics::Texture* getColourBufferTexture() const { return m_ColourTexture; }
+			inline unsigned int getColourBufferTexture() const { return m_ColourTexture; }
 			inline unsigned int getDepthTexture() { return m_DepthTexture; }
 
 			inline bool isMultisampledColourBuffer() { return m_IsMultisampledColourBuffer; }
@@ -39,7 +39,7 @@ namespace tiger {
 
 			bool m_IsMultisampledColourBuffer;
 
-			graphics::Texture* m_ColourTexture;
+			unsigned int m_ColourTexture;
 			unsigned int m_DepthStencilRBO;
 			unsigned int m_DepthTexture;
 

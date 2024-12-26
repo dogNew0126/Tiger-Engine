@@ -44,7 +44,6 @@ int main() {
 	tiger::opengl::RenderTarget framebuffer(window.getWidth(), window.getHeight());
 	framebuffer.addColorAttachment(shouldMultisample).addDepthStencilRBO(shouldMultisample).createFramebuffer();
 
-	// TODO: MAKE MULTISAMPLE OPTION WORK OR INVESTIGATE
 	tiger::opengl::RenderTarget shadowmap(SHADOWMAP_RESOLUTION_X, SHADOWMAP_RESOLUTION_Y);
 	shadowmap.addDepthAttachment(false).createFramebuffer();
 
