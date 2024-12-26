@@ -102,10 +102,10 @@ namespace tiger {
 			if (mesh->mMaterialIndex >= 0) {
 				aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
-				newMesh.m_Material.setDiffuseMap(loadMaterialTexture(material, aiTextureType_DIFFUSE));
-				newMesh.m_Material.setSpecularMap(loadMaterialTexture(material, aiTextureType_SPECULAR));
-				newMesh.m_Material.setNormalMap(loadMaterialTexture(material, aiTextureType_NORMALS));
-				newMesh.m_Material.setEmissionMap(loadMaterialTexture(material, aiTextureType_EMISSIVE));
+				newMesh.m_Material.setDiffuseMap(loadMaterialTexture(material, aiTextureType_DIFFUSE, true));
+				newMesh.m_Material.setSpecularMap(loadMaterialTexture(material, aiTextureType_SPECULAR, false));
+				newMesh.m_Material.setNormalMap(loadMaterialTexture(material, aiTextureType_NORMALS, false));
+				newMesh.m_Material.setEmissionMap(loadMaterialTexture(material, aiTextureType_EMISSIVE, true));
 				float shininess = 0.0f;
 				material->Get(AI_MATKEY_SHININESS, shininess); // Assimp scales specular exponent by 4 times since most renderers handle it that way. Value defaults to 0 if not specified
 				newMesh.m_Material.setShininess(shininess);
@@ -114,7 +114,7 @@ namespace tiger {
 			return newMesh;
 		}
 
-		Texture* Model::loadMaterialTexture(aiMaterial* mat, aiTextureType type) {
+		Texture* Model::loadMaterialTexture(aiMaterial* mat, aiTextureType type, bool isSRGB) {
 			// Log material constraints are being violated (1 texture per type for the standard shader)
 			if (mat->GetTextureCount(type) > 1)
 				utils::Logger::getInstance().error("logged_files/material_creation.txt", "Mesh Loading", "Mesh's default material contains more than 1 texture for the same type, which currently isn't supported by the standard shader");
@@ -125,7 +125,7 @@ namespace tiger {
 				mat->GetTexture(type, 0, &str); // Grab only the first texture (standard shader only supports one texture of each type, it doesn't know how you want to do special blending)
 
 				// Assumption made: material stuff is located in the same directory as the model object
-				return utils::TextureLoader::load2DTexture((m_Directory + "/" + std::string(str.C_Str())).c_str());
+				return utils::TextureLoader::load2DTexture((m_Directory + "/" + std::string(str.C_Str())).c_str(), isSRGB);
 			}
 
 			return nullptr;

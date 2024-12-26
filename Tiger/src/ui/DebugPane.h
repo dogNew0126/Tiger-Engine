@@ -13,10 +13,13 @@ namespace tiger {
 
 			virtual void setupPaneObjects();
 
+			inline static void bindGammaCorrectionValue(float* ptr) { s_GammaCorrectionValue = ptr; }
+
 			inline static bool getWireframeMode() { return s_WireframeMode; }
 			inline static void setWireframeMode(bool choice) { s_WireframeMode = choice; }
 
 		private:
+			static float* s_GammaCorrectionValue;
 			static bool s_WireframeMode;
 		};
 
