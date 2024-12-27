@@ -13,10 +13,10 @@
 
 namespace tiger {
 
-	Scene3D::Scene3D(graphics::Camera* camera)
+	Scene3D::Scene3D(graphics::FPSCamera* camera)
 		: m_TerrainShader("src/shaders/terrain.vert", "src/shaders/terrain.frag"), m_ModelShader("src/shaders/pbr_model.vert", "src/shaders/pbr_model.frag"), m_Camera(camera), m_ShadowmapShader("src/shaders/shadowmap.vert", "src/shaders/shadowmap.frag"), m_DynamicLightManager()
 	{
-		m_Renderer = new graphics::Renderer(camera);
+		m_Renderer = new graphics::MeshRenderer(camera);
 		m_GLCache = graphics::GLCache::getInstance();
 		m_Terrain = new terrain::Terrain(glm::vec3(0.0f, -20.0f, 0.0f));
 

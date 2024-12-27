@@ -3,7 +3,7 @@
 namespace tiger {
 	namespace graphics {
 
-		PostProcessor::PostProcessor(Renderer* renderer)
+		PostProcessor::PostProcessor(MeshRenderer* renderer)
 			: m_Renderer(renderer), m_PostProcessShader("src/shaders/postprocess.vert", "src/shaders/postprocess.frag"), m_ScreenRenderTarget(Window::getWidth(), Window::getHeight())
 		{
 			m_ScreenRenderTarget.addColorAttachment(false).addDepthStencilRBO(false).createFramebuffer();

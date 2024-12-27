@@ -24,7 +24,7 @@
     <ClCompile Include="src\graphics\Window.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\camera\Camera.cpp">
+    <ClCompile Include="src\graphics\camera\FPSCamera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="vendor\stb\stb_image.cpp">
@@ -63,7 +63,7 @@
     <ClCompile Include="src\graphics\renderer\Renderable3D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\renderer\Renderer.cpp">
+    <ClCompile Include="src\graphics\renderer\MeshRenderer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Scene3D.cpp">
@@ -144,6 +144,15 @@
     <ClCompile Include="src\ui\RuntimePane.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\camera\CubemapCamera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ibl\EnvironmentProbe.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ibl\EnvironmentProbeManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Shader.h">
@@ -155,7 +164,7 @@
     <ClInclude Include="src\graphics\Window.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\camera\Camera.h">
+    <ClInclude Include="src\graphics\camera\FPSCamera.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\shaders\terrain.vert">
@@ -197,7 +206,7 @@
     <ClInclude Include="src\Scene3D.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\renderer\Renderer.h">
+    <ClInclude Include="src\graphics\renderer\MeshRenderer.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\renderer\Renderable3D.h">
@@ -288,6 +297,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\ui\RuntimePane.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\camera\CubemapCamera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\ibl\EnvironmentProbe.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\ibl\EnvironmentProbeManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

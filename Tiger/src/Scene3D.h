@@ -1,8 +1,8 @@
 #pragma once
 
 #include "graphics/renderer/Renderable3D.h"
-#include "graphics/camera/Camera.h"
-#include "graphics/renderer/Renderer.h"
+#include "graphics/camera/FPSCamera.h"
+#include "graphics/renderer/MeshRenderer.h"
 #include "graphics/renderer/GLCache.h"
 #include "terrain/Terrain.h"
 #include "graphics/Window.h"
@@ -16,8 +16,8 @@ namespace tiger {
 	class Scene3D {
 
 	private:
-		graphics::Camera* m_Camera;
-		graphics::Renderer* m_Renderer;
+		graphics::FPSCamera* m_Camera;
+		graphics::MeshRenderer* m_Renderer;
 		terrain::Terrain* m_Terrain;
 		graphics::Skybox* m_Skybox;
 		graphics::DynamicLightManager m_DynamicLightManager;
@@ -30,7 +30,7 @@ namespace tiger {
 		graphics::Shader m_TerrainShader, m_ModelShader, m_ShadowmapShader;
 
 	public:
-		Scene3D(graphics::Camera* camera);
+		Scene3D(graphics::FPSCamera* camera);
 		~Scene3D();
 
 		void add(graphics::Renderable3D* renderable);
@@ -41,8 +41,8 @@ namespace tiger {
 		void onUpdate(float deltaTime);
 		void onRender(unsigned int shadowmap);
 
-		inline graphics::Renderer* getRenderer() const { return m_Renderer; }
-		inline graphics::Camera* getCamera() const { return m_Camera; }
+		inline graphics::MeshRenderer* getRenderer() const { return m_Renderer; }
+		inline graphics::FPSCamera* getCamera() const { return m_Camera; }
 
 	private:
 		void init();

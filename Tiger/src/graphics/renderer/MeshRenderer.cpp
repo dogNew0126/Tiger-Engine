@@ -1,10 +1,10 @@
-#include "Renderer.h"
+#include "MeshRenderer.h"
 
 
 namespace tiger {
 	namespace graphics {
 
-		Renderer::Renderer(Camera* camera) : m_Camera(camera), NDC_Plane()
+		MeshRenderer::MeshRenderer(FPSCamera* camera) : m_Camera(camera), NDC_Plane()
 		{
 			// Configure and cache OpenGL state
 			m_GLCache = GLCache::getInstance();
@@ -13,15 +13,15 @@ namespace tiger {
 			m_GLCache->setFaceCull(true);
 		}
 
-		void Renderer::submitOpaque(Renderable3D* renderable) {
+		void MeshRenderer::submitOpaque(Renderable3D* renderable) {
 			m_OpaqueRenderQueue.push_back(renderable);
 		}
 
-		void Renderer::submitTransparent(Renderable3D* renderable) {
+		void MeshRenderer::submitTransparent(Renderable3D* renderable) {
 			m_TransparentRenderQueue.push_back(renderable);
 		}
 
-		void Renderer::flushOpaque(Shader& shader, RenderPass pass) {
+		void MeshRenderer::flushOpaque(Shader& shader, RenderPass pass) {
 			m_GLCache->switchShader(shader.getShaderID());
 
 			m_GLCache->setDepthTest(true);
@@ -42,7 +42,7 @@ namespace tiger {
 			}
 		}
 
-		void Renderer::flushTransparent(Shader& shader, RenderPass pass) {
+		void MeshRenderer::flushTransparent(Shader& shader, RenderPass pass) {
 
 			m_GLCache->switchShader(shader.getShaderID());
 			m_GLCache->setDepthTest(true);
@@ -74,7 +74,7 @@ namespace tiger {
 		}
 
 		// TODO: Currently only support two levels in a hierarchical scene graph
-		void Renderer::setupModelMatrix(Renderable3D* renderable, Shader& shader, RenderPass pass) {
+		void MeshRenderer::setupModelMatrix(Renderable3D* renderable, Shader& shader, RenderPass pass) {
 			glm::mat4 model(1);
 			glm::mat4 translate = glm::translate(glm::mat4(1.0f), renderable->getPosition());
 			glm::mat4 rotate = glm::toMat4(renderable->getOrientation());

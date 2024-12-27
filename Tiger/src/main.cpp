@@ -9,7 +9,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "utils/Time.h"
-#include "graphics/camera/Camera.h"
+#include "graphics/camera/FPSCamera.h"
 #include "utils/Logger.h"
 #include "graphics/mesh/Model.h"
 #include "terrain/Terrain.h"
@@ -27,7 +27,7 @@
 
 int main() {
 	// Prepare the engine
-	tiger::graphics::Camera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+	tiger::graphics::FPSCamera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 	tiger::graphics::Window window("Tiger Engine", WINDOW_X_RESOLUTION, WINDOW_Y_RESOLUTION);
 	tiger::Scene3D scene(&camera);
 	tiger::graphics::GLCache* glCache = tiger::graphics::GLCache::getInstance();

@@ -1,16 +1,16 @@
-#include "Camera.h"
+#include "FPSCamera.h"
 
 namespace tiger {
 	namespace graphics {
 
-		Camera::Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH)
+		FPSCamera::FPSCamera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH)
 			: m_Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseSensitivity(SENSITIVITY), m_FOV(FOV), 
 				m_Position(position), m_WorldUp(up), m_Yaw(yaw), m_Pitch(pitch)
 		{
 			updateCameraVectors();
 		}
 
-		Camera::Camera(float xPos, float yPos, float zPos, float xUp, float yUp, float zUp, float yaw = YAW, float pitch = PITCH)
+		FPSCamera::FPSCamera(float xPos, float yPos, float zPos, float xUp, float yUp, float zUp, float yaw = YAW, float pitch = PITCH)
 			: m_Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseSensitivity(SENSITIVITY), m_FOV(FOV),
 				m_Position(glm::vec3(xPos, yPos, zPos)), m_WorldUp(glm::vec3(xUp, yUp, zUp)), m_Yaw(yaw), m_Pitch(pitch)
 		{
@@ -18,16 +18,16 @@ namespace tiger {
 			ui::DebugPane::bindCameraPositionValue(&m_Position);
 		}
 
-		glm::mat4 Camera::getViewMatrix() const
+		glm::mat4 FPSCamera::getViewMatrix() const
 		{
 			return glm::lookAt(m_Position, m_Position + m_Front, m_Up);
 		}
 
-		glm::mat4 Camera::getProjectionMatrix() {
+		glm::mat4 FPSCamera::getProjectionMatrix() {
 			return glm::perspective(glm::radians(m_FOV), (float)graphics::Window::getWidth() / (float)graphics::Window::getHeight(), NEAR_PLANE, FAR_PLANE);
 		}
 
-		void Camera::processInput(float deltaTime) {
+		void FPSCamera::processInput(float deltaTime) {
 			// Keyboard input
 			if (Window::isKeyPressed(GLFW_KEY_W))
 				processKeyboard(tiger::graphics::FORWARD, deltaTime);
@@ -53,7 +53,7 @@ namespace tiger {
 			processMouseMovement(Window::getMouseXDelta(), -Window::getMouseYDelta(), true);
 		}
 
-		void Camera::processKeyboard(Camera_Movement direction, float deltaTime) 
+		void FPSCamera::processKeyboard(Camera_Movement direction, float deltaTime) 
 		{
 			float velocity = m_MovementSpeed * deltaTime;
 			switch (direction) {
@@ -78,7 +78,7 @@ namespace tiger {
 			}
 		}
 
-		void Camera::processMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch = true)
+		void FPSCamera::processMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch = true)
 		{
 			xOffset *= m_MouseSensitivity;
 			yOffset *= m_MouseSensitivity;
@@ -96,7 +96,7 @@ namespace tiger {
 			updateCameraVectors();
 		}
 
-		void Camera::processMouseScroll(float offset) {
+		void FPSCamera::processMouseScroll(float offset) {
 			if (offset != 0 && m_FOV >= 1.0f && m_FOV <= FOV) {
 				m_FOV -= offset;
 			}
@@ -108,7 +108,7 @@ namespace tiger {
 			}
 		}
 
-		void Camera::updateCameraVectors() {
+		void FPSCamera::updateCameraVectors() {
 			glm::vec3 front;
 			front.x = cos(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch));
 			front.y = sin(glm::radians(m_Pitch));
