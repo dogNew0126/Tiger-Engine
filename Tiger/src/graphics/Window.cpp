@@ -38,13 +38,25 @@ namespace tiger {
 		}
 
 		bool Window::init() {
+			// Needed in order to establish the correct OpenGL context (also enabled the usage of RenderDoc along with the window hints)
+			glewExperimental = true;
+
 			if (!glfwInit()) {
 				utils::Logger::getInstance().error("logged_files/window_creation.txt", "Window Initialization", "Could not initialize the GLFW window");
 				std::cout << "GLFW Failed To Initialize" << std::endl;
 				return false;
 			}
 
-			// Create the window
+			// Context hints
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+
+			// Window hints
+			glfwWindowHint(GLFW_DOUBLEBUFFER, true);
+
+			// Create the window and OpenGL context
 			if (FULLSCREEN_MODE) {
 				setFullScreenResolution();
 				m_Window = glfwCreateWindow(s_Width, s_Height, m_Title, glfwGetPrimaryMonitor(), NULL);
@@ -71,9 +83,18 @@ namespace tiger {
 			});
 			glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 				Window* win = (Window*)glfwGetWindowUserPointer(window);
-				win->s_Width = width;
-				win->s_Height = height;
+				if (width == 0 || height == 0) {
+					win->s_Width = WINDOW_X_RESOLUTION;
+					win->s_Height = WINDOW_Y_RESOLUTION;
+				}
+				else {
+					win->s_Width = width;
+					win->s_Height = height;
+				}
 				glViewport(0, 0, win->s_Width, win->s_Height);
+			});
+			glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
+				Window* win = (Window*)glfwGetWindowUserPointer(window);
 			});
 			glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 				Window* win = (Window*)glfwGetWindowUserPointer(window);
@@ -133,6 +154,20 @@ namespace tiger {
 			ImGui_ImplGlfw_InitForOpenGL(m_Window, false);
 			ImGui_ImplOpenGL3_Init("#version 430");
 			ImGui::StyleColorsDark();
+
+			// Error callback setup
+#if DEBUG_ENABLED
+			glEnable(GL_DEBUG_OUTPUT);
+			glDebugMessageCallback([](GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam) {
+				fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+				(type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
+				type, severity, message);
+			}, 0);
+			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, nullptr, GL_FALSE);
+			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_LOW, 0, nullptr, GL_FALSE);
+			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_MEDIUM, 0, nullptr, GL_TRUE);
+			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_HIGH, 0, nullptr, GL_TRUE);
+#endif
 
 			// Everything was successful so return true
 			return 1;

@@ -7,7 +7,7 @@
 #include "graphics/mesh/common/Quad.h"
 #include "graphics/renderer/GLCache.h"
 #include "graphics/renderer/PostProcessor.h"
-#include "platform/OpenGL/Framebuffers/RenderTarget.h"
+#include "platform/OpenGL/Framebuffers/Framebuffer.h"
 #include "utils/Timer.h"
 #include "utils/Time.h"
 #include "utils/loaders/TextureLoader.h"

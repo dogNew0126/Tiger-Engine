@@ -3,7 +3,7 @@
 #include "graphics/mesh/common/Quad.h"
 #include "MeshRenderer.h"
 #include "graphics/Shader.h"
-#include "platform/OpenGL/Framebuffers/RenderTarget.h"
+#include "platform/OpenGL/Framebuffers/Framebuffer.h"
 #include "utils/Timer.h"
 
 namespace tiger {
@@ -19,7 +19,7 @@ namespace tiger {
 			void postLightingPostProcess(opengl::RenderTarget* input);
 
 			// Might be useful to have if we want to have more custom post processing. Unity does it this way
-			//void blit(Texture *texture, opengl::RenderTarget *source);
+			//void blit(Texture *texture, opengl::Framebuffer *source);
 
 			inline void EnableBlur(bool choice) { m_Blur = choice; }
 		private:

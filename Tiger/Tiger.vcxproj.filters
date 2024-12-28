@@ -66,7 +66,7 @@
     <ClCompile Include="src\Scene3D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\OpenGL\Framebuffers\RenderTarget.cpp">
+    <ClCompile Include="src\platform\OpenGL\Framebuffers\Framebuffer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\Skybox.cpp">
@@ -215,7 +215,7 @@
     <ClInclude Include="src\graphics\renderer\MeshRenderer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\platform\OpenGL\Framebuffers\RenderTarget.h">
+    <ClInclude Include="src\platform\OpenGL\Framebuffers\Framebuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\Skybox.h">

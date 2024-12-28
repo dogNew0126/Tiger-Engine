@@ -46,7 +46,7 @@ namespace tiger {
 				processKeyboard(tiger::graphics::DOWNWARDS, deltaTime);
 			if (Window::isKeyPressed(GLFW_KEY_LEFT_SHIFT))
 				m_MovementSpeed = SPEED * 4.0f;
-			if (Window::isKeyPressed(GLFW_KEY_LEFT_ALT))
+			else if (Window::isKeyPressed(GLFW_KEY_LEFT_ALT))
 				m_MovementSpeed = SPEED / 4.0f;
 			else
 				m_MovementSpeed = SPEED;

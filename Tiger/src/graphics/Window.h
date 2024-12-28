@@ -45,18 +45,10 @@ namespace tiger {
 			static inline int getHeight() { return s_Height; }
 
 		private:
-			/**
-			* Creates the window. Sets up the mouse settings and all important callbacks
-			* Initializes GLEW and initializes v-sync depending on the settings
-			*
-			* @return returns true if the window was initialized properly
-			*/
 			bool init();
 
-			/**
-			* Sets the size of the window to the resolution of the primary monitor
-			*/
 			void setFullScreenResolution();
+
 		};
 
 	}
