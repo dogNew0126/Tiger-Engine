@@ -1,4 +1,6 @@
+#include "pch.h"
 #include "Material.h"
+#include "utils/loaders/TextureLoader.h"
 
 namespace tiger
 {

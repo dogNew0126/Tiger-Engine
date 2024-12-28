@@ -1,5 +1,5 @@
+#include "pch.h"
 #include "Sphere.h"
-#include <math.h>
 
 namespace tiger {
 	namespace graphics {

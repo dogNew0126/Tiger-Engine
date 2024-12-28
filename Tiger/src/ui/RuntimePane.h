@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Pane.h"
-#include "../Defs.h"
 
 namespace tiger {
 	namespace ui {

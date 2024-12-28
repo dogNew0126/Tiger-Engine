@@ -1,17 +1,16 @@
 #pragma once
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include "../../utils/Singleton.h"
-#include <iostream>
+#include "utils/Singleton.h"
 
 namespace tiger {
 	namespace graphics {
 
 		class GLCache : utils::Singleton {
-		public:
-
+		private:
 			GLCache();
+
+		public:
+			
 			~GLCache();
 
 			static GLCache* getInstance();

@@ -1,8 +1,5 @@
 #pragma once
 
-#include <gl/glew.h>
-#include "../../Defs.h"
-
 namespace tiger {
 	namespace graphics {
 

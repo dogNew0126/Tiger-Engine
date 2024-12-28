@@ -89,7 +89,7 @@ void main() {
 	vec3 directLightIrradiance = vec3(0.0);
 	directLightIrradiance += CalculateDirectionalLightRadiance(albedo, normal, metallic, roughness, fragToView, baseReflectivity);
 	directLightIrradiance += CalculatePointLightRadiance(albedo, normal, metallic, roughness, fragToView, baseReflectivity);
-	//directLightIrradiance += CalculateSpotLightRadiance(albedo, normal, metallic, roughness, fragToView, baseReflectivity);
+	directLightIrradiance += CalculateSpotLightRadiance(albedo, normal, metallic, roughness, fragToView, baseReflectivity);
 
 	// Calcualte ambient IBL for both diffuse and specular
 	vec3 specularRatio = FresnelSchlick(max(dot(normal, fragToView), 0.0), baseReflectivity);
@@ -233,8 +233,9 @@ float GeometrySchlickGGX(float cosTheta, float roughness) {
 
 // Calculates the amount of specular (reflected) light. Since diffuse(refraction) and specular(reflection) are mutually exclusive, 
 // we can also use this to determine the amount of diffuse light
+// Taken from UE4's implementation which is faster and basically identical to the usual Fresnel calculations: https://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
 vec3 FresnelSchlick(float cosTheta, vec3 baseReflectivity) {
-	return baseReflectivity + (1.0 - baseReflectivity) * pow(1.0 - cosTheta, 5);
+	return max(baseReflectivity + (1.0 - baseReflectivity) * pow(2, (-5.55473 * cosTheta - 6.98316) * cosTheta), 0.0);
 }
 
 float CalculateShadow(vec3 normal, vec3 fragToDirLight) {

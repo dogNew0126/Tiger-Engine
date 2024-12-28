@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLFW\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLEW\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLM\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\SOIL\include;D:\xqb_workspace\internship\Tiger-Engine\Tiger\vendor\stb;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\Assimp\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\FreeType\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\FreeType-GL\include;D:\xqb_workspace\internship\Tiger-Engine\Tiger\vendor\Imgui;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLFW\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLEW\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\Assimp\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\FreeType\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\FreeType-GL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM\include;$(SolutionDir)Tiger\vendor\stb;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\FreeType\include;$(SolutionDir)Dependencies\FreeType-GL\include;$(SolutionDir)Tiger\vendor\Imgui;$(SolutionDir)Tiger\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\GLFW\lib;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\FreeType\lib;$(SolutionDir)Dependencies\FreeType-GL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLFW\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLEW\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLM\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\SOIL\include;D:\xqb_workspace\internship\Tiger-Engine\Tiger\vendor\stb;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\Assimp\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\FreeType\include;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\FreeType-GL\include;D:\xqb_workspace\internship\Tiger-Engine\Tiger\vendor\Imgui;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLFW\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\GLEW\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\Assimp\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\FreeType\lib;D:\xqb_workspace\internship\Tiger-Engine\Dependencies\FreeType-GL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM\include;$(SolutionDir)Tiger\vendor\stb;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\FreeType\include;$(SolutionDir)Dependencies\FreeType-GL\include;$(SolutionDir)Tiger\vendor\Imgui;$(SolutionDir)Tiger\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\GLFW\lib;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\FreeType\lib;$(SolutionDir)Dependencies\FreeType-GL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -110,8 +110,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,8 +128,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,7 +160,6 @@
     <ClCompile Include="src\graphics\mesh\Model.cpp" />
     <ClCompile Include="src\graphics\renderer\GLCache.cpp" />
     <ClCompile Include="src\graphics\renderer\PostProcessor.cpp" />
-    <ClCompile Include="src\graphics\renderer\Renderable3D.cpp" />
     <ClCompile Include="src\graphics\renderer\MeshRenderer.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
     <ClCompile Include="src\graphics\Skybox.cpp" />
@@ -164,11 +167,17 @@
     <ClCompile Include="src\graphics\texture\Texture.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\platform\OpenGL\Buffer.cpp" />
     <ClCompile Include="src\platform\OpenGL\Framebuffers\RenderTarget.cpp" />
     <ClCompile Include="src\platform\OpenGL\IndexBuffer.cpp" />
     <ClCompile Include="src\platform\OpenGL\VertexArray.cpp" />
     <ClCompile Include="src\Scene3D.cpp" />
+    <ClCompile Include="src\scene\SceneGraph.cpp" />
+    <ClCompile Include="src\scene\SceneNode.cpp" />
     <ClCompile Include="src\terrain\Terrain.cpp" />
     <ClCompile Include="src\ui\DebugPane.cpp" />
     <ClCompile Include="src\ui\Pane.cpp" />
@@ -178,13 +187,34 @@
     <ClCompile Include="src\utils\Logger.cpp" />
     <ClCompile Include="src\utils\Time.cpp" />
     <ClCompile Include="src\utils\Timer.cpp" />
-    <ClCompile Include="vendor\Imgui\examples\imgui_impl_glfw.cpp" />
-    <ClCompile Include="vendor\Imgui\examples\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="vendor\Imgui\imgui.cpp" />
-    <ClCompile Include="vendor\Imgui\imgui_demo.cpp" />
-    <ClCompile Include="vendor\Imgui\imgui_draw.cpp" />
-    <ClCompile Include="vendor\Imgui\imgui_widgets.cpp" />
-    <ClCompile Include="vendor\stb\stb_image.cpp" />
+    <ClCompile Include="vendor\Imgui\examples\imgui_impl_glfw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="vendor\Imgui\examples\imgui_impl_opengl3.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="vendor\Imgui\imgui.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="vendor\Imgui\imgui_demo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="vendor\Imgui\imgui_draw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="vendor\Imgui\imgui_widgets.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="vendor\stb\stb_image.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Defs.h" />
@@ -205,7 +235,6 @@
     <ClInclude Include="src\graphics\mesh\Model.h" />
     <ClInclude Include="src\graphics\renderer\GLCache.h" />
     <ClInclude Include="src\graphics\renderer\PostProcessor.h" />
-    <ClInclude Include="src\graphics\renderer\Renderable3D.h" />
     <ClInclude Include="src\graphics\renderer\MeshRenderer.h" />
     <ClInclude Include="src\graphics\renderer\RenderPass.h" />
     <ClInclude Include="src\graphics\Shader.h" />
@@ -213,11 +242,14 @@
     <ClInclude Include="src\graphics\texture\Cubemap.h" />
     <ClInclude Include="src\graphics\texture\Texture.h" />
     <ClInclude Include="src\graphics\Window.h" />
+    <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\platform\OpenGL\Buffer.h" />
     <ClInclude Include="src\platform\OpenGL\Framebuffers\RenderTarget.h" />
     <ClInclude Include="src\platform\OpenGL\IndexBuffer.h" />
     <ClInclude Include="src\platform\OpenGL\VertexArray.h" />
     <ClInclude Include="src\Scene3D.h" />
+    <ClInclude Include="src\scene\SceneGraph.h" />
+    <ClInclude Include="src\scene\SceneNode.h" />
     <ClInclude Include="src\shaders\terrain.vert" />
     <ClInclude Include="src\terrain\Terrain.h" />
     <ClInclude Include="src\ui\DebugPane.h" />

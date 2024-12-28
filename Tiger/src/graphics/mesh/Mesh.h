@@ -1,12 +1,6 @@
 #pragma once
 
-#include <vector>
-#include <glm/common.hpp>
-
-#include "../../platform/OpenGL/VertexArray.h"
-#include "../../platform/OpenGL/IndexBuffer.h"
 #include "Material.h"
-#include "../../utils/Logger.h"
 
 namespace tiger {
 	namespace graphics {

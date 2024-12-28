@@ -1,13 +1,5 @@
 #pragma once
 
-#include "../utils/FileUtils.h"
-#define GLEW_STATIC
-#include <GL/glew.h>
-#include <iostream>
-#include <vector>
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
 namespace tiger {
 	namespace graphics {
 

@@ -60,9 +60,6 @@
     <ClCompile Include="src\terrain\Terrain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\renderer\Renderable3D.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\renderer\MeshRenderer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -94,15 +91,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="vendor\Imgui\imgui.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="vendor\Imgui\imgui_demo.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="vendor\Imgui\imgui_draw.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="vendor\Imgui\imgui_widgets.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="vendor\Imgui\examples\imgui_impl_glfw.cpp">
@@ -151,6 +139,24 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\ibl\EnvironmentProbeManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene\SceneNode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene\SceneGraph.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pch.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\Imgui\imgui_draw.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\Imgui\imgui_demo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\Imgui\imgui_widgets.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,9 +215,6 @@
     <ClInclude Include="src\graphics\renderer\MeshRenderer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\renderer\Renderable3D.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\platform\OpenGL\Framebuffers\RenderTarget.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -243,18 +246,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="vendor\Imgui\imgui.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="vendor\Imgui\imgui_internal.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="vendor\Imgui\imstb_rectpack.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="vendor\Imgui\imstb_textedit.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="vendor\Imgui\imstb_truetype.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="vendor\Imgui\examples\imgui_impl_glfw.h">
@@ -306,6 +297,27 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\ibl\EnvironmentProbeManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scene\SceneNode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scene\SceneGraph.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\Imgui\imgui_internal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\Imgui\imstb_rectpack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\Imgui\imstb_textedit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\Imgui\imstb_truetype.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

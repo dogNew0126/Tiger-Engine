@@ -1,5 +1,6 @@
 #version 430 core
 
+// Does AMD support sampler2D in a struct?
 struct Material {
 	sampler2D texture_diffuse1; // background texture
 	sampler2D texture_diffuse2; // r texture
@@ -15,30 +16,24 @@ struct Material {
 
 struct DirLight {
 	vec3 direction;
-	vec3 ambient;
-	vec3 diffuse;
-	vec3 specular;
+
+	vec3 lightColour; // radiant flux
 };
+
 struct PointLight {
 	vec3 position;
-	float constant;
-	float linear;
-	float quadratic;
-	vec3 ambient;
-	vec3 diffuse;
-	vec3 specular;
+
+	vec3 lightColour; // radiant flux
 };
+
 struct SpotLight {
 	vec3 position;
 	vec3 direction;
+
 	float cutOff;
 	float outerCutOff;
-	float constant;
-	float linear;
-	float quadratic;
-	vec3 ambient;
-	vec3 diffuse;
-	vec3 specular;
+
+	vec3 lightColour; // radiant flux
 };
 
 #define MAX_POINT_LIGHTS 5
@@ -72,7 +67,7 @@ void main() {
 	vec4 blendMapColour = texture(material.blendmap, TexCoords);
 	
 	float backTextureAmount = 1 - (blendMapColour.r + blendMapColour.g + blendMapColour.b);
-
+	
 	vec2 tiledCoords = TexCoords * 64;
 	vec3 backgroundTextureColour = texture(material.texture_diffuse1, tiledCoords).rgb * backTextureAmount;
 	vec3 rTextureColour = texture(material.texture_diffuse2, tiledCoords).rgb * blendMapColour.r;
@@ -80,21 +75,23 @@ void main() {
 	vec3 bTextureColour = texture(material.texture_diffuse4, tiledCoords).rgb * blendMapColour.b;
 	
 	vec3 terrainColour = (backgroundTextureColour + rTextureColour + gTextureColour + bTextureColour) * 
-						(CalcDirLight(dirLight, norm, fragToCam) + CalcSpotLight(spotLight, norm, FragPos) + CalcPointLight(pointLights[0], norm, FragPos, fragToCam));
+						 (CalcDirLight(dirLight, norm, fragToCam) + CalcSpotLight(spotLight, norm, FragPos) + CalcPointLight(pointLights[0], norm, FragPos, fragToCam));
 	
 	
 	// Result
 	color = vec4(terrainColour, 1.0);
+	//color = vec4(Normal, 1.0);
+	//color = vec4(vec3(gl_FragCoord.z), 1.0); //depth buffer display
 }
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 fragToCam) {
-	vec3 fragToLight = normalize(light.direction);
+	vec3 fragToLight = normalize(-light.direction);
 
-	float diff = max(dot(-fragToLight, normal), 0.0);
+	float diff = max(dot(fragToLight, normal), 0.0);
 
-	vec3 ambient = light.ambient;
-	vec3 diffuse = light.diffuse * diff;
-
+	vec3 ambient = light.lightColour * vec3(0.05);
+	vec3 diffuse = light.lightColour * diff;
+	
 	return ambient + (diffuse * (1.0 - CalculateShadow(normal, fragToLight)));
 }
 
@@ -103,15 +100,12 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 fragToCam)
 
 	float diff = max(dot(fragToLight, normal), 0.0);
 
-	//vec3 reflectedVec = reflect(-fragToLight, normal);
-	//float spec = pow(max(dot(reflectedVec, fragToCam), 0.0), material.shininess);
-
 	// Attenuation calculation
-	float distanceFromLight = length(light.position - fragPos);
-	float attenuation = 1.0 / (light.constant + light.linear * distanceFromLight + light.quadratic * distanceFromLight * distanceFromLight);
+	float fragToLightDistance = length(light.position - fragPos);
+	float attenuation = 1.0 / (fragToLightDistance * fragToLightDistance);
 
-	vec3 ambient = light.ambient * attenuation;
-	vec3 diffuse = light.diffuse * diff * attenuation;
+	vec3 ambient = light.lightColour * vec3(0.05) * attenuation;
+	vec3 diffuse = light.lightColour * diff * attenuation;
 
 	return ambient + diffuse;
 }
@@ -119,19 +113,17 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 fragToCam)
 vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos) {
 	vec3 fragToLight = normalize(light.position - fragPos);
 
-	float diff = max(dot(fragToLight, normal), 0.0);
-
 	// Attenuation calculation
-	float distanceFromLight = length(light.position - fragPos);
-	float attenuation = 1.0 / (light.constant + light.linear * distanceFromLight + light.quadratic * distanceFromLight * distanceFromLight);
+	float fragToLightDistance = length(light.position - fragPos);
+	float attenuation = 1.0 / (fragToLightDistance * fragToLightDistance);
 
 	// check if its in the spotlight's circle
 	float theta = dot(-fragToLight, normalize(light.direction));
 	float difference = light.cutOff - light.outerCutOff;
 	float intensity = clamp((theta - light.outerCutOff) / difference, 0.0, 1.0);
 
-	vec3 ambient = light.ambient * attenuation;
-	vec3 diffuse = light.diffuse * intensity * attenuation;
+	vec3 ambient = light.lightColour * vec3(0.05) * attenuation;
+	vec3 diffuse = light.lightColour * intensity * attenuation;
 
 	return ambient + diffuse;
 }
@@ -145,7 +137,7 @@ float CalculateShadow(vec3 normal, vec3 fragToDirLight) {
 
 	// Add shadow bias to avoid shadow acne, and more shadow bias is needed depending on the angle between the normal and light direction
 	// However too much bias can cause peter panning
-	float shadowBias = max(0.01, 0.01 * (1.0 - dot(normal, fragToDirLight)));
+	float shadowBias = max(0.01, 0.1 * (1.0 - dot(normal, fragToDirLight)));
 
 	// Perform Percentage Closer Filtering (PCF) in order to produce soft shadows
 	vec2 texelSize = 1.0 / textureSize(shadowmap, 0);
@@ -156,6 +148,7 @@ float CalculateShadow(vec3 normal, vec3 fragToDirLight) {
 		}
 	}
 	shadow /= 9.0;
+
 	if (currentDepth > 1.0)
 		shadow = 0.0;
 	return shadow;

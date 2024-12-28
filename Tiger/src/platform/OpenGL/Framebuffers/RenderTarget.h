@@ -1,12 +1,5 @@
 #pragma once
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
-#include "../../../Defs.h"
-#include "../../../utils/Logger.h"
-#include "../../../utils/loaders/TextureLoader.h"
-
 namespace tiger {
 	namespace opengl {
 

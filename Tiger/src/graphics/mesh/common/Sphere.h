@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Mesh.h"
+#include "graphics/mesh/Mesh.h"
 
 namespace tiger {
 	namespace graphics {

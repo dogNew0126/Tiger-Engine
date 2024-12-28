@@ -1,8 +1,6 @@
+#include "pch.h"
 #include "Terrain.h"
-
-#include <glm/gtc/matrix_transform.hpp>
-
-#include "../utils/Logger.h"
+#include "utils/loaders/TextureLoader.h"
 
 namespace tiger {
 	namespace terrain {

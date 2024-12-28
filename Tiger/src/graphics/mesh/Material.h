@@ -1,16 +1,11 @@
 #pragma once
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
-#include "../Shader.h"
-#include "../texture/Texture.h"
-#include "../../utils/loaders/TextureLoader.h"
+#include "graphics/Shader.h"
+#include "graphics/texture/Texture.h"
 
 namespace tiger {
 	namespace graphics {
 
-		// TODO: Move to a PBR material system
 		class Material {
 		public:
 			Material(Texture* albedoMap = nullptr, Texture* normalMap = nullptr, Texture* metallicMap = nullptr, Texture* roughnessMap = nullptr,

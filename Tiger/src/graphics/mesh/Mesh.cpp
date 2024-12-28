@@ -1,4 +1,7 @@
+#include "pch.h"
 #include "Mesh.h"
+#include "platform/OpenGL/VertexArray.h"
+#include "platform/OpenGL/IndexBuffer.h"
 
 namespace tiger {
 	namespace graphics {

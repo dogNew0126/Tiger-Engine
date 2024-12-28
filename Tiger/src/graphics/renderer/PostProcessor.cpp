@@ -1,4 +1,8 @@
+#include "pch.h"
 #include "PostProcessor.h"
+#include "ui/DebugPane.h"
+#include "ui/RuntimePane.h"
+#include "graphics/Window.h"
 
 namespace tiger {
 	namespace graphics {

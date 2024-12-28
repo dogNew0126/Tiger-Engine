@@ -1,4 +1,6 @@
+#include "pch.h"
 #include "Skybox.h"
+#include "utils/loaders/TextureLoader.h"
 
 namespace tiger {
 	namespace graphics {

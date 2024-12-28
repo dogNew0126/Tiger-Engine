@@ -1,14 +1,13 @@
 #pragma once
 
-#include <vector>
-#include "../platform/OpenGL/VertexArray.h"
-#include "../platform/OpenGL/IndexBuffer.h"
-#include "../platform/OpenGL/Buffer.h"
-#include "../utils/loaders/TextureLoader.h"
-#include "../graphics/renderer/GLCache.h"
 #include "Shader.h"
 #include "camera/FPSCamera.h"
-#include "window.h"
+
+#include "platform/OpenGL/VertexArray.h"
+#include "platform/OpenGL/IndexBuffer.h"
+#include "platform/OpenGL/Buffer.h"
+#include "graphics/renderer/GLCache.h"
+#include "graphics/texture/Cubemap.h"
 
 namespace tiger {
 

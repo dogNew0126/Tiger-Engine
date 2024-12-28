@@ -1,4 +1,7 @@
+#include "pch.h"
 #include "FPSCamera.h"
+#include "graphics/Window.h"
+#include "ui/DebugPane.h"
 
 namespace tiger {
 	namespace graphics {

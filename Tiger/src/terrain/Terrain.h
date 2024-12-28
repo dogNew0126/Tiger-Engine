@@ -1,12 +1,7 @@
 #pragma once
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <array>
-
-#include "../graphics/mesh/Mesh.h"
-#include "../graphics/mesh/Model.h"
+#include "graphics/mesh/Mesh.h"
+#include "graphics/mesh/Model.h"
 
 namespace tiger {
 	namespace terrain {

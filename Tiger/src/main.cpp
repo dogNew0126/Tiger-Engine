@@ -1,29 +1,20 @@
-#include <iostream>
-#include "graphics/Window.h"
-#include "utils/Timer.h"
-#include "graphics/Shader.h"
-#include <stb_image.h>
-#include <cmath>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include "pch.h"
 
-#include "utils/Time.h"
+#include "graphics/Window.h"
+#include "graphics/Shader.h"
 #include "graphics/camera/FPSCamera.h"
-#include "utils/Logger.h"
 #include "graphics/mesh/Model.h"
-#include "terrain/Terrain.h"
-#include "Scene3D.h"
-#include "platform/OpenGL/Framebuffers/RenderTarget.h"
 #include "graphics/mesh/common/Quad.h"
 #include "graphics/renderer/GLCache.h"
 #include "graphics/renderer/PostProcessor.h"
+#include "platform/OpenGL/Framebuffers/RenderTarget.h"
+#include "utils/Timer.h"
+#include "utils/Time.h"
+#include "utils/loaders/TextureLoader.h"
+#include "terrain/Terrain.h"
+#include "Scene3D.h"
 #include "ui/RuntimePane.h"
 #include "ui/DebugPane.h"
-
-#include <ft2build.h>
-#include FT_FREETYPE_H
-#include <freetype-gl.h>
 
 int main() {
 	// Prepare the engine

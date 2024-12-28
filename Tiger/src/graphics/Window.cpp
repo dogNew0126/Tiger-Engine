@@ -1,5 +1,5 @@
+#include "pch.h"
 #include "Window.h"
-#include "../utils/Logger.h"
 
 namespace tiger {
 	namespace graphics {

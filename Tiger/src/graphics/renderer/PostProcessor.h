@@ -1,13 +1,10 @@
 #pragma once
 
-#include "../../Defs.h"
-#include "../mesh/common/Quad.h"
+#include "graphics/mesh/common/Quad.h"
 #include "MeshRenderer.h"
-#include "../Shader.h"
-#include "../../platform/OpenGL/Framebuffers/RenderTarget.h"
-#include "../../utils/Timer.h"
-#include "../../ui/DebugPane.h"
-#include "../../ui/RuntimePane.h"
+#include "graphics/Shader.h"
+#include "platform/OpenGL/Framebuffers/RenderTarget.h"
+#include "utils/Timer.h"
 
 namespace tiger {
 	namespace graphics {

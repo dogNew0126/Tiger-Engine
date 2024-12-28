@@ -1,11 +1,5 @@
 #pragma once
 
-#include <GL/glew.h>
-#include <glm/common.hpp>
-
-#include "../../Defs.h"
-#include "../../utils/Logger.h"
-
 namespace tiger {
 	namespace graphics {
 

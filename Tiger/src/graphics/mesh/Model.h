@@ -1,16 +1,13 @@
 #pragma once
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-#include "../Shader.h"
+#include "graphics/Shader.h"
 #include "Mesh.h"
-#include "../../utils/loaders/TextureLoader.h"
 
-#include "../renderer/RenderPass.h"
+#include "graphics/renderer/RenderPass.h"
 
 namespace tiger {
 	namespace graphics {
