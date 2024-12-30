@@ -4,7 +4,6 @@
 #include "ui/DebugPane.h"
 
 namespace tiger {
-	namespace graphics {
 
 		FPSCamera::FPSCamera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH)
 			: m_Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseSensitivity(SENSITIVITY), m_FOV(FOV), 
@@ -18,7 +17,7 @@ namespace tiger {
 				m_Position(glm::vec3(xPos, yPos, zPos)), m_WorldUp(glm::vec3(xUp, yUp, zUp)), m_Yaw(yaw), m_Pitch(pitch)
 		{
 			updateCameraVectors();
-			ui::DebugPane::bindCameraPositionValue(&m_Position);
+			DebugPane::bindCameraPositionValue(&m_Position);
 		}
 
 		glm::mat4 FPSCamera::getViewMatrix() const
@@ -27,33 +26,33 @@ namespace tiger {
 		}
 
 		glm::mat4 FPSCamera::getProjectionMatrix() {
-			return glm::perspective(glm::radians(m_FOV), (float)graphics::Window::getWidth() / (float)graphics::Window::getHeight(), NEAR_PLANE, FAR_PLANE);
+			return glm::perspective(glm::radians(m_FOV), (float)Window::getWidth() / (float)Window::getHeight(), NEAR_PLANE, FAR_PLANE);
 		}
 
 		void FPSCamera::processInput(float deltaTime) {
 			// Keyboard input
-			if (Window::isKeyPressed(GLFW_KEY_W))
-				processKeyboard(tiger::graphics::FORWARD, deltaTime);
-			if (Window::isKeyPressed(GLFW_KEY_S))
-				processKeyboard(tiger::graphics::BACKWARD, deltaTime);
-			if (Window::isKeyPressed(GLFW_KEY_A))
-				processKeyboard(tiger::graphics::LEFT, deltaTime);
-			if (Window::isKeyPressed(GLFW_KEY_D))
-				processKeyboard(tiger::graphics::RIGHT, deltaTime);
-			if (Window::isKeyPressed(GLFW_KEY_SPACE))
-				processKeyboard(tiger::graphics::UPWARDS, deltaTime);
-			if (Window::isKeyPressed(GLFW_KEY_LEFT_CONTROL))
-				processKeyboard(tiger::graphics::DOWNWARDS, deltaTime);
-			if (Window::isKeyPressed(GLFW_KEY_LEFT_SHIFT))
+			if (InputManager::isKeyPressed(GLFW_KEY_W))
+				processKeyboard(tiger::FORWARD, deltaTime);
+			if (InputManager::isKeyPressed(GLFW_KEY_S))
+				processKeyboard(tiger::BACKWARD, deltaTime);
+			if (InputManager::isKeyPressed(GLFW_KEY_A))
+				processKeyboard(tiger::LEFT, deltaTime);
+			if (InputManager::isKeyPressed(GLFW_KEY_D))
+				processKeyboard(tiger::RIGHT, deltaTime);
+			if (InputManager::isKeyPressed(GLFW_KEY_SPACE))
+				processKeyboard(tiger::UPWARDS, deltaTime);
+			if (InputManager::isKeyPressed(GLFW_KEY_LEFT_CONTROL))
+				processKeyboard(tiger::DOWNWARDS, deltaTime);
+			if (InputManager::isKeyPressed(GLFW_KEY_LEFT_SHIFT))
 				m_MovementSpeed = SPEED * 4.0f;
-			else if (Window::isKeyPressed(GLFW_KEY_LEFT_ALT))
+			else if (InputManager::isKeyPressed(GLFW_KEY_LEFT_ALT))
 				m_MovementSpeed = SPEED / 4.0f;
 			else
 				m_MovementSpeed = SPEED;
 			// Mouse scrolling
-			processMouseScroll(Window::getScrollY() * 6);
+			processMouseScroll(InputManager::getScrollY() * 6);
 			// Mouse movement
-			processMouseMovement(Window::getMouseXDelta(), -Window::getMouseYDelta(), true);
+			processMouseMovement(InputManager::getMouseXDelta(), -InputManager::getMouseYDelta(), true);
 		}
 
 		void FPSCamera::processKeyboard(Camera_Movement direction, float deltaTime) 
@@ -122,5 +121,5 @@ namespace tiger {
 			m_Right = glm::normalize(glm::cross(m_Front, m_WorldUp));
 			m_Up = glm::normalize(glm::cross(m_Right, m_Front));
 		}
-	}
+
 }

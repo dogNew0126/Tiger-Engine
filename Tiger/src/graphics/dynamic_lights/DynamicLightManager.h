@@ -5,7 +5,6 @@
 #include "SpotLight.h"
 
 namespace tiger {
-	namespace graphics {
 
 		class DynamicLightManager {
 
@@ -31,5 +30,4 @@ namespace tiger {
 			std::vector<PointLight> m_PointLights;
 		};
 
-	}
 }

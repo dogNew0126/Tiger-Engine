@@ -3,7 +3,6 @@
 #include "DynamicLight.h"
 
 namespace tiger {
-	namespace graphics {
 
 		struct SpotLight : public DynamicLight {
 
@@ -15,5 +14,4 @@ namespace tiger {
 			float cutOff, outerCutOff;
 		};
 
-	}
 }

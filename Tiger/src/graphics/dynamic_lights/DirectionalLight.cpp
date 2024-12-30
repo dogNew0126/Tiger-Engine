@@ -2,7 +2,6 @@
 #include "DirectionalLight.h"
 
 namespace tiger {
-	namespace graphics {
 
 		DirectionalLight::DirectionalLight(const glm::vec3& lightColour, const glm::vec3& dir)
 			: DynamicLight(lightColour), direction(dir) {}
@@ -16,5 +15,4 @@ namespace tiger {
 			}
 		}
 
-	}
 }

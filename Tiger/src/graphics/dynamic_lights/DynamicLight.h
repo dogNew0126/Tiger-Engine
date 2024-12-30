@@ -3,7 +3,6 @@
 #include "graphics/Shader.h"
 
 namespace tiger {
-	namespace graphics {
 
 		// TODO: Add functionality so it can update with an entitie's position and orientation
 		struct DynamicLight {
@@ -15,6 +14,4 @@ namespace tiger {
 			glm::vec3 lightColour;
 			bool isActive;
 		};
-
-	}
 }

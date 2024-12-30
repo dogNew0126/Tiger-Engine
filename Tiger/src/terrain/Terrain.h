@@ -4,32 +4,30 @@
 #include "graphics/mesh/Model.h"
 
 namespace tiger {
-	namespace terrain {
 
-		class Terrain {
+	class Terrain {
 
-		public:
-			Terrain(const glm::vec3& worldPosition);
-			~Terrain();
+	public:
+		Terrain(const glm::vec3& worldPosition);
+		~Terrain();
 
-			void Draw(graphics::Shader& shader, graphics::RenderPass pass) const;
+		void Draw(Shader& shader, RenderPass pass) const;
 
-			inline const glm::vec3& getPosition() const { return m_Position; }
+		inline const glm::vec3& getPosition() const { return m_Position; }
 
-		private:
+	private:
 
-			glm::vec3 calculateNormal(int x, int z, unsigned char* heightMapData);
-			float getVertexHeight(int x, int y, unsigned char* heightMapData);
+		glm::vec3 calculateNormal(int x, int z, unsigned char* heightMapData);
+		float getVertexHeight(int x, int y, unsigned char* heightMapData);
 
-			float m_TerrainSize;
-			unsigned int m_VertexSideCount;
-			GLushort m_HeightMapScale;
-			glm::mat4 m_ModelMatrix;
-			glm::vec3 m_Position;
-			graphics::Mesh* m_Mesh;
-			std::array<graphics::Texture*, 9> m_Textures; // Represents all the textures supported by the terrain's texure splatting (rgba and the default value)
+		float m_TerrainSize;
+		unsigned int m_VertexSideCount;
+		GLushort m_HeightMapScale;
+		glm::mat4 m_ModelMatrix;
+		glm::vec3 m_Position;
+		Mesh* m_Mesh;
+		std::array<Texture*, 9> m_Textures; // Represents all the textures supported by the terrain's texure splatting (rgba and the default value)
 
-		};
+	};
 
-	}
 }

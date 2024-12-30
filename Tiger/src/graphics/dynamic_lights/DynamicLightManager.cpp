@@ -2,7 +2,6 @@
 #include "DynamicLightManager.h"
 
 namespace tiger {
-	namespace graphics {
 
 		// TODO: Add functionality so it can update with an entity's position and orientation
 		DynamicLightManager::DynamicLightManager()
@@ -56,5 +55,4 @@ namespace tiger {
 			m_PointLights.push_back(pointLight);
 		}
 
-	}
 }

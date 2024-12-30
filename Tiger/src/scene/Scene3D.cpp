@@ -12,12 +12,12 @@
 
 namespace tiger {
 
-	Scene3D::Scene3D(graphics::FPSCamera* camera)
+	Scene3D::Scene3D(FPSCamera* camera)
 		: m_TerrainShader("src/shaders/terrain.vert", "src/shaders/terrain.frag"), m_ModelShader("src/shaders/pbr_model.vert", "src/shaders/pbr_model.frag"), m_Camera(camera), m_ShadowmapShader("src/shaders/shadowmap.vert", "src/shaders/shadowmap.frag"), m_DynamicLightManager()
 	{
-		m_Renderer = new graphics::MeshRenderer(camera);
-		m_GLCache = graphics::GLCache::getInstance();
-		m_Terrain = new terrain::Terrain(glm::vec3(0.0f, -20.0f, 0.0f));
+		m_Renderer = new MeshRenderer(camera);
+		m_GLCache = GLCache::getInstance();
+		m_Terrain = new Terrain(glm::vec3(0.0f, -20.0f, 0.0f));
 
 		init();
 	}
@@ -47,13 +47,13 @@ namespace tiger {
 		//add(new scene::SceneNode(glm::vec3(-20, 90, -20), glm::vec3(10, 10, 10), glm::vec3(1, 0, 0), 0, new graphics::Model(graphics::Quad()), nullptr, false));
 
 		// Temp code until I rewrite the model loader
-		graphics::Model* pbrGun = new tiger::graphics::Model("res/3D_Models/Cerberus_Gun/Cerberus_LP.FBX");
-		add(new scene::SceneNode(glm::vec3(120.0f, 75.0f, 120.0f), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec3(1.0f, 0.0f, 0.0f), glm::radians(-90.0f), pbrGun, nullptr, false));
-		pbrGun->getMeshes()[0].getMaterial().setAlbedoMap(utils::TextureLoader::load2DTexture(std::string("res/3D_Models/Cerberus_Gun/Textures/Cerberus_A.tga"), true));
-		pbrGun->getMeshes()[0].getMaterial().setNormalMap(utils::TextureLoader::load2DTexture(std::string("res/3D_Models/Cerberus_Gun/Textures/Cerberus_N.tga"), false));
-		pbrGun->getMeshes()[0].getMaterial().setMetallicMap(utils::TextureLoader::load2DTexture(std::string("res/3D_Models/Cerberus_Gun/Textures/Cerberus_M.tga"), false));
-		pbrGun->getMeshes()[0].getMaterial().setRoughnessMap(utils::TextureLoader::load2DTexture(std::string("res/3D_Models/Cerberus_Gun/Textures/Cerberus_R.tga"), false));
-		pbrGun->getMeshes()[0].getMaterial().setAmbientOcclusionMap(utils::TextureLoader::load2DTexture(std::string("res/3D_Models/Cerberus_Gun/Textures/Cerberus_AO.tga"), false));
+		Model* pbrGun = new tiger::Model("res/3D_Models/Cerberus_Gun/Cerberus_LP.FBX");
+		add(new Renderable3D(glm::vec3(120.0f, 75.0f, 120.0f), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec3(1.0f, 0.0f, 0.0f), glm::radians(-90.0f), pbrGun, nullptr, false));
+		pbrGun->getMeshes()[0].getMaterial().setAlbedoMap(TextureLoader::load2DTexture(std::string("res/3D_Models/Cerberus_Gun/Textures/Cerberus_A.tga"), true));
+		pbrGun->getMeshes()[0].getMaterial().setNormalMap(TextureLoader::load2DTexture(std::string("res/3D_Models/Cerberus_Gun/Textures/Cerberus_N.tga"), false));
+		pbrGun->getMeshes()[0].getMaterial().setMetallicMap(TextureLoader::load2DTexture(std::string("res/3D_Models/Cerberus_Gun/Textures/Cerberus_M.tga"), false));
+		pbrGun->getMeshes()[0].getMaterial().setRoughnessMap(TextureLoader::load2DTexture(std::string("res/3D_Models/Cerberus_Gun/Textures/Cerberus_R.tga"), false));
+		pbrGun->getMeshes()[0].getMaterial().setAmbientOcclusionMap(TextureLoader::load2DTexture(std::string("res/3D_Models/Cerberus_Gun/Textures/Cerberus_AO.tga"), false));
 
 		// Temp testing code
 		int nrRows = 2;
@@ -61,14 +61,14 @@ namespace tiger {
 		float spacing = 2.5;
 		for (int row = 0; row < nrRows; row++) {
 			for (int col = 0; col < nrColumns; col++) {
-				graphics::Model* sphere = new tiger::graphics::Model("res/3D_Models/Sphere/globe-sphere.obj");
-				graphics::Material& mat = sphere->getMeshes()[0].getMaterial();
-				mat.setAlbedoMap(utils::TextureLoader::load2DTexture(std::string("res/3D_Models/Sphere/rustediron2_basecolor.png"), true));
-				mat.setNormalMap(utils::TextureLoader::load2DTexture(std::string("res/3D_Models/Sphere/rustediron2_normal.png"), false));
-				mat.setAmbientOcclusionMap(utils::TextureLoader::load2DTexture(std::string("res/textures/default/white.png"), false));
-				mat.setMetallicMap(utils::TextureLoader::load2DTexture(std::string("res/3D_Models/Sphere/rustediron2_metallic.png"), false));
-				mat.setRoughnessMap(utils::TextureLoader::load2DTexture(std::string("res/3D_Models/Sphere/rustediron2_roughness.png"), false));
-				add(new scene::SceneNode(glm::vec3((float)(col - (nrColumns / 2)) * spacing,
+				Model* sphere = new tiger::Model("res/3D_Models/Sphere/globe-sphere.obj");
+				Material& mat = sphere->getMeshes()[0].getMaterial();
+				mat.setAlbedoMap(TextureLoader::load2DTexture(std::string("res/3D_Models/Sphere/rustediron2_basecolor.png"), true));
+				mat.setNormalMap(TextureLoader::load2DTexture(std::string("res/3D_Models/Sphere/rustediron2_normal.png"), false));
+				mat.setAmbientOcclusionMap(TextureLoader::load2DTexture(std::string("res/textures/default/white.png"), false));
+				mat.setMetallicMap(TextureLoader::load2DTexture(std::string("res/3D_Models/Sphere/rustediron2_metallic.png"), false));
+				mat.setRoughnessMap(TextureLoader::load2DTexture(std::string("res/3D_Models/Sphere/rustediron2_roughness.png"), false));
+				add(new Renderable3D(glm::vec3((float)(col - (nrColumns / 2)) * spacing,
 					(float)(row - (nrRows / 2)) * spacing, 0.0f), glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(1.0f, 0.0f, 0.0f), 0.0f, sphere, nullptr, false));
 			}
 		}
@@ -81,7 +81,7 @@ namespace tiger {
 		skyboxFilePaths.push_back("res/skybox/bottom.png");
 		skyboxFilePaths.push_back("res/skybox/back.png");
 		skyboxFilePaths.push_back("res/skybox/front.png");
-		m_Skybox = new graphics::Skybox(skyboxFilePaths, m_Camera);
+		m_Skybox = new Skybox(skyboxFilePaths, m_Camera);
 	}
 
 	void Scene3D::shadowmapPass() {
@@ -99,9 +99,9 @@ namespace tiger {
 		// Add objects to the renderer
 		addObjectsToRenderQueue();
 
-		m_Renderer->flushOpaque(m_ShadowmapShader, graphics::RenderPass::ShadowmapPass);
-		m_Renderer->flushTransparent(m_ShadowmapShader, graphics::RenderPass::ShadowmapPass);
-		m_Terrain->Draw(m_ShadowmapShader, graphics::RenderPass::ShadowmapPass);
+		m_Renderer->flushOpaque(m_ShadowmapShader, RenderPass::ShadowmapPass);
+		m_Renderer->flushTransparent(m_ShadowmapShader, RenderPass::ShadowmapPass);
+		m_Terrain->Draw(m_ShadowmapShader, RenderPass::ShadowmapPass);
 
 		m_GLCache->switchShader(m_TerrainShader.getShaderID());
 		m_TerrainShader.setUniformMat4("lightSpaceViewProjectionMatrix", directionalLightViewProjMatrix);
@@ -118,7 +118,7 @@ namespace tiger {
 
 	void Scene3D::onRender(unsigned int shadowmap) {
 
-		glm::mat4 projectionMatrix = glm::perspective(glm::radians(m_Camera->getFOV()), (float)graphics::Window::getWidth() / (float)graphics::Window::getHeight(), NEAR_PLANE, FAR_PLANE);
+		glm::mat4 projectionMatrix = glm::perspective(glm::radians(m_Camera->getFOV()), (float)Window::getWidth() / (float)Window::getHeight(), NEAR_PLANE, FAR_PLANE);
 
 		// Setup
 		m_DynamicLightManager.setSpotLightDirection(m_Camera->getFront());
@@ -143,7 +143,7 @@ namespace tiger {
 		// Add objects to the renderer
 		addObjectsToRenderQueue();
 
-		m_Renderer->flushOpaque(m_ModelShader, graphics::RenderPass::LightingPass);
+		m_Renderer->flushOpaque(m_ModelShader, RenderPass::LightingPass);
 
 		// Terrain
 		m_GLCache->switchShader(m_TerrainShader.getShaderID());
@@ -161,24 +161,24 @@ namespace tiger {
 		m_TerrainShader.setUniformMat4("model", modelMatrix);
 		m_TerrainShader.setUniformMat4("view", m_Camera->getViewMatrix());
 		m_TerrainShader.setUniformMat4("projection", projectionMatrix);
-		m_Terrain->Draw(m_TerrainShader, graphics::RenderPass::LightingPass);
+		m_Terrain->Draw(m_TerrainShader, RenderPass::LightingPass);
 
 		// skybox
 		m_Skybox->Draw();
 
 		// Transparent objects
 		m_GLCache->switchShader(m_ModelShader.getShaderID());
-		m_Renderer->flushTransparent(m_ModelShader, graphics::RenderPass::LightingPass);
+		m_Renderer->flushTransparent(m_ModelShader, RenderPass::LightingPass);
 	}
 
-	void Scene3D::add(scene::SceneNode* renderable) {
+	void Scene3D::add(Renderable3D* renderable) {
 		m_Renderables.push_back(renderable);
 	}
 
 	void Scene3D::addObjectsToRenderQueue() {
 		auto iter = m_Renderables.begin();
 		while (iter != m_Renderables.end()) {
-			scene::SceneNode* curr = *iter;
+			Renderable3D* curr = *iter;
 			if (curr->getTransparent()) {
 				m_Renderer->submitTransparent(curr);
 			}

@@ -1,7 +1,6 @@
 #pragma once
 
 namespace tiger {
-	namespace graphics {
 
 		enum Camera_Movement {
 			FORWARD,
@@ -61,5 +60,4 @@ namespace tiger {
 			void processMouseScroll(float yOffset);
 		};
 
-	}
 }

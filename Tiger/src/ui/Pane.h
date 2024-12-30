@@ -3,19 +3,18 @@
 #include "../../vendor/imgui/imgui.h"
 
 namespace tiger {
-	namespace ui {
 
-		class Pane {
+	class Pane {
 
-		public:
-			Pane(const std::string& paneName, const glm::vec2& paneSize);
-			void render();
+	public:
+		Pane(const std::string& paneName, const glm::vec2& paneSize);
+		void render();
 
-		protected:
-			virtual void setupPaneObjects() = 0;
+	protected:
+		virtual void setupPaneObjects() = 0;
 
-			std::string m_PaneName;
-			glm::vec2 m_PaneSize;
-		};
-	}
+		std::string m_PaneName;
+		glm::vec2 m_PaneSize;
+	};
+
 }

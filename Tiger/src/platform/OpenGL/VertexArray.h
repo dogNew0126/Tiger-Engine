@@ -3,23 +3,22 @@
 #include "Buffer.h"
 
 namespace tiger {
-	namespace opengl {
 
-		class VertexArray {
+	class VertexArray {
 
-		private:
-			unsigned int m_VertexArrayID;
-			std::vector<Buffer*> m_Buffers;
+	private:
+		unsigned int m_VertexArrayID;
+		std::vector<Buffer*> m_Buffers;
 
-		public:
-			VertexArray();
-			~VertexArray();
+	public:
+		VertexArray();
+		~VertexArray();
 
-			// Function for automatically adding non-interleaved buffer data
-			void addBuffer(Buffer* buffer, int index);
+		// Function for automatically adding non-interleaved buffer data
+		void addBuffer(Buffer* buffer, int index);
 
-			void bind() const;
-			void unbind() const;
-		};
-	}
+		void bind() const;
+		void unbind() const;
+	};
+
 }

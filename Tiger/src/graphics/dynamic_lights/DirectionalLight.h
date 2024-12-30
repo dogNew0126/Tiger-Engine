@@ -3,7 +3,6 @@
 #include "DynamicLight.h"
 
 namespace tiger {
-	namespace graphics {
 
 		struct DirectionalLight : public DynamicLight {
 
@@ -14,5 +13,4 @@ namespace tiger {
 			glm::vec3 direction;
 		};
 
-	}
 }

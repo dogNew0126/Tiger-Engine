@@ -166,6 +166,8 @@
     <ClCompile Include="src\graphics\texture\Cubemap.cpp" />
     <ClCompile Include="src\graphics\texture\Texture.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
+    <ClCompile Include="src\input\InputManager.cpp" />
+    <ClCompile Include="src\input\JoystickManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -175,9 +177,8 @@
     <ClCompile Include="src\platform\OpenGL\Framebuffers\Framebuffer.cpp" />
     <ClCompile Include="src\platform\OpenGL\IndexBuffer.cpp" />
     <ClCompile Include="src\platform\OpenGL\VertexArray.cpp" />
-    <ClCompile Include="src\Scene3D.cpp" />
-    <ClCompile Include="src\scene\SceneGraph.cpp" />
-    <ClCompile Include="src\scene\SceneNode.cpp" />
+    <ClCompile Include="src\scene\Scene3D.cpp" />
+    <ClCompile Include="src\scene\Renderable3D.cpp" />
     <ClCompile Include="src\terrain\Terrain.cpp" />
     <ClCompile Include="src\ui\DebugPane.cpp" />
     <ClCompile Include="src\ui\Pane.cpp" />
@@ -242,14 +243,15 @@
     <ClInclude Include="src\graphics\texture\Cubemap.h" />
     <ClInclude Include="src\graphics\texture\Texture.h" />
     <ClInclude Include="src\graphics\Window.h" />
+    <ClInclude Include="src\input\InputManager.h" />
+    <ClInclude Include="src\input\JoystickManager.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\platform\OpenGL\Buffer.h" />
     <ClInclude Include="src\platform\OpenGL\Framebuffers\Framebuffer.h" />
     <ClInclude Include="src\platform\OpenGL\IndexBuffer.h" />
     <ClInclude Include="src\platform\OpenGL\VertexArray.h" />
-    <ClInclude Include="src\Scene3D.h" />
-    <ClInclude Include="src\scene\SceneGraph.h" />
-    <ClInclude Include="src\scene\SceneNode.h" />
+    <ClInclude Include="src\scene\Scene3D.h" />
+    <ClInclude Include="src\scene\Renderable3D.h" />
     <ClInclude Include="src\shaders\terrain.vert" />
     <ClInclude Include="src\terrain\Terrain.h" />
     <ClInclude Include="src\ui\DebugPane.h" />

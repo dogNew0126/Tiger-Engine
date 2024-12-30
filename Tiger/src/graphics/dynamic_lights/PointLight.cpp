@@ -2,7 +2,6 @@
 #include "PointLight.h"
 
 namespace tiger {
-	namespace graphics {
 
 		PointLight::PointLight(const glm::vec3& lightColour, const glm::vec3& pos)
 			: DynamicLight(lightColour), position(pos) {}
@@ -14,6 +13,4 @@ namespace tiger {
 				shader.setUniform3f(("pointLights[" + std::to_string(currentLightIndex) + "].position").c_str(), position);
 			}
 		}
-
-	}
 }

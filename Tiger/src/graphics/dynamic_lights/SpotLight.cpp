@@ -2,7 +2,6 @@
 #include "SpotLight.h"
 
 namespace tiger {
-	namespace graphics {
 
 		SpotLight::SpotLight(const glm::vec3& lightColour, const glm::vec3& pos, const glm::vec3& dir, float cutOffAngle, float outerCutOffAngle)
 			: DynamicLight(lightColour), position(pos), direction(dir), cutOff(cutOffAngle), outerCutOff(outerCutOffAngle) {}
@@ -19,5 +18,4 @@ namespace tiger {
 			}
 		}
 
-	}
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 namespace tiger {
-	namespace graphics {
 
 		class CubemapCamera {
 		public:
@@ -14,6 +13,4 @@ namespace tiger {
 		private:
 			glm::vec3 m_CenterPosition, m_Front, m_Up;
 		};
-
-	}
 }

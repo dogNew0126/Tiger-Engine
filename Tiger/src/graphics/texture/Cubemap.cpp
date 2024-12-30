@@ -2,7 +2,6 @@
 #include "Cubemap.h"
 
 namespace tiger {
-	namespace graphics {
 
 		Cubemap::Cubemap() : m_CubemapId(0) {}
 
@@ -39,5 +38,5 @@ namespace tiger {
 		void Cubemap::unbind() {
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
-	}
+
 }

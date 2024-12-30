@@ -11,27 +11,24 @@
 
 namespace tiger {
 
-	namespace graphics {
+	class Skybox {
 
-		class Skybox {
+	public:
+		Skybox(const std::vector<std::string>& filePaths, FPSCamera* camera);
+		void Draw();
 
-		public:
-			Skybox(const std::vector<std::string>& filePaths, FPSCamera* camera);
-			void Draw();
+		inline Cubemap* getSkyboxCubemap() { return m_SkyboxCubemap; }
 
-			inline graphics::Cubemap* getSkyboxCubemap() { return m_SkyboxCubemap; }
+	private:
+		FPSCamera* m_Camera;
+		Shader m_SkyboxShader;
+		GLCache* m_GLCache;
 
-		private:
-			FPSCamera* m_Camera;
-			Shader m_SkyboxShader;
-			GLCache* m_GLCache;
+		VertexArray m_SkyboxVAO;
+		IndexBuffer m_SkyboxIBO;
+		Buffer  m_SkyboxVBO;
+		Cubemap* m_SkyboxCubemap; // Cubemap texture
 
-			opengl::VertexArray m_SkyboxVAO;
-			opengl::IndexBuffer m_SkyboxIBO;
-			opengl::Buffer  m_SkyboxVBO;
-			graphics::Cubemap* m_SkyboxCubemap; // Cubemap texture
-
-		};
-	}
+	};
 
 }

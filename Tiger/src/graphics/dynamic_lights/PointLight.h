@@ -3,7 +3,6 @@
 #include "DynamicLight.h"
 
 namespace tiger {
-	namespace graphics {
 
 		struct PointLight : public DynamicLight {
 
@@ -13,5 +12,5 @@ namespace tiger {
 			virtual void setupUniforms(Shader& shader, int currentLightIndex) override;
 			glm::vec3 position;
 		};
-	}
+
 }

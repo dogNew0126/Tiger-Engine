@@ -12,30 +12,31 @@
 #include "utils/Time.h"
 #include "utils/loaders/TextureLoader.h"
 #include "terrain/Terrain.h"
-#include "Scene3D.h"
+#include "scene/Scene3D.h"
 #include "ui/RuntimePane.h"
 #include "ui/DebugPane.h"
+#include "input/InputManager.h"
 
 int main() {
 	// Prepare the engine
-	tiger::graphics::FPSCamera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
-	tiger::graphics::Window window("Tiger Engine", WINDOW_X_RESOLUTION, WINDOW_Y_RESOLUTION);
+	tiger::FPSCamera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+	tiger::Window window("Tiger Engine", WINDOW_X_RESOLUTION, WINDOW_Y_RESOLUTION);
 	tiger::Scene3D scene(&camera);
-	tiger::graphics::GLCache* glCache = tiger::graphics::GLCache::getInstance();
-	tiger::graphics::PostProcessor postProcessor(scene.getRenderer());
+	tiger::GLCache* glCache = tiger::GLCache::getInstance();
+	tiger::PostProcessor postProcessor(scene.getRenderer());
 
-	tiger::utils::TextureLoader::initializeDefaultTextures();
+	tiger::TextureLoader::initializeDefaultTextures();
 
 	// Prepare the UI
-	tiger::ui::RuntimePane runtimePane(glm::vec2(256.0f, 90.0f));
-	tiger::ui::DebugPane debugPane(glm::vec2(256.0f, 100.0f));
+	tiger::RuntimePane runtimePane(glm::vec2(256.0f, 90.0f));
+	tiger::DebugPane debugPane(glm::vec2(256.0f, 100.0f));
 
 	// Construct framebuffers
 	bool shouldMultisample = MSAA_SAMPLE_AMOUNT > 1.0 ? true : false;
-	tiger::opengl::RenderTarget framebuffer(window.getWidth(), window.getHeight());
+	tiger::Framebuffer framebuffer(window.getWidth(), window.getHeight());
 	framebuffer.addColorAttachment(shouldMultisample).addDepthStencilRBO(shouldMultisample).createFramebuffer();
 
-	tiger::opengl::RenderTarget shadowmap(SHADOWMAP_RESOLUTION_X, SHADOWMAP_RESOLUTION_Y);
+	tiger::Framebuffer shadowmap(SHADOWMAP_RESOLUTION_X, SHADOWMAP_RESOLUTION_Y);
 	shadowmap.addDepthAttachment(false).createFramebuffer();
 
 #if DEBUG_ENABLED
@@ -94,7 +95,7 @@ int main() {
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-		window.resetScroll();
+
 		window.update();
 	}
 
