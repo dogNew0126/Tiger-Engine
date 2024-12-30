@@ -13,7 +13,7 @@ namespace tiger {
 		InputManager();
 		~InputManager();
 
-		void Update();
+		void update();
 		static bool isKeyPressed(unsigned int keycode);
 		static float getKeyPressure(unsigned int keycode);
 		static bool isMouseButtonPressed(unsigned int code);

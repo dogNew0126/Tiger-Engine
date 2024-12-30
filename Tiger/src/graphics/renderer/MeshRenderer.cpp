@@ -13,11 +13,11 @@ namespace tiger {
 		m_GLCache->setFaceCull(true);
 	}
 
-	void MeshRenderer::submitOpaque(Renderable3D* renderable) {
+	void MeshRenderer::submitOpaque(RenderableModel* renderable) {
 		m_OpaqueRenderQueue.push_back(renderable);
 	}
 
-	void MeshRenderer::submitTransparent(Renderable3D* renderable) {
+	void MeshRenderer::submitTransparent(RenderableModel* renderable) {
 		m_TransparentRenderQueue.push_back(renderable);
 	}
 
@@ -33,7 +33,7 @@ namespace tiger {
 		// Render opaque objects
 		while (!m_OpaqueRenderQueue.empty()) {
 
-			Renderable3D* current = m_OpaqueRenderQueue.front();
+			RenderableModel* current = m_OpaqueRenderQueue.front();
 
 			setupModelMatrix(current, shader, pass);
 			current->draw(shader, pass);
@@ -52,7 +52,7 @@ namespace tiger {
 
 
 		std::sort(m_TransparentRenderQueue.begin(), m_TransparentRenderQueue.end(),
-			[this](Renderable3D* a, Renderable3D* b) -> bool
+			[this](RenderableModel* a, RenderableModel* b) -> bool
 		{
 			return glm::length2(m_Camera->getPosition() - a->getPosition()) > glm::length2(m_Camera->getPosition() - b->getPosition());
 		});
@@ -60,7 +60,7 @@ namespace tiger {
 		// Sort then render transparent objects
 		while (!m_TransparentRenderQueue.empty()) {
 
-			Renderable3D* current = m_TransparentRenderQueue.front();
+			RenderableModel* current = m_TransparentRenderQueue.front();
 
 			// Enable blending (note: You will still need to sort from back to front when rendering)
 			m_GLCache->setBlend(true);
@@ -74,7 +74,7 @@ namespace tiger {
 	}
 
 	// TODO: Currently only support two levels in a hierarchical scene graph
-	void MeshRenderer::setupModelMatrix(Renderable3D* renderable, Shader& shader, RenderPass pass) {
+	void MeshRenderer::setupModelMatrix(RenderableModel* renderable, Shader& shader, RenderPass pass) {
 		glm::mat4 model(1);
 		glm::mat4 translate = glm::translate(glm::mat4(1.0f), renderable->getPosition());
 		glm::mat4 rotate = glm::toMat4(renderable->getOrientation());

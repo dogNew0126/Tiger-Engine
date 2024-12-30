@@ -8,7 +8,7 @@ namespace tiger {
 		~Framebuffer();
 
 		void createFramebuffer();
-		Framebuffer& addColorAttachment(bool multisampledBuffer);
+		Framebuffer& addTexture2DColorAttachment(bool multisampledBuffer);
 		Framebuffer& addDepthStencilRBO(bool multisampledBuffer);
 		Framebuffer& addDepthAttachment(bool multisampledBuffer);
 
@@ -16,6 +16,9 @@ namespace tiger {
 		void unbind();
 
 		void clear();
+
+		// Assumes framebuffer is bound
+		void setColorAttachment(unsigned int target, unsigned int targetType);
 
 		inline unsigned int getWidth() { return m_Width; }
 		inline unsigned int getHeight() { return m_Height; }

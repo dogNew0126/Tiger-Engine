@@ -173,7 +173,7 @@ namespace tiger {
 			std::cout << "OpenGL Error: " << error << std::endl;
 		}
 		// Input handling
-		g_InputManager.Update();
+		g_InputManager.update();
 
 		glfwSwapBuffers(m_Window);
 		glfwPollEvents();

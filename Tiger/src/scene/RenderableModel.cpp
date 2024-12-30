@@ -1,26 +1,26 @@
 #include "pch.h"
-#include "Renderable3D.h"
+#include "RenderableModel.h"
 
 namespace tiger {
 
-	Renderable3D::Renderable3D(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotationAxis, float radianRotation, Model* model, Renderable3D* parent, bool transparent)
+	RenderableModel::RenderableModel(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotationAxis, float radianRotation, Model* model, RenderableModel* parent, bool transparent)
 		: m_Position(position), m_Scale(scale), m_Orientation(glm::angleAxis(radianRotation, rotationAxis)), m_Model(model), m_Parent(parent), m_Transparent(transparent)
 	{
 	}
 
-	Renderable3D::~Renderable3D() {
+	RenderableModel::~RenderableModel() {
 		// Recursive delete on children
 		for (int i = 0; i < m_Children.size(); i++) {
 			delete m_Children[i];
 		}
 	}
 
-	void Renderable3D::draw(Shader& shader, RenderPass pass) const {
+	void RenderableModel::draw(Shader& shader, RenderPass pass) const {
 		if (m_Model)
 			m_Model->Draw(shader, pass);
 	}
 
-	void Renderable3D::addChild(Renderable3D* child) {
+	void RenderableModel::addChild(RenderableModel* child) {
 		if (child == this)
 			return;
 

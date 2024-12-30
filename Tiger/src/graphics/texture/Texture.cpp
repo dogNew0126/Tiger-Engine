@@ -4,10 +4,10 @@
 namespace tiger {
 
 	Texture::Texture() : m_TextureTarget(0) {}
-	Texture::Texture(TextureSettings settings) : m_TextureTarget(0), m_TextureSettings(settings) {}
+	Texture::Texture(TextureSettings& settings) : m_TextureTarget(0), m_TextureSettings(settings) {}
 
 	Texture::~Texture() {
-			
+		glDeleteTextures(1, &m_TextureId);
 	}
 
 	void Texture::generate2DTexture(unsigned int width, unsigned int height, GLenum textureFormat, GLenum dataFormat, const void* data) {

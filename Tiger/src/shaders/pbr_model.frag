@@ -72,6 +72,7 @@ float CalculateShadow(vec3 normal, vec3 fragToLight);
 void main() {
 
 	vec3 albedo = texture(material.texture_albedo, TexCoords).rgb;
+	float albedoAlpha = texture(material.texture_albedo, TexCoords).w;
 	vec3 normal = texture(material.texture_normal, TexCoords).rgb;
 	float metallic = texture(material.texture_metallic, TexCoords).r;
 	float roughness = max(texture(material.texture_roughness, TexCoords).r, 0.04);

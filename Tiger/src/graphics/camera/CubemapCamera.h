@@ -4,6 +4,7 @@ namespace tiger {
 
 		class CubemapCamera {
 		public:
+			CubemapCamera();
 			CubemapCamera(glm::vec3& centerPosition);
 
 			void switchCameraToFace(int cubeFaceIndex);
