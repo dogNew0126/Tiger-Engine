@@ -40,7 +40,6 @@ namespace tiger {
 			ShadowmapPassOutput shadowpassOutput = shadowPass.generateShadowmaps(&m_CubemapCamera);
 
 			// Light pass
-			iblProbe->getIrradianceMap()->bind();
 			lightingFramebuffer.bind();
 			lightingFramebuffer.setColorAttachment(iblProbe->getIrradianceMap()->getCubemapID(), GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
 			lightingPass.executeRenderPass(shadowpassOutput, &m_CubemapCamera);

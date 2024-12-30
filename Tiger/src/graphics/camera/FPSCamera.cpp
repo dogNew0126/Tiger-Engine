@@ -81,6 +81,9 @@ namespace tiger {
 
 		void FPSCamera::processMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch = true)
 		{
+			// Make sure the user isn't interacting with the UI
+			if (!Window::getHideCursor())
+				return;
 			xOffset *= m_MouseSensitivity;
 			yOffset *= m_MouseSensitivity;
 			m_Yaw += xOffset;

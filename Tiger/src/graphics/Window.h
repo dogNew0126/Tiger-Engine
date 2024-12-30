@@ -13,8 +13,8 @@ namespace tiger {
 	private:
 		const char* m_Title;
 		GLFWwindow* m_Window;
-		bool m_HideCursor;
 
+		static bool s_HideCursor;
 		static int s_Width, s_Height;
 
 	public:
@@ -26,6 +26,7 @@ namespace tiger {
 		static void clear();
 		bool closed() const;
 
+		static inline bool getHideCursor() { return s_HideCursor; }
 		static inline int getWidth() { return s_Width; }
 		static inline int getHeight() { return s_Height; }
 

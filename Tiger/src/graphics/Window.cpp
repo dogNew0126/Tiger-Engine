@@ -3,6 +3,7 @@
 
 namespace tiger {
 
+	bool Window::s_HideCursor;
 	int Window::s_Width, Window::s_Height;
 
 	Window::Window(const char* title, int width, int height) 
@@ -10,7 +11,7 @@ namespace tiger {
 	{
 		s_Width = width;
 		s_Height = height;
-		m_HideCursor = true;
+		s_HideCursor = true;
 
 		if (!init()) {
 			Logger::getInstance().error("logged_files/window_creation.txt", "Window Initialization", "Could not initialize window class");
@@ -63,7 +64,7 @@ namespace tiger {
 		}
 
 		// Setup the mouse settings
-		if (m_HideCursor)
+		if (s_HideCursor)
 			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		double currMouseX, currMouseY;
@@ -97,8 +98,8 @@ namespace tiger {
 			ImGui_ImplGlfw_KeyCallback(window, key, scancode, action, mods);
 #if DEBUG_ENABLED
 			if (key == GLFW_KEY_P && action == GLFW_RELEASE) {
-				win->m_HideCursor = !win->m_HideCursor;
-				GLenum cursorOption = win->m_HideCursor ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL;
+				win->s_HideCursor = !win->s_HideCursor;
+				GLenum cursorOption = win->s_HideCursor ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL;
 				glfwSetInputMode(win->m_Window, GLFW_CURSOR, cursorOption);
 			}
 #endif
