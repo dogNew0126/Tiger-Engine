@@ -1,6 +1,7 @@
 #pragma once
 
 #include "utils/Singleton.h"
+#include "graphics/Shader.h"
 
 namespace tiger {
 
@@ -26,6 +27,7 @@ namespace tiger {
 
 		void setBlendFunc(GLenum src, GLenum dst);
 		void setCullFace(GLenum faceToCull);
+		void switchShader(Shader& shader);
 		void switchShader(unsigned int shaderID);
 
 		void setMultisample(bool choice);

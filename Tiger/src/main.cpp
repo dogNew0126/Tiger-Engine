@@ -6,7 +6,7 @@
 #include "graphics/mesh/Model.h"
 #include "graphics/mesh/common/Quad.h"
 #include "graphics/renderer/GLCache.h"
-#include "graphics/renderer/PostProcessor.h"
+#include "graphics/renderer/MasterRenderer.h"
 #include "platform/OpenGL/Framebuffers/Framebuffer.h"
 #include "utils/Timer.h"
 #include "utils/Time.h"
@@ -19,25 +19,15 @@
 
 int main() {
 	// Prepare the engine
-	tiger::FPSCamera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 	tiger::Window window("Tiger Engine", WINDOW_X_RESOLUTION, WINDOW_Y_RESOLUTION);
-	tiger::Scene3D scene(&camera);
-	tiger::GLCache* glCache = tiger::GLCache::getInstance();
-	tiger::PostProcessor postProcessor(scene.getRenderer());
+	tiger::Scene3D scene(&window);
+	tiger::MasterRenderer renderer(&scene);
 
 	tiger::TextureLoader::initializeDefaultTextures();
 
 	// Prepare the UI
 	tiger::RuntimePane runtimePane(glm::vec2(256.0f, 90.0f));
 	tiger::DebugPane debugPane(glm::vec2(256.0f, 100.0f));
-
-	// Construct framebuffers
-	bool shouldMultisample = MSAA_SAMPLE_AMOUNT > 1.0 ? true : false;
-	tiger::Framebuffer framebuffer(window.getWidth(), window.getHeight());
-	framebuffer.addTexture2DColorAttachment(shouldMultisample).addDepthStencilRBO(shouldMultisample).createFramebuffer();
-
-	tiger::Framebuffer shadowmap(SHADOWMAP_RESOLUTION_X, SHADOWMAP_RESOLUTION_Y);
-	shadowmap.addDepthAttachment(false).createFramebuffer();
 
 #if DEBUG_ENABLED
 	tiger::Timer timer;
@@ -62,33 +52,9 @@ int main() {
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		// Shadowmap Pass
-#if DEBUG_ENABLED
-		glFinish();
-		timer.reset();
-#endif
-		glViewport(0, 0, shadowmap.getWidth(), shadowmap.getHeight());
-		shadowmap.bind();
-		shadowmap.clear();
-		scene.shadowmapPass();
-#if DEBUG_ENABLED
-		glFinish();
-		runtimePane.setShadowmapTimer(timer.elapsed());
-#endif
-
-		// Camera Update
-		camera.processInput(deltaTime.getDeltaTime());
-
-		// Draw the scene to our custom multisampled framebuffer
-		glViewport(0, 0, framebuffer.getWidth(), framebuffer.getHeight());
-		framebuffer.bind();
-		framebuffer.clear();
-
 		scene.onUpdate(deltaTime.getDeltaTime());
-		scene.onRender(shadowmap.getDepthTexture());
+		renderer.render();
 
-		// Peform post processing
-		postProcessor.postLightingPostProcess(&framebuffer);
 		// Display panes
 		runtimePane.render();
 		debugPane.render();

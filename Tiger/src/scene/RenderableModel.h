@@ -1,20 +1,17 @@
 #pragma once
 
 #include "graphics/mesh/Model.h"
-#include "graphics/renderer/RenderPass.h"
+#include "graphics/renderer/renderpass/RenderPasstype.h"
 
 namespace tiger {
 
-	// TODO: RenderableModel should hold a Object, not a model. Abstract model and its properties into a Model that has the properties that we want like transparency object or something
-	//		 Then we can just have some sort of overridable draw method for each and each can have their own properties
-	//		 Of course general information for arranging the scene nodes will be common info like transparency etc.
 	class RenderableModel {
 	public:
-		RenderableModel(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotationAxis, float radianRotation, Model* model, RenderableModel* parent, bool transparent = false);
+		RenderableModel(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotationAxis, float radianRotation, Model* model, RenderableModel* parent, bool isStatic = false, bool isTransparent = false);
 		~RenderableModel();
 
 		// Assumes shader is already bound by the renderer
-		void draw(Shader& shader, RenderPass pass) const;
+		void draw(Shader& shader, RenderPassType pass) const;
 
 		void addChild(RenderableModel* child);
 

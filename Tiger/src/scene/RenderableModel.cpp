@@ -3,8 +3,8 @@
 
 namespace tiger {
 
-	RenderableModel::RenderableModel(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotationAxis, float radianRotation, Model* model, RenderableModel* parent, bool transparent)
-		: m_Position(position), m_Scale(scale), m_Orientation(glm::angleAxis(radianRotation, rotationAxis)), m_Model(model), m_Parent(parent), m_Transparent(transparent)
+	RenderableModel::RenderableModel(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotationAxis, float radianRotation, Model* model, RenderableModel* parent, bool isStatic, bool isTransparent)
+		: m_Position(position), m_Scale(scale), m_Orientation(glm::angleAxis(radianRotation, rotationAxis)), m_Model(model), m_Parent(parent), m_Transparent(isTransparent)
 	{
 	}
 
@@ -15,7 +15,7 @@ namespace tiger {
 		}
 	}
 
-	void RenderableModel::draw(Shader& shader, RenderPass pass) const {
+	void RenderableModel::draw(Shader& shader, RenderPassType pass) const {
 		if (m_Model)
 			m_Model->Draw(shader, pass);
 	}
