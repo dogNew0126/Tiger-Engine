@@ -159,8 +159,9 @@
     <ClCompile Include="src\graphics\mesh\Mesh.cpp" />
     <ClCompile Include="src\graphics\mesh\Model.cpp" />
     <ClCompile Include="src\graphics\renderer\GLCache.cpp" />
-    <ClCompile Include="src\graphics\renderer\MaterRenderer.cpp" />
+    <ClCompile Include="src\graphics\renderer\MasterRenderer.cpp" />
     <ClCompile Include="src\graphics\renderer\ModelRenderer.cpp" />
+    <ClCompile Include="src\graphics\renderer\renderpass\EnvironmentProbePass.cpp" />
     <ClCompile Include="src\graphics\renderer\renderpass\LightingPass.cpp" />
     <ClCompile Include="src\graphics\renderer\renderpass\PostProcessPass.cpp" />
     <ClCompile Include="src\graphics\renderer\renderpass\RenderPass.cpp" />
@@ -188,6 +189,7 @@
     <ClCompile Include="src\ui\Pane.cpp" />
     <ClCompile Include="src\ui\RuntimePane.cpp" />
     <ClCompile Include="src\utils\FireUtils.cpp" />
+    <ClCompile Include="src\utils\loaders\ShaderLoader.cpp" />
     <ClCompile Include="src\utils\loaders\TextureLoader.cpp" />
     <ClCompile Include="src\utils\Logger.cpp" />
     <ClCompile Include="src\utils\Time.cpp" />
@@ -225,6 +227,7 @@
     <ClInclude Include="src\Defs.h" />
     <ClInclude Include="src\graphics\camera\FPSCamera.h" />
     <ClInclude Include="src\graphics\camera\CubemapCamera.h" />
+    <ClInclude Include="src\graphics\camera\ICamera.h" />
     <ClInclude Include="src\graphics\dynamic_lights\DirectionalLight.h" />
     <ClInclude Include="src\graphics\dynamic_lights\DynamicLight.h" />
     <ClInclude Include="src\graphics\dynamic_lights\DynamicLightManager.h" />
@@ -241,6 +244,7 @@
     <ClInclude Include="src\graphics\renderer\GLCache.h" />
     <ClInclude Include="src\graphics\renderer\MasterRenderer.h" />
     <ClInclude Include="src\graphics\renderer\ModelRenderer.h" />
+    <ClInclude Include="src\graphics\renderer\renderpass\EnvironmentProbePass.h" />
     <ClInclude Include="src\graphics\renderer\renderpass\LightingPass.h" />
     <ClInclude Include="src\graphics\renderer\renderpass\PostProcessPass.h" />
     <ClInclude Include="src\graphics\renderer\renderpass\RenderPass.h" />
@@ -266,6 +270,7 @@
     <ClInclude Include="src\ui\Pane.h" />
     <ClInclude Include="src\ui\RuntimePane.h" />
     <ClInclude Include="src\utils\FileUtils.h" />
+    <ClInclude Include="src\utils\loaders\ShaderLoader.h" />
     <ClInclude Include="src\utils\loaders\TextureLoader.h" />
     <ClInclude Include="src\utils\Logger.h" />
     <ClInclude Include="src\utils\Singleton.h" />

@@ -9,7 +9,7 @@ namespace tiger {
 
 			DynamicLight(const glm::vec3& lightColour);
 
-			virtual void setupUniforms(Shader& shader, int currentLightIndex) = 0;
+			virtual void setupUniforms(Shader* shader, int currentLightIndex) = 0;
 
 			glm::vec3 lightColour;
 			bool isActive;

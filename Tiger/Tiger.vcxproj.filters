@@ -135,9 +135,6 @@
     <ClCompile Include="src\graphics\ibl\EnvironmentProbe.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\ibl\EnvironmentProbeManager.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\scene\RenderableModel.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -171,7 +168,16 @@
     <ClCompile Include="src\graphics\renderer\renderpass\ShadowmapPass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\renderer\MaterRenderer.cpp">
+    <ClCompile Include="src\graphics\renderer\MasterRenderer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\renderer\renderpass\EnvironmentProbePass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\loaders\ShaderLoader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ibl\EnvironmentProbeManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -308,9 +314,6 @@
     <ClInclude Include="src\graphics\ibl\EnvironmentProbe.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\ibl\EnvironmentProbeManager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\scene\RenderableModel.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -348,6 +351,18 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\renderer\MasterRenderer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderer\renderpass\EnvironmentProbePass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\camera\ICamera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\loaders\ShaderLoader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\ibl\EnvironmentProbeManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

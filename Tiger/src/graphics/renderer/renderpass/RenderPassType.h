@@ -7,13 +7,14 @@ namespace tiger {
 		enum RenderPassType {
 			ShadowmapPassType,
 			LightingPassType,
-			PostProcessPassType
+			PostProcessPassType,
+			EnvironmentProbePassType
 		};
 
 		struct ShadowmapPassOutput
 		{
 			glm::mat4 directionalLightViewProjMatrix;
-			unsigned int shadowmapTexture;
+			Framebuffer* shadowmapFramebuffer;
 		};
 
 		struct LightingPassOutput

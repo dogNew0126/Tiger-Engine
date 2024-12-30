@@ -40,11 +40,11 @@ namespace tiger {
 		}
 	}
 
-	glm::mat4 CubemapCamera::getViewMatrix() {
+	glm::mat4 CubemapCamera::getViewMatrix() const {
 		return glm::lookAt(m_CenterPosition, m_CenterPosition + m_Front, m_Up);
 	}
 
-	glm::mat4 CubemapCamera::getProjectionMatrix() {
+	glm::mat4 CubemapCamera::getProjectionMatrix() const {
 		return glm::perspective(glm::radians(90.0f), 1.0f, 0.5f, FAR_PLANE);
 	}
 

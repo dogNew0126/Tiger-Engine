@@ -26,8 +26,11 @@ namespace tiger {
 		// Pre-generation controls only
 		inline void setCubemapSettings(CubemapSettings settings) { m_CubemapSettings = settings; }
 
+		// Getters
+		unsigned int getCubemapID() { return m_CubemapID; }
+
 	private:
-		unsigned int m_CubemapId;
+		unsigned int m_CubemapID;
 		unsigned int m_FaceWidth, m_FaceHeight;
 
 		GLenum m_TextureFormat;

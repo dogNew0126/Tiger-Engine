@@ -14,14 +14,14 @@ namespace tiger {
 	class Skybox {
 
 	public:
-		Skybox(const std::vector<std::string>& filePaths, FPSCamera* camera);
-		void Draw();
+		Skybox(const std::vector<std::string>& filePaths);
+		void Draw(ICamera* camera);
 
 		inline Cubemap* getSkyboxCubemap() { return m_SkyboxCubemap; }
 
 	private:
-		FPSCamera* m_Camera;
-		Shader m_SkyboxShader;
+
+		Shader* m_SkyboxShader;
 		GLCache* m_GLCache;
 
 		VertexArray m_SkyboxVAO;

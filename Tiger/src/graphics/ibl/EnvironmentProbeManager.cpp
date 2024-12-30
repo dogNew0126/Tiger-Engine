@@ -3,12 +3,42 @@
 
 namespace tiger {
 
-	EnvironmentProbeManager::EnvironmentProbeManager() : m_CubemapGenerationFramebuffer(DEFAULT_IBL_RESOLUTION, DEFAULT_IBL_RESOLUTION) {
+	EnvironmentProbeManager::EnvironmentProbeManager(EnvironmentProbeBlendSetting sceneProbeBlendSetting) : m_ProbeBlendSetting(sceneProbeBlendSetting) {
+
 	}
 
-	void EnvironmentProbeManager::GenerateProbe(glm::vec3& worldPosition, glm::vec2& probeResolution, bool isStaticProbe) {
-		EnvironmentProbe* iblProbe = new EnvironmentProbe(worldPosition, probeResolution, isStaticProbe);
-		m_CubemapGenerationFramebuffer = Framebuffer((unsigned int)probeResolution.x, (unsigned int)probeResolution.y);
-		m_CubemapGenerationFramebuffer.addDepthStencilRBO(false);
+	EnvironmentProbeManager::~EnvironmentProbeManager() {
+		for (auto iter = m_Probes.begin(); iter != m_Probes.end(); ++iter) {
+			delete (*iter);
+		}
+		m_Probes.clear();
 	}
+
+	void EnvironmentProbeManager::init(Skybox* skybox) {
+		m_Skybox = skybox;
+	}
+
+	void EnvironmentProbeManager::addProbe(EnvironmentProbe* probe) {
+		m_Probes.push_back(probe);
+	}
+
+	void EnvironmentProbeManager::bindProbe(const glm::vec3& renderPosition, Shader* shader) {
+		// If simple blending is enabled just use the closest probe
+		if (m_ProbeBlendSetting == PROBES_SIMPLE) {
+			if (m_Probes.size() > 0) {
+				m_Probes[0]->bind(shader);
+			}
+			else {
+				// Fallback to skybox
+				shader->setUniform1i("irradianceMap", 1);
+				m_Skybox->getSkyboxCubemap()->bind(1);
+			}
+		}
+		// If probes are disabled just use the skybox
+		else if (m_ProbeBlendSetting == PROBES_DISABLED) {
+			shader->setUniform1i("irradianceMap", 1);
+			m_Skybox->getSkyboxCubemap()->bind(1);
+		}
+	}
+
 }

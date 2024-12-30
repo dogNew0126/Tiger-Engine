@@ -65,9 +65,15 @@ namespace tiger {
 			int length;
 			glGetShaderiv(fragment, GL_INFO_LOG_LENGTH, &length);
 			std::vector<char> error(length);
-			glGetShaderInfoLog(fragment, length, &length, &error[0]);
-			std::cout << "Failed to compile fragment shader!" << std::endl << &error[0] << std::endl;
-			Logger::getInstance().error("logged_files/shader_creation.txt", "shader initialization", "failed to compile fragment shader " + error[0]);
+
+			if (length > 0) {
+				glGetShaderInfoLog(fragment, length, &length, &error[0]);
+				std::cout << "Failed to Compile Fragment Shader" << std::endl << &error[0] << std::endl;
+				Logger::getInstance().error("logged_files/shader_creation.txt", "shader initialization", "failed to compile fragment shader " + error[0]);
+			}
+			else {
+				Logger::getInstance().error("logged_files/shader_creation.txt", "shader initialization", "failed to compile fragment shader");
+			}
 
 			glDeleteShader(fragment);
 			return 0;

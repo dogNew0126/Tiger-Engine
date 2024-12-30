@@ -107,10 +107,10 @@ namespace tiger {
 		}
 	}
 
-	void GLCache::switchShader(Shader& shader) {
-		if (m_ActiveShaderID != shader.getShaderID()) {
-			m_ActiveShaderID = shader.getShaderID();
-			shader.enable();
+	void GLCache::switchShader(Shader* shader) {
+		if (m_ActiveShaderID != shader->getShaderID()) {
+			m_ActiveShaderID = shader->getShaderID();
+			shader->enable();
 		}
 	}
 

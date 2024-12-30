@@ -29,6 +29,7 @@ namespace tiger {
 		inline ModelRenderer* getModelRenderer() { return &m_ModelRenderer; }
 		inline Terrain* getTerrain() { return &m_Terrain; }
 		inline DynamicLightManager* getDynamicLightManager() { return &m_DynamicLightManager; }
+		inline EnvironmentProbeManager* getProbeManager() { return &m_ProbeManager; }
 		inline FPSCamera* getCamera() { return &m_SceneCamera; }
 		inline Skybox* getSkybox() { return m_Skybox; }
 
@@ -43,8 +44,12 @@ namespace tiger {
 		ModelRenderer m_ModelRenderer;
 		Terrain m_Terrain;
 		DynamicLightManager m_DynamicLightManager;
+		std::vector<EnvironmentProbe*> m_Probes;
 		EnvironmentProbeManager m_ProbeManager;
 		std::vector<RenderableModel*> m_RenderableModels;
+
+		// Scene parameters
+		EnvironmentProbeBlendSetting m_SceneProbeBlendSetting = PROBES_SIMPLE;
 
 	};
 }

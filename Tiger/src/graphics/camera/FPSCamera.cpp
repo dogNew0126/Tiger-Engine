@@ -20,12 +20,11 @@ namespace tiger {
 			DebugPane::bindCameraPositionValue(&m_Position);
 		}
 
-		glm::mat4 FPSCamera::getViewMatrix() const
-		{
+		glm::mat4 FPSCamera::getViewMatrix() const {
 			return glm::lookAt(m_Position, m_Position + m_Front, m_Up);
 		}
 
-		glm::mat4 FPSCamera::getProjectionMatrix() {
+		glm::mat4 FPSCamera::getProjectionMatrix() const {
 			return glm::perspective(glm::radians(m_FOV), (float)Window::getWidth() / (float)Window::getHeight(), NEAR_PLANE, FAR_PLANE);
 		}
 

@@ -43,6 +43,7 @@ out vec4 color;
 uniform vec3 viewPos;
 
 // IBL
+uniform bool computeIBL;
 uniform samplerCube irradianceMap;
 uniform samplerCube prefilterMap;
 uniform sampler2D brdfLUT;
@@ -93,14 +94,17 @@ void main() {
 	directLightIrradiance += CalculateSpotLightRadiance(albedo, normal, metallic, roughness, fragToView, baseReflectivity);
 
 	// Calcualte ambient IBL for both diffuse and specular
-	vec3 specularRatio = FresnelSchlick(max(dot(normal, fragToView), 0.0), baseReflectivity);
-	vec3 diffuseRatio = vec3(1.0) - specularRatio;
+	vec3 ambient = vec3(0.03) * albedo * ao;
 
-	diffuseRatio *= 1.0 - metallic;
-
-	vec3 indirectIrradiance = texture(irradianceMap, normal).rgb;
-	vec3 indirectDiffuse = indirectIrradiance * albedo;
-	vec3 ambient = (diffuseRatio * indirectDiffuse) * ao;
+	if (computeIBL) {
+		vec3 specularRatio = FresnelSchlick(max(dot(normal, fragToView), 0.0), baseReflectivity);
+		vec3 diffuseRatio = vec3(1.0) - specularRatio;
+		diffuseRatio *= 1.0 - metallic;
+		vec3 indirectIrradiance = texture(irradianceMap, normal).rgb;
+		vec3 indirectDiffuse = indirectIrradiance * albedo;
+		vec3 indirectSpecular = texture(irradianceMap, reflect(-fragToView, normal)).rgb;
+		ambient = (diffuseRatio * indirectDiffuse + specularRatio * indirectSpecular) * ao;
+	}
 
 	color = vec4(ambient + directLightIrradiance, 1.0);
 
