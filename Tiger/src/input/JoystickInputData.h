@@ -26,8 +26,9 @@ namespace tiger {
 
 	class JoystickInputData
 	{
+		friend class JoystickManager;
+
 	public:
-		unsigned char m_ButtonStates[MAX_JOYSTICK_BUTTONS];
 
 		JoystickInputData(char id = 0);
 		~JoystickInputData();
@@ -44,6 +45,8 @@ namespace tiger {
 		void update();
 
 	private:
+		unsigned char m_ButtonStates[MAX_JOYSTICK_BUTTONS];
+
 		bool m_Connected;
 		char m_Id;
 		int m_NumButtons;

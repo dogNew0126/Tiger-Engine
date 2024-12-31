@@ -4,65 +4,53 @@
 
 namespace tiger {
 
-		enum Camera_Movement {
-			FORWARD,
-			BACKWARD,
-			LEFT,
-			RIGHT,
-			UPWARDS,
-			DOWNWARDS
-		};
+	enum Camera_Movement {
+		FORWARD,
+		BACKWARD,
+		LEFT,
+		RIGHT,
+		UPWARDS,
+		DOWNWARDS
+	};
 
-		// Default Camera Values
-		const float YAW = -90.0f;
-		const float PITCH = 0.0f;
-		const float SPEED = 40.0f;
-		const float SENSITIVITY = 0.10f;
-		const float FOV = 80.0f;
+	class FPSCamera : public ICamera {
 
-		class FPSCamera : public ICamera{
-		private:
-			// Camera Attributes
-			glm::vec3 m_Position, m_Front, m_Up, m_Right, m_WorldUp;
+#define FPSCAMERA_MAX_SPEED 40.0f
+#define FPSCAMERA_ROTATION_SENSITIVITY 0.1f
+#define FPSCAMERA_MAX_FOV 100.0f
 
-			// Euler Angles
-			float m_Yaw;
-			float m_Pitch;
+	public:
+		FPSCamera(const glm::vec3& position, const glm::vec3& up, float yaw, float pitch);
+		FPSCamera(float xPos, float yPos, float zPos, float xUp, float yUp, float zUp, float yaw, float pitch);
 
-			// Camera Options
-			float m_MovementSpeed;
-			float m_MouseSensitivity;
-			float m_FOV;
+		virtual glm::mat4 getViewMatrix() const override;
+		virtual glm::mat4 getProjectionMatrix() const override;
 
-		public:
-			FPSCamera(glm::vec3 position, glm::vec3 up, float yaw, float pitch);
+		void processInput(float deltaTime);
 
-			FPSCamera(float xPos, float yPos, float zPos, float xUp, float yUp, float zUp, float yaw, float pitch);
+		// Getters
+		inline float getYaw() const { return m_CurrentYaw; }
+		inline float getPitch() const { return m_CurrentPitch; }
+		inline float getMovementSpeed() const { return m_CurrentMovementSpeed; }
+		inline float getFOV() const { return m_CurrentFOV; }
+		inline virtual const glm::vec3& getPosition() const override { return m_Position; }
+		inline virtual const glm::vec3& getFront() const { return m_Front; }
+		inline virtual const glm::vec3& getUp() const { return m_Up; }
+	private:
+		void updateCameraVectors();
+		void processCameraMovement(glm::vec3& direction, float deltaTime);
+		void processCameraRotation(double xOffset, double yOffset, GLboolean constrainPitch);
+		void processCameraFOV(double yOffset);
+	private:
+		// Camera Attributes
+		glm::vec3 m_Position, m_Front, m_Up, m_Right, m_WorldUp;
 
-			virtual ~FPSCamera() = default;
+		// Euler Angles
+		float m_CurrentYaw;
+		float m_CurrentPitch;
 
-			virtual glm::mat4 getViewMatrix() const override;
-			virtual glm::mat4 getProjectionMatrix() const override;
-
-			void processInput(float deltaTime);
-			// Getters
-			inline float getYaw() const { return m_Yaw; }
-			inline float getPitch() const { return m_Pitch; }
-			inline float getMovementSpeed() const { return m_MovementSpeed; }
-			inline float getMouseSensitivity() const { return m_MouseSensitivity; }
-			inline float getFOV() const { return m_FOV; }
-			inline virtual const glm::vec3& getPosition() const override { return m_Position; }
-			inline virtual const glm::vec3& getFront() const { return m_Front; }
-			inline virtual const glm::vec3& getUp() const { return m_Up; }
-
-		private:
-			void updateCameraVectors();
-
-			void processKeyboard(Camera_Movement direction, float deltaTime);
-
-			void processMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch);
-			
-			void processMouseScroll(float yOffset);
-		};
+		float m_CurrentMovementSpeed;
+		float m_CurrentFOV;
+	};
 
 }
