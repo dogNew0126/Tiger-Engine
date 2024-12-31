@@ -7,7 +7,7 @@
 
 namespace tiger {
 
-	static InputManager g_InputManager;
+	static InputManager s_InputManager;
 
 	class Window {
 	private:

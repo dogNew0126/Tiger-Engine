@@ -14,9 +14,12 @@ namespace tiger {
 		~InputManager();
 
 		void update();
+
 		static bool isKeyPressed(unsigned int keycode);
 		static float getKeyPressure(unsigned int keycode);
 		static bool isMouseButtonPressed(unsigned int code);
+		static bool GetButton(int keyCode);
+		static bool GetButtonDown(int keyCode);
 
 		void keyCallback(int key, int scancode, int action, int mods);
 		void mouseButtonCallback(int button, int action, int mods);
@@ -32,12 +35,13 @@ namespace tiger {
 		static inline double getScrollX() { return s_ScrollX; }
 		static inline double getScrollY() { return s_ScrollY; }
 		static inline void getMousePosition(double& x, double& y) { x = s_MouseX; y = s_MouseY; }
+
 		static inline void setMouseX(double value) { s_MouseX = value; }
 		static inline void setMouseY(double value) { s_MouseY = value; }
 		static inline void setMousePos(double xPos, double yPos) { s_MouseX = xPos, s_MouseY = yPos; }
-
 	private:
 		JoystickManager m_JoystickManager;
+
 		static bool s_Keys[MAX_KEYS];
 		static float s_KeyPressure[MAX_KEYS];
 		static bool s_Buttons[MAX_BUTTONS];

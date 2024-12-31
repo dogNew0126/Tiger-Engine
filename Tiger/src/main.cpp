@@ -14,6 +14,7 @@ int main() {
 	tiger::TextureLoader::initializeDefaultTextures();
 	tiger::Scene3D scene(&window);
 	tiger::MasterRenderer renderer(&scene);
+	//tiger::InputManager manager;
 
 
 	// Prepare the UI
@@ -41,6 +42,8 @@ int main() {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
+
+		//manager.update();
 
 		scene.onUpdate(deltaTime.getDeltaTime());
 		renderer.render();

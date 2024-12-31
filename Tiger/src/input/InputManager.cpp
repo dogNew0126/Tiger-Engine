@@ -29,7 +29,7 @@ namespace tiger {
 	}
 
 	bool InputManager::isKeyPressed(unsigned int keycode) {
-		if (keycode >= MAX_KEYS) {
+		if (keycode < 0 || keycode >= MAX_KEYS) {
 			Logger::getInstance().error("logged_files/input_errors.txt", "Input Check", "Key checked is out of bounds (ie not supported)");
 			return false;
 		}
@@ -39,25 +39,22 @@ namespace tiger {
 	}
 
 	float InputManager::getKeyPressure(unsigned int keycode) {
-		if (keycode >= MAX_KEYS) {
+		if (keycode < 0 || keycode >= MAX_KEYS) {
 			Logger::getInstance().error("logged_files/input_errors.txt", "Input Check", "Key checked is out of bounds (ie not supported)");
 			return 0.0f;
 		}
-		else {
-			return s_KeyPressure[keycode];
-		}
+
+		return s_KeyPressure[keycode];
 	}
 
 	bool InputManager::isMouseButtonPressed(unsigned int code) {
-		if (code >= MAX_BUTTONS) {
+		if (code < 0 || code >= MAX_BUTTONS) {
 			Logger::getInstance().error("logged_files/input_errors.txt", "Input Check", "Mouse button checked is out of bounds (ie not supported)");
 			return false;
 		}
-		else {
-			return s_Buttons[code];
-		}
-	}
 
+		return s_Buttons[code];
+	}
 
 	void InputManager::keyCallback(int key, int scancode, int action, int mods) {
 		s_Keys[key] = action != GLFW_RELEASE;
@@ -82,6 +79,28 @@ namespace tiger {
 
 	void InputManager::joystickCallback(int joystick, int event) {
 		m_JoystickManager.joystickConnectionCallback(joystick, event);
+	}
+
+	bool InputManager::GetButton(int keyCode)
+	{
+		if (keyCode < 0 || keyCode >= MAX_BUTTONS)
+		{
+			Logger::getInstance().error("logged_files/input_errors.txt", "Input Get button", "Button get is out of bounds (ie not supported)");
+			return false;
+		}
+
+		return s_Keys[keyCode] != GLFW_RELEASE;
+	}
+
+	bool InputManager::GetButtonDown(int keyCode)
+	{
+		if (keyCode < 0 || keyCode >= MAX_BUTTONS)
+		{
+			Logger::getInstance().error("logged_files/input_errors.txt", "Input Get button", "Button get is out of bounds (ie not supported)");
+			return false;
+		}
+
+		return s_Keys[keyCode] == GLFW_PRESS;
 	}
 
 }

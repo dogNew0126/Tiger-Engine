@@ -172,6 +172,7 @@
     <ClCompile Include="src\graphics\texture\Texture.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
     <ClCompile Include="src\input\InputManager.cpp" />
+    <ClCompile Include="src\input\JoystickInputData.cpp" />
     <ClCompile Include="src\input\JoystickManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp">
@@ -256,6 +257,7 @@
     <ClInclude Include="src\graphics\texture\Texture.h" />
     <ClInclude Include="src\graphics\Window.h" />
     <ClInclude Include="src\input\InputManager.h" />
+    <ClInclude Include="src\input\JoystickInputData.h" />
     <ClInclude Include="src\input\JoystickManager.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\platform\OpenGL\Buffer.h" />

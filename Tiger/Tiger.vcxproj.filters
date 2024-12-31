@@ -180,6 +180,9 @@
     <ClCompile Include="src\graphics\ibl\EnvironmentProbeManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\input\JoystickInputData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Shader.h">
@@ -363,6 +366,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\ibl\EnvironmentProbeManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\input\JoystickInputData.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
