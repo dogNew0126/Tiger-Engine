@@ -4,7 +4,8 @@
 
 namespace tiger {
 
-	ModelRenderer::ModelRenderer(FPSCamera* camera) : m_Camera(camera), NDC_Plane()
+	ModelRenderer::ModelRenderer(FPSCamera* camera) :
+		m_Camera(camera), NDC_Plane(), NDC_Cube()
 	{
 		// Configure and cache OpenGL state
 		m_GLCache = GLCache::getInstance();
@@ -23,7 +24,6 @@ namespace tiger {
 
 	void ModelRenderer::flushOpaque(Shader* shader, RenderPassType pass) {
 		m_GLCache->switchShader(shader);
-
 		m_GLCache->setDepthTest(true);
 		m_GLCache->setBlend(false);
 		m_GLCache->setStencilTest(false);
@@ -32,7 +32,6 @@ namespace tiger {
 
 		// Render opaque objects
 		while (!m_OpaqueRenderQueue.empty()) {
-
 			RenderableModel* current = m_OpaqueRenderQueue.front();
 
 			setupModelMatrix(current, shader, pass);
@@ -43,29 +42,24 @@ namespace tiger {
 	}
 
 	void ModelRenderer::flushTransparent(Shader* shader, RenderPassType pass) {
-
 		m_GLCache->switchShader(shader);
 		m_GLCache->setDepthTest(true);
 		m_GLCache->setBlend(true);
 		m_GLCache->setStencilTest(false);
 		m_GLCache->setFaceCull(false);
 
-
+		// Sort then render transparent objects (from back to front, does not account for rotations or scaling)
 		std::sort(m_TransparentRenderQueue.begin(), m_TransparentRenderQueue.end(),
 			[this](RenderableModel* a, RenderableModel* b) -> bool
 		{
 			return glm::length2(m_Camera->getPosition() - a->getPosition()) > glm::length2(m_Camera->getPosition() - b->getPosition());
 		});
-
-		// Sort then render transparent objects
 		while (!m_TransparentRenderQueue.empty()) {
-
 			RenderableModel* current = m_TransparentRenderQueue.front();
 
-			// Enable blending (note: You will still need to sort from back to front when rendering)
 			m_GLCache->setBlend(true);
 			m_GLCache->setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				
+
 			setupModelMatrix(current, shader, pass);
 			current->draw(shader, pass);
 
@@ -73,7 +67,8 @@ namespace tiger {
 		}
 	}
 
-	// TODO: Currently only support two levels in a hierarchical scene graph
+	// TODO: Currently only supports two levels for hierarchical transformations
+	// Make it work with any number of levels
 	void ModelRenderer::setupModelMatrix(RenderableModel* renderable, Shader* shader, RenderPassType pass) {
 		glm::mat4 model(1);
 		glm::mat4 translate = glm::translate(glm::mat4(1.0f), renderable->getPosition());
@@ -91,12 +86,9 @@ namespace tiger {
 		shader->setUniformMat4("model", model);
 
 		if (pass != RenderPassType::ShadowmapPassType) {
-
 			glm::mat3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(model)));
 			shader->setUniformMat3("normalMatrix", normalMatrix);
-
 		}
-
 	}
 
 }

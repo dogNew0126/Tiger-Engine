@@ -10,8 +10,8 @@ namespace tiger {
 		// TODO: Assert that the shader is bound in debug
 		void DirectionalLight::setupUniforms(Shader* shader, int currentLightIndex) {
 			if (isActive) {
-				shader->setUniform3f("dirLight.lightColour", lightColour);
 				shader->setUniform3f("dirLight.direction", direction);
+				shader->setUniform3f("dirLight.lightColour", lightColour);
 			}
 		}
 

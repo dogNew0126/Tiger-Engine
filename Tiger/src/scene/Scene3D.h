@@ -8,7 +8,7 @@
 #include "graphics/Window.h"
 #include "graphics/Skybox.h"
 #include "graphics/dynamic_lights/DynamicLightManager.h"
-#include "graphics/ibl/EnvironmentProbeManager.h"
+#include "graphics/ibl/ProbeManager.h"
 
 namespace tiger {
 
@@ -29,7 +29,7 @@ namespace tiger {
 		inline ModelRenderer* getModelRenderer() { return &m_ModelRenderer; }
 		inline Terrain* getTerrain() { return &m_Terrain; }
 		inline DynamicLightManager* getDynamicLightManager() { return &m_DynamicLightManager; }
-		inline EnvironmentProbeManager* getProbeManager() { return &m_ProbeManager; }
+		inline ProbeManager* getProbeManager() { return &m_ProbeManager; }
 		inline FPSCamera* getCamera() { return &m_SceneCamera; }
 		inline Skybox* getSkybox() { return m_Skybox; }
 
@@ -39,17 +39,15 @@ namespace tiger {
 	private:
 		GLCache* m_GLCache;
 
+		ProbeBlendSetting m_SceneProbeBlendSetting = PROBES_SIMPLE;
+
 		FPSCamera m_SceneCamera;
 		Skybox* m_Skybox;
 		ModelRenderer m_ModelRenderer;
 		Terrain m_Terrain;
 		DynamicLightManager m_DynamicLightManager;
-		std::vector<EnvironmentProbe*> m_Probes;
-		EnvironmentProbeManager m_ProbeManager;
+		ProbeManager m_ProbeManager;
 		std::vector<RenderableModel*> m_RenderableModels;
-
-		// Scene parameters
-		EnvironmentProbeBlendSetting m_SceneProbeBlendSetting = PROBES_SIMPLE;
 
 	};
 }

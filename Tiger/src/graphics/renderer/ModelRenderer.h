@@ -5,6 +5,7 @@
 #include "scene/RenderableModel.h"
 #include "GLCache.h"
 #include "graphics/mesh/common/Quad.h"
+#include "graphics/mesh/common/Cube.h"
 #include "graphics/renderer/renderpass/RenderPassType.h"
 
 
@@ -23,6 +24,7 @@ namespace tiger {
 
 	public:
 		Quad NDC_Plane;
+		Cube NDC_Cube;
 
 	private:
 

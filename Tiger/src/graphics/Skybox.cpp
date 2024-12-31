@@ -52,7 +52,7 @@ namespace tiger {
 
 	void Skybox::Draw(ICamera* camera) {
 
-		m_SkyboxShader->enable();
+		m_GLCache->switchShader(m_SkyboxShader);
 		// Pass the texture to the shader
 		m_SkyboxCubemap->bind(0);
 		m_SkyboxShader->setUniform1i("skyboxCubemap", 0);
@@ -70,7 +70,8 @@ namespace tiger {
 		m_SkyboxVAO.unbind();
 		m_SkyboxIBO.unbind();
 		m_GLCache->setDepthFunc(GL_LESS);
-		m_SkyboxShader->disable();
+
+		m_SkyboxCubemap->unbind();
 	}
 
 }

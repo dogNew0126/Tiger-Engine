@@ -5,11 +5,11 @@
 
 namespace tiger {
 
-	class EnvironmentProbe {
+	class LightProbe {
 
 	public:
-		EnvironmentProbe(const glm::vec3& probePosition, const glm::vec2& probeResolution, bool isStatic);
-		~EnvironmentProbe();
+		LightProbe(const glm::vec3& probePosition, const glm::vec2& probeResolution);
+		~LightProbe();
 
 		void generate();
 
@@ -20,12 +20,11 @@ namespace tiger {
 		inline Cubemap* getIrradianceMap() { return m_IrradianceMap; }
 
 	private:
-		Cubemap* m_IrradianceMap, * m_PrefilterMap, * m_BRDF_LUT;
+		Cubemap* m_IrradianceMap;
 		glm::vec3 m_Position;
 		bool m_Generated;
 
 		glm::vec2 m_ProbeResolution;
-		bool m_IsStatic;
 	};
 
 }

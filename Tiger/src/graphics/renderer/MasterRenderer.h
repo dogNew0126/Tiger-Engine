@@ -3,7 +3,7 @@
 #include "graphics/renderer/renderpass/LightingPass.h"
 #include "graphics/renderer/renderpass/ShadowmapPass.h"
 #include "graphics/renderer/renderpass/PostProcessPass.h"
-#include "graphics/renderer/renderpass/EnvironmentProbePass.h"
+#include "graphics/renderer/renderpass/ProbePass.h"
 #include "scene/Scene3D.h"
 #include "utils/Timer.h"
 
@@ -23,7 +23,7 @@ namespace tiger {
 		ShadowmapPass m_ShadowmapPass;
 		LightingPass m_LightingPass;
 		PostProcessPass m_PostProcessPass;
-		EnvironmentProbePass m_EnvironmentProbePass;
+		ProbePass m_EnvironmentProbePass;
 		Timer m_Timer;
 	};
 }

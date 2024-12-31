@@ -132,7 +132,7 @@
     <ClCompile Include="src\graphics\camera\CubemapCamera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\ibl\EnvironmentProbe.cpp">
+    <ClCompile Include="src\graphics\ibl\LightProbe.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\scene\RenderableModel.cpp">
@@ -171,16 +171,19 @@
     <ClCompile Include="src\graphics\renderer\MasterRenderer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\renderer\renderpass\EnvironmentProbePass.cpp">
+    <ClCompile Include="src\graphics\renderer\renderpass\ProbePass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\utils\loaders\ShaderLoader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\ibl\EnvironmentProbeManager.cpp">
+    <ClCompile Include="src\graphics\ibl\ProbeManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\input\JoystickInputData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ibl\ReflectionProbe.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -314,7 +317,7 @@
     <ClInclude Include="src\graphics\camera\CubemapCamera.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\ibl\EnvironmentProbe.h">
+    <ClInclude Include="src\graphics\ibl\LightProbe.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\scene\RenderableModel.h">
@@ -356,7 +359,7 @@
     <ClInclude Include="src\graphics\renderer\MasterRenderer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\renderer\renderpass\EnvironmentProbePass.h">
+    <ClInclude Include="src\graphics\renderer\renderpass\ProbePass.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\camera\ICamera.h">
@@ -365,10 +368,13 @@
     <ClInclude Include="src\utils\loaders\ShaderLoader.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\ibl\EnvironmentProbeManager.h">
+    <ClInclude Include="src\graphics\ibl\ProbeManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\input\JoystickInputData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\ibl\ReflectionProbe.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -387,6 +393,8 @@
     <None Include="src\shaders\model.frag" />
     <None Include="src\shaders\pbr_model.vert" />
     <None Include="src\shaders\pbr_model.frag" />
+    <None Include="src\shaders\lightprobe_convolution.vert" />
+    <None Include="src\shaders\lightprobe_convolution.frag" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vendor\Imgui\LICENSE.txt" />

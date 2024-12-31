@@ -10,9 +10,9 @@ namespace tiger {
 		// TODO: Assert that the shader is bound in debug
 		void SpotLight::setupUniforms(Shader* shader, int currentLightIndex) {
 			if (isActive) {
-				shader->setUniform3f("spotLight.lightColour", lightColour);
 				shader->setUniform3f("spotLight.position", position);
 				shader->setUniform3f("spotLight.direction", direction);
+				shader->setUniform3f("spotLight.lightColour", lightColour);
 				shader->setUniform1f("spotLight.cutOff", cutOff);
 				shader->setUniform1f("spotLight.outerCutOff", outerCutOff);
 			}

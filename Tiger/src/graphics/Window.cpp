@@ -69,7 +69,7 @@ namespace tiger {
 
 		double currMouseX, currMouseY;
 		glfwGetCursorPos(m_Window, &currMouseX, &currMouseY);
-		g_InputManager.setMousePos(currMouseX, currMouseY);
+		s_InputManager.setMousePos(currMouseX, currMouseY);
 
 		// Set up contexts and callbacks
 		glfwMakeContextCurrent(m_Window);
@@ -94,7 +94,7 @@ namespace tiger {
 		});
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 			Window* win = (Window*)glfwGetWindowUserPointer(window);
-			g_InputManager.keyCallback(key, scancode, action, mods);
+			s_InputManager.keyCallback(key, scancode, action, mods);
 			ImGui_ImplGlfw_KeyCallback(window, key, scancode, action, mods);
 #if DEBUG_ENABLED
 			if (key == GLFW_KEY_P && action == GLFW_RELEASE) {
@@ -106,23 +106,23 @@ namespace tiger {
 		});
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
 			Window* win = (Window*)glfwGetWindowUserPointer(window);
-			g_InputManager.mouseButtonCallback(button, action, mods);
+			s_InputManager.mouseButtonCallback(button, action, mods);
 			ImGui_ImplGlfw_MouseButtonCallback(window, button, action, mods);
 		});
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xpos, double ypos) {
 			Window* win = (Window*)glfwGetWindowUserPointer(window);
-			g_InputManager.cursorPositionCallback(xpos, ypos);
+			s_InputManager.cursorPositionCallback(xpos, ypos);
 		});
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xoffset, double yoffset) {
 			Window* win = (Window*)glfwGetWindowUserPointer(window);
-			g_InputManager.scrollCallback(xoffset, yoffset);
+			s_InputManager.scrollCallback(xoffset, yoffset);
 			ImGui_ImplGlfw_ScrollCallback(window, xoffset, yoffset);
 		});
 		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int c) {
 			ImGui_ImplGlfw_CharCallback(window, c);
 		});
 		glfwSetJoystickCallback([](int joystick, int event) {
-			g_InputManager.joystickCallback(joystick, event);
+			s_InputManager.joystickCallback(joystick, event);
 		});
 		// Check to see if v-sync was enabled and act accordingly
 		if (V_SYNC) {
@@ -174,7 +174,7 @@ namespace tiger {
 			std::cout << "OpenGL Error: " << error << std::endl;
 		}
 		// Input handling
-		g_InputManager.update();
+		s_InputManager.update();
 
 		glfwSwapBuffers(m_Window);
 		glfwPollEvents();

@@ -8,7 +8,7 @@ namespace tiger {
 			ShadowmapPassType,
 			LightingPassType,
 			PostProcessPassType,
-			EnvironmentProbePassType
+			ProbePassType
 		};
 
 		struct ShadowmapPassOutput

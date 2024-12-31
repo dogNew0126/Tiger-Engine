@@ -33,7 +33,7 @@ namespace tiger
 		Terrain* terrain = m_ActiveScene->getTerrain();
 		DynamicLightManager* lightManager = m_ActiveScene->getDynamicLightManager();
 		Skybox* skybox = m_ActiveScene->getSkybox();
-		EnvironmentProbeManager* probeManager = m_ActiveScene->getProbeManager();
+		ProbeManager* probeManager = m_ActiveScene->getProbeManager();
 
 		// View setup + lighting setup
 		m_GLCache->switchShader(m_ModelShader);
@@ -68,6 +68,7 @@ namespace tiger
 		m_TerrainShader->setUniformMat4("view", camera->getViewMatrix());
 		m_TerrainShader->setUniformMat4("projection", camera->getProjectionMatrix());
 		bindShadowmap(m_TerrainShader, shadowmapData);
+
 		terrain->Draw(m_TerrainShader, m_RenderPassType);
 
 		skybox->Draw(camera);
@@ -83,9 +84,9 @@ namespace tiger
 
 	void LightingPass::bindShadowmap(Shader* shader, ShadowmapPassOutput& shadowmapData) {
 
-		shader->setUniform1i("shadowmap", 0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, shadowmapData.shadowmapFramebuffer->getDepthTexture());
+		shader->setUniform1i("shadowmap", 0);
 		shader->setUniformMat4("lightSpaceViewProjectionMatrix", shadowmapData.directionalLightViewProjMatrix);
 
 	}
