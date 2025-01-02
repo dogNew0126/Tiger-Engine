@@ -48,6 +48,7 @@ int main() {
 		scene.onUpdate(deltaTime.getDeltaTime());
 		renderer.render();
 
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		// Display panes
 		runtimePane.render();
 		debugPane.render();

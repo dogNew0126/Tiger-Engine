@@ -40,7 +40,7 @@ namespace tiger {
 		glFinish();
 		RuntimePane::setPostProcessTimer((float)m_Timer.elapsed());
 #endif
-		m_EnvironmentProbePass.pregenerateProbes();
+		//m_EnvironmentProbePass.pregenerateProbes();
 	}
 
 
