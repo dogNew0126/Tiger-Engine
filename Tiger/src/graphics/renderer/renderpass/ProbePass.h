@@ -15,11 +15,15 @@ namespace tiger
 		ProbePass(Scene3D* scene);
 		virtual ~ProbePass() override;
 
+		void pregenerateIBL();
 		void pregenerateProbes();
 		void generateLightProbe(glm::vec3& probePosition);
+		void generateReflectionProbe(glm::vec3& probePosition);
+
+	private:
 		void generateBRDFLUT();
 		void generateFallbackProbes();
-		void generateReflectionProbe(glm::vec3& probePosition);
+
 	private:
 		Framebuffer m_SceneCaptureShadowFramebuffer, m_SceneCaptureLightingFramebuffer, m_LightProbeConvolutionFramebuffer, m_ReflectionProbeSamplingFramebuffer;
 		CubemapCamera m_CubemapCamera;

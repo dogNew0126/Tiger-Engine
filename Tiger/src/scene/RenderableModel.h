@@ -26,6 +26,7 @@ namespace tiger {
 		inline void setScale(glm::vec3& other) { m_Scale = other; }
 		inline void setOrientation(float radianRotation, glm::vec3 rotationAxis) { m_Orientation = glm::angleAxis(radianRotation, rotationAxis); }
 		inline void setTransparent(bool choice) { m_Transparent = choice; }
+		inline bool getStatic() const { return m_IsStatic; }
 		inline void setParent(RenderableModel* parent) { m_Parent = parent; }
 	private:
 		glm::vec3 m_Position, m_Scale;
@@ -35,6 +36,7 @@ namespace tiger {
 
 		bool m_Transparent;
 		Model* m_Model;
+		bool m_IsStatic;	  // Should be true if the model will never have its transform modified
 	};
 
 }

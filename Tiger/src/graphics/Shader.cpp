@@ -41,18 +41,23 @@ namespace tiger {
 
 		// Check to see if it was successful
 		glGetShaderiv(vertex, GL_COMPILE_STATUS, &result);
-		if (result == GL_FALSE)
-		{
+		if (result == GL_FALSE) {
 			int length;
 			glGetShaderiv(vertex, GL_INFO_LOG_LENGTH, &length);
-			std::vector<char> error(length);
-			glGetShaderInfoLog(vertex, length, &length, &error[0]);
-			std::cout << "Failed to compile vertex shader!" << std::endl << &error[0] << std::endl;
-			Logger::getInstance().error("logged_files/shader_creation.txt", "shader initialization", "failed to compile vertex shader " + error[0]);
+			if (length > 0) {
+				std::vector<char> error(length);
+				glGetShaderInfoLog(vertex, length, &length, &error[0]);
+				std::string errorString(error.begin(), error.end());
 
+				Logger::getInstance().error("logged_files/shader_compile_error.txt", m_VertPath, errorString);
+			}
+			else {
+				Logger::getInstance().error("logged_files/shader_compile_error.txt", m_VertPath, "unknown error");
+			}
 			glDeleteShader(vertex);
 			return 0;
 		}
+
 
 		// Fragment Shader
 		glShaderSource(fragment, 1, &fragSource, NULL);
@@ -64,15 +69,15 @@ namespace tiger {
 		{
 			int length;
 			glGetShaderiv(fragment, GL_INFO_LOG_LENGTH, &length);
-			std::vector<char> error(length);
 
 			if (length > 0) {
+				std::vector<char> error(length);
 				glGetShaderInfoLog(fragment, length, &length, &error[0]);
-				std::cout << "Failed to Compile Fragment Shader" << std::endl << &error[0] << std::endl;
-				Logger::getInstance().error("logged_files/shader_creation.txt", "shader initialization", "failed to compile fragment shader " + error[0]);
+				std::string errorString(error.begin(), error.end());
+				Logger::getInstance().error("logged_files/shader_compile_error.txt", m_FragPath, errorString);
 			}
 			else {
-				Logger::getInstance().error("logged_files/shader_creation.txt", "shader initialization", "failed to compile fragment shader");
+				Logger::getInstance().error("logged_files/shader_compile_error.txt", m_FragPath, "error unknown");
 			}
 
 			glDeleteShader(fragment);
@@ -98,10 +103,16 @@ namespace tiger {
 			if (result == GL_FALSE) {
 				int length;
 				glGetShaderiv(geometry, GL_INFO_LOG_LENGTH, &length);
-				std::vector<char> error(length);
-				glGetShaderInfoLog(geometry, length, &length, &error[0]);
-				std::cout << "Failed to Compile Geometry Shader" << std::endl << &error[0] << std::endl;
-				Logger::getInstance().error("logged_files/shader_creation.txt", "shader initialization", "failed to compile geometry shader " + error[0]);
+				if (length > 0) {
+					std::vector<char> error(length);
+					glGetShaderInfoLog(geometry, length, &length, &error[0]);
+					std::string errorString(error.begin(), error.end());
+
+					Logger::getInstance().error("logged_files/shader_compile_error.txt", m_GeomPath, errorString);
+				}
+				else {
+					Logger::getInstance().error("logged_files/shader_compile_error.txt", m_GeomPath, "error unknown");
+				}
 				glDeleteShader(geometry);
 				return 0;
 			}
@@ -147,6 +158,10 @@ namespace tiger {
 
 	void Shader::setUniform4f(const char* name, const glm::vec4& vector){
 		glUniform4f(getUniformLocation(name), vector.x, vector.y, vector.z, vector.w);
+	}
+
+	void Shader::setUniform4i(const char* name, const glm::ivec4& vector) {
+		glUniform4i(getUniformLocation(name), vector.x, vector.y, vector.z, vector.w);
 	}
 
 	void Shader::setUniformMat3(const char* name, const glm::mat3& matrix) {

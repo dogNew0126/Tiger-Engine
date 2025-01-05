@@ -4,8 +4,8 @@
 namespace tiger {
 	Texture* ReflectionProbe::s_BRDF_LUT = nullptr;
 
-	ReflectionProbe::ReflectionProbe(const glm::vec3& probePosition, const glm::vec2& probeResolution, bool isStatic)
-		: m_Position(probePosition), m_ProbeResolution(probeResolution), m_IsStatic(isStatic), m_Generated(false), m_PrefilterMap(nullptr)
+	ReflectionProbe::ReflectionProbe(const glm::vec3& probePosition, const glm::vec2& probeResolution)
+		: m_Position(probePosition), m_ProbeResolution(probeResolution), m_Generated(false), m_PrefilterMap(nullptr)
 	{}
 
 	ReflectionProbe::~ReflectionProbe() {

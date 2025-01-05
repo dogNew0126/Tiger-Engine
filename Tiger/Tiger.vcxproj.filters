@@ -72,19 +72,19 @@
     <ClCompile Include="src\graphics\Skybox.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\dynamic_lights\DynamicLight.cpp">
+    <ClCompile Include="src\graphics\lights\Light.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\dynamic_lights\SpotLight.cpp">
+    <ClCompile Include="src\graphics\lights\SpotLight.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\dynamic_lights\PointLight.cpp">
+    <ClCompile Include="src\graphics\lights\PointLight.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\dynamic_lights\DirectionalLight.cpp">
+    <ClCompile Include="src\graphics\lights\DirectionalLight.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\dynamic_lights\DynamicLightManager.cpp">
+    <ClCompile Include="src\graphics\lights\DynamicLightManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\renderer\GLCache.cpp">
@@ -251,19 +251,19 @@
     <ClInclude Include="src\Defs.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\dynamic_lights\SpotLight.h">
+    <ClInclude Include="src\graphics\lights\SpotLight.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\dynamic_lights\DynamicLight.h">
+    <ClInclude Include="src\graphics\lights\Light.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\dynamic_lights\PointLight.h">
+    <ClInclude Include="src\graphics\lights\PointLight.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\dynamic_lights\DirectionalLight.h">
+    <ClInclude Include="src\graphics\lights\DirectionalLight.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\dynamic_lights\DynamicLightManager.h">
+    <ClInclude Include="src\graphics\lights\DynamicLightManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\renderer\GLCache.h">

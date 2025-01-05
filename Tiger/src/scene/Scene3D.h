@@ -7,7 +7,7 @@
 #include "terrain/Terrain.h"
 #include "graphics/Window.h"
 #include "graphics/Skybox.h"
-#include "graphics/dynamic_lights/DynamicLightManager.h"
+#include "graphics/lights/DynamicLightManager.h"
 #include "graphics/ibl/ProbeManager.h"
 
 namespace tiger {
@@ -22,9 +22,9 @@ namespace tiger {
 		void shadowmapPass();
 
 		void onUpdate(float deltaTime);
-		void onRender();
 
 		void addModelsToRenderer();
+		void addStaticModelsToRenderer();
 
 		inline ModelRenderer* getModelRenderer() { return &m_ModelRenderer; }
 		inline Terrain* getTerrain() { return &m_Terrain; }

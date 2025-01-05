@@ -6,7 +6,7 @@
 namespace tiger {
 
 	MasterRenderer::MasterRenderer(Scene3D* scene) : m_ActiveScene(scene),
-		m_ShadowmapPass(scene), m_LightingPass(scene), m_PostProcessPass(scene), m_EnvironmentProbePass(scene)
+		m_ShadowmapPass(scene), m_LightingPass(scene, true), m_PostProcessPass(scene), m_EnvironmentProbePass(scene)
 	{
 		m_GLCache = GLCache::getInstance();
 	}
@@ -15,6 +15,7 @@ namespace tiger {
 		// State that should never change
 		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
+		m_EnvironmentProbePass.pregenerateIBL();
 		m_EnvironmentProbePass.pregenerateProbes();
 	}
 
@@ -24,14 +25,14 @@ namespace tiger {
 		glFinish();
 		m_Timer.reset();
 #endif
-		ShadowmapPassOutput shadowmapOutput = m_ShadowmapPass.generateShadowmaps(m_ActiveScene->getCamera());
+		ShadowmapPassOutput shadowmapOutput = m_ShadowmapPass.generateShadowmaps(m_ActiveScene->getCamera(), false);
 #if DEBUG_ENABLED
 		glFinish();
 		RuntimePane::setShadowmapTimer((float)m_Timer.elapsed());
 #endif
 
 		// Lighting Pass
-		LightingPassOutput lightingOutput = m_LightingPass.executeRenderPass(shadowmapOutput, m_ActiveScene->getCamera(), true);
+		LightingPassOutput lightingOutput = m_LightingPass.executeRenderPass(shadowmapOutput, m_ActiveScene->getCamera(), false, true);
 
 		// Post Process Pass
 #if DEBUG_ENABLED

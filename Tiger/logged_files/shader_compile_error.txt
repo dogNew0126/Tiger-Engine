@@ -1,0 +1,2 @@
+(src/shaders/terrain.frag): 0(77) : error C1503: undefined variable "bTextureColour"
+
