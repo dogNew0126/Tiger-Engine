@@ -5,18 +5,21 @@
 
 namespace tiger {
 
-	ShadowmapPass::ShadowmapPass(Scene3D* scene) : RenderPass(scene, RenderPassType::ShadowmapPassType)
+	ShadowmapPass::ShadowmapPass(Scene3D* scene) : RenderPass(scene, RenderPassType::ShadowmapPassType), m_AllocatedFramebuffer(true)
 	{
 		m_ShadowmapShader = ShaderLoader::loadShader("src/shaders/shadowmap.vert", "src/shaders/shadowmap.frag");
 		m_ShadowmapFramebuffer = new Framebuffer(SHADOWMAP_RESOLUTION_X, SHADOWMAP_RESOLUTION_Y);
 		m_ShadowmapFramebuffer->addDepthAttachment(false).createFramebuffer();
 	}
-	ShadowmapPass::ShadowmapPass(Scene3D* scene, Framebuffer* customFramebuffer) : RenderPass(scene, RenderPassType::ShadowmapPassType), m_ShadowmapFramebuffer(customFramebuffer)
+	ShadowmapPass::ShadowmapPass(Scene3D* scene, Framebuffer* customFramebuffer) : RenderPass(scene, RenderPassType::ShadowmapPassType), m_AllocatedFramebuffer(false), m_ShadowmapFramebuffer(customFramebuffer)
 	{
 		m_ShadowmapShader = ShaderLoader::loadShader("src/shaders/shadowmap.vert", "src/shaders/shadowmap.frag");
 	}
 
-	ShadowmapPass::~ShadowmapPass() {}
+	ShadowmapPass::~ShadowmapPass() {
+		if (m_AllocatedFramebuffer)
+			delete m_ShadowmapFramebuffer;
+	}
 
 	ShadowmapPassOutput ShadowmapPass::generateShadowmaps(ICamera* camera) {
 		glViewport(0, 0, m_ShadowmapFramebuffer->getWidth(), m_ShadowmapFramebuffer->getHeight());
