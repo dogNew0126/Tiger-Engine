@@ -5,13 +5,14 @@ namespace tiger {
 	class Shader {
 	private: 
 		unsigned int m_ShaderID;
-		const char* m_VertPath, * m_FragPath, * m_GeomPath;
+		const char* m_VertPath, * m_FragPath, * m_GeomPath, * m_HullShader, * m_DomainShader;;
 
 	public:
 
 		Shader(const char *vertPath, const char *fragPath);
-
 		Shader(const char* vertPath, const char* fragPath, const char* geoPath);
+		Shader(const char* vertPath, const char* fragPath, const char* hullPath, const char* domainPath);
+		Shader(const char* vertPath, const char* fragPath, const char* geoPath, const char* hullPath, const char* domainPath);
 		~Shader();
 
 		void setUniform1f(const char* name, float value);

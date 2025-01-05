@@ -17,12 +17,18 @@ namespace tiger {
 
 	private:
 
-		glm::vec3 calculateNormal(int x, int z, unsigned char* heightMapData);
-		float getVertexHeight(int x, int y, unsigned char* heightMapData);
+		glm::vec3 calculateNormal(float worldPosX, float worldPosZ, unsigned char* heightMapData);
 
-		float m_TerrainSize;
-		unsigned int m_VertexSideCount;
-		GLushort m_HeightMapScale;
+		float sampleHeightfieldBilinear(float worldPosX, float worldPosZ, unsigned char* heightMapData);
+		float sampleHeightfieldNearest(float worldPosX, float worldPosZ, unsigned char* heightMapData);
+		float clamp(float n, float lower, float upper);
+
+	private:
+		float m_TerrainSizeXZ, m_TerrainSizeY;
+		float m_SpaceBetweenVertices;
+		float m_TerrainToHeightfieldTextureConversion;
+		unsigned int m_HeightfieldTextureSize;
+		unsigned int m_SideVertexCount;
 		glm::mat4 m_ModelMatrix;
 		glm::vec3 m_Position;
 		Mesh* m_Mesh;
