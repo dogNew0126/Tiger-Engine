@@ -17,6 +17,7 @@ namespace tiger {
 		void bind(Shader* shader);
 
 		// Getters
+		inline glm::vec3& getPosition() { return m_Position; }
 		inline Cubemap* getIrradianceMap() { return m_IrradianceMap; }
 
 	private:
