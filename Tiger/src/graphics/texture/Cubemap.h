@@ -10,6 +10,8 @@ namespace tiger {
 		// Texture filtering options
 		GLenum TextureMinificationFilterMode = GL_LINEAR; // Filtering mode when the texture moves further away and multiple texels map to one pixel (trilinear for best quality)
 		GLenum TextureMagnificationFilterMode = GL_LINEAR; // Filtering mode when the texture gets closer and multiple pixels map to a single texel (Never needs to be more than bilinear because that is as accurate as it gets in this sitation)
+		// Mip Settings
+		bool HasMips = false;
 	};
 
 	class Cubemap {
@@ -28,9 +30,12 @@ namespace tiger {
 
 		// Getters
 		unsigned int getCubemapID() { return m_CubemapID; }
+		inline unsigned int getFaceWidth() { return m_FaceWidth; }
+		inline unsigned int getFaceHeight() { return m_FaceHeight; }
 
 	private:
 		unsigned int m_CubemapID;
+		unsigned int m_FacesGenerated;
 		unsigned int m_FaceWidth, m_FaceHeight;
 
 		GLenum m_TextureFormat;

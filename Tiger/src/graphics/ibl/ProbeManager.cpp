@@ -4,7 +4,7 @@
 namespace tiger {
 
 	ProbeManager::ProbeManager(ProbeBlendSetting sceneProbeBlendSetting)
-		: m_ProbeBlendSetting(sceneProbeBlendSetting), m_Skybox(nullptr)
+		: m_ProbeBlendSetting(sceneProbeBlendSetting), m_LightProbeFallback(nullptr), m_ReflectionProbeFallback(nullptr)
 	{}
 
 	ProbeManager::~ProbeManager() {
@@ -16,10 +16,8 @@ namespace tiger {
 		}
 		m_LightProbes.clear();
 		m_ReflectionProbes.clear();
-	}
-
-	void ProbeManager::init(Skybox* skybox) {
-		m_Skybox = skybox;
+		delete m_LightProbeFallback;
+		delete m_ReflectionProbeFallback;
 	}
 
 	void ProbeManager::addProbe(LightProbe* probe) {
@@ -38,9 +36,7 @@ namespace tiger {
 				m_LightProbes[0]->bind(shader);
 			}
 			else {
-				// Fallback to skybox
-				m_Skybox->getSkyboxCubemap()->bind(1);
-				shader->setUniform1i("irradianceMap", 1);
+				m_LightProbeFallback->bind(shader);
 			}
 
 			// Reflection Probes
@@ -48,20 +44,16 @@ namespace tiger {
 				m_ReflectionProbes[0]->bind(shader);
 			}
 			else {
-				// Fallback to skybox
-				m_Skybox->getSkyboxCubemap()->bind(2);
-				shader->setUniform1i("prefilterMap", 2);
+				m_ReflectionProbeFallback->bind(shader);
 			}
 		}
 		// If probes are disabled just use the skybox
 		else if (m_ProbeBlendSetting == PROBES_DISABLED) {
-			// Light Probes
-			m_Skybox->getSkyboxCubemap()->bind(1);
-			shader->setUniform1i("irradianceMap", 1);
+			// Light probe fallback
+			m_LightProbeFallback->bind(shader);
 
-			// Reflection Probes
-			m_Skybox->getSkyboxCubemap()->bind(2);
-			shader->setUniform1i("prefilterMap", 2);
+			// Reflection probe fallback
+			m_ReflectionProbeFallback->bind(shader);
 		}
 	}
 

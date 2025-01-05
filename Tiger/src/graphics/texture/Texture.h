@@ -41,6 +41,8 @@ namespace tiger {
 		inline void setTextureSettings(TextureSettings settings) { m_TextureSettings = settings; }
 
 		inline unsigned int getTextureId() { return m_TextureId; }
+		inline unsigned int getWidth() { return m_Width; }
+		inline unsigned int getHeight() { return m_Height; }
 
 	private:
 		unsigned int m_TextureId;

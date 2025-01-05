@@ -395,6 +395,10 @@
     <None Include="src\shaders\pbr_model.frag" />
     <None Include="src\shaders\lightprobe_convolution.vert" />
     <None Include="src\shaders\lightprobe_convolution.frag" />
+    <None Include="src\shaders\brdf_integration.vert" />
+    <None Include="src\shaders\brdf_integration.frag" />
+    <None Include="src\shaders\reflectionprobe_importance_sampling.vert" />
+    <None Include="src\shaders\reflectionprobe_importance_sampling.frag" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vendor\Imgui\LICENSE.txt" />

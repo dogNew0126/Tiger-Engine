@@ -43,6 +43,7 @@ out vec4 color;
 uniform vec3 viewPos;
 
 // IBL
+uniform int reflectionProbeMipCount;
 uniform bool computeIBL;
 uniform samplerCube irradianceMap;
 uniform samplerCube prefilterMap;
@@ -76,13 +77,15 @@ void main() {
 	float albedoAlpha = texture(material.texture_albedo, TexCoords).w;
 	vec3 normal = texture(material.texture_normal, TexCoords).rgb;
 	float metallic = texture(material.texture_metallic, TexCoords).r;
-	float roughness = max(texture(material.texture_roughness, TexCoords).r, 0.04);
+	float unclampedRoughness = texture(material.texture_roughness, TexCoords).r; // Used for indirect specular (reflections)
+	float roughness = max(unclampedRoughness, 0.04); // Used for calculations since specular highlights will be too fine, and will cause flicker
 	float ao = texture(material.texture_ao, TexCoords).r;
 
 	normal = normalize(normal * 2.0f - 1.0f);
 	normal = normalize(TBN * normal);
 	
 	vec3 fragToView = normalize(viewPos - FragPos);
+	vec3 reflectionVec = reflect(-fragToView, normal);
 
 	vec3 baseReflectivity = vec3(0.04);
 	baseReflectivity = mix(baseReflectivity, albedo, metallic);
@@ -100,8 +103,14 @@ void main() {
 		vec3 specularRatio = FresnelSchlick(max(dot(normal, fragToView), 0.0), baseReflectivity);
 		vec3 diffuseRatio = vec3(1.0) - specularRatio;
 		diffuseRatio *= 1.0 - metallic;
+
 		vec3 indirectDiffuse = texture(irradianceMap, normal).rgb * albedo;
-		ambient = (diffuseRatio * indirectDiffuse) * ao;
+
+		vec3 prefilterColour = textureLod(prefilterMap, reflectionVec, unclampedRoughness * (reflectionProbeMipCount - 1)).rgb;
+		vec2 brdfIntegration = texture(brdfLUT, vec2(max(dot(normal, fragToView), 0.0), roughness)).rg;
+		vec3 indirectSpecular = prefilterColour * (specularRatio * brdfIntegration.x + brdfIntegration.y);
+
+		ambient = (diffuseRatio * indirectDiffuse + indirectSpecular) * ao;
 	}
 
 	color = vec4(ambient + directLightIrradiance, 1.0);
