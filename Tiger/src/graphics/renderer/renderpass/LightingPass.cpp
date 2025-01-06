@@ -9,7 +9,7 @@ namespace tiger
 	LightingPass::LightingPass(Scene3D* scene, bool shouldMultisample) : RenderPass(scene, RenderPassType::LightingPassType), m_AllocatedFramebuffer(true)
 	{
 		m_ModelShader = ShaderLoader::loadShader("src/shaders/pbr_model.vert", "src/shaders/pbr_model.frag");
-		m_TerrainShader = ShaderLoader::loadShader("src/shaders/terrain.vert", "src/shaders/terrain.frag");
+		m_TerrainShader = ShaderLoader::loadShader("src/shaders/pbr_terrain.vert", "src/shaders/pbr_terrain.frag");
 		m_Framebuffer = new Framebuffer(Window::getWidth(), Window::getHeight());
 		m_Framebuffer->addTexture2DColorAttachment(shouldMultisample).addDepthStencilRBO(shouldMultisample).createFramebuffer();
 	}
@@ -17,7 +17,7 @@ namespace tiger
 	LightingPass::LightingPass(Scene3D* scene, Framebuffer* customFramebuffer) : RenderPass(scene, RenderPassType::LightingPassType), m_AllocatedFramebuffer(false), m_Framebuffer(customFramebuffer)
 	{
 		m_ModelShader = ShaderLoader::loadShader("src/shaders/pbr_model.vert", "src/shaders/pbr_model.frag");
-		m_TerrainShader = ShaderLoader::loadShader("src/shaders/terrain.vert", "src/shaders/terrain.frag");
+		m_TerrainShader = ShaderLoader::loadShader("src/shaders/pbr_terrain.vert", "src/shaders/pbr_terrain.frag");
 	}
 
 	LightingPass::~LightingPass() {

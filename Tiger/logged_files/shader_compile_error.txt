@@ -1,2 +1,2 @@
-(src/shaders/terrain.frag): 0(77) : error C1503: undefined variable "bTextureColour"
+(src/shaders/terrain.vert): 0(13) : error C1038: declaration of "TexCoords" conflicts with previous declaration at 0(10)
 

@@ -11,13 +11,13 @@ struct Material {
 struct DirLight {
 	vec3 direction;
 
-	vec3 lightColour; // radiant flux
+	vec3 lightColour;
 };
 
 struct PointLight {
 	vec3 position;
 
-	vec3 lightColour; // radiant flux
+	vec3 lightColour;
 };
 
 struct SpotLight {
@@ -27,7 +27,7 @@ struct SpotLight {
 	float cutOff;
 	float outerCutOff;
 
-	vec3 lightColour; // radiant flux
+	vec3 lightColour;
 };
 
 #define MAX_DIR_LIGHTS 5
@@ -71,6 +71,7 @@ float GeometrySchlickGGX(float cosTheta, float roughness);
 vec3 FresnelSchlick(float cosTheta, vec3 baseReflectivity);
 
 // Other function prototypes
+vec3 UnpackNormal(vec3 textureNormal);
 float CalculateShadow(vec3 normal, vec3 fragToLight);
 
 void main() {
@@ -83,8 +84,7 @@ void main() {
 	float roughness = max(unclampedRoughness, 0.04); // Used for calculations since specular highlights will be too fine, and will cause flicker
 	float ao = texture(material.texture_ao, TexCoords).r;
 
-	normal = normalize(normal * 2.0f - 1.0f);
-	normal = normalize(TBN * normal);
+	normal = normalize(TBN * UnpackNormal(normal));
 	
 	vec3 fragToView = normalize(viewPos - FragPos);
 	vec3 reflectionVec = reflect(-fragToView, normal);
@@ -263,6 +263,11 @@ float GeometrySchlickGGX(float cosTheta, float roughness) {
 // Taken from UE4's implementation which is faster and basically identical to the usual Fresnel calculations: https://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
 vec3 FresnelSchlick(float cosTheta, vec3 baseReflectivity) {
 	return max(baseReflectivity + (1.0 - baseReflectivity) * pow(2, (-5.55473 * cosTheta - 6.98316) * cosTheta), 0.0);
+}
+
+// Unpacks the normal from the texture and returns the normal in tangent space
+vec3 UnpackNormal(vec3 textureNormal) {
+	return normalize(textureNormal * 2.0 - 1.0);
 }
 
 float CalculateShadow(vec3 normal, vec3 fragToLight) {

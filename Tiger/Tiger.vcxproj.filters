@@ -200,7 +200,7 @@
     <ClInclude Include="src\graphics\camera\FPSCamera.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\shaders\terrain.vert">
+    <ClInclude Include="src\shaders\pbr_terrain.vert">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="vendor\stb\stb_image.h">
@@ -380,7 +380,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\lightCube.frag" />
-    <None Include="src\shaders\terrain.frag" />
+    <None Include="src\shaders\pbr_terrain.frag" />
     <None Include="src\shaders\postprocess.vert" />
     <None Include="src\shaders\postprocess.frag" />
     <None Include="src\shaders\skybox.vert" />
