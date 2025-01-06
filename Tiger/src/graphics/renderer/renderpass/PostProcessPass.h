@@ -13,13 +13,12 @@ namespace tiger
 	public:
 		PostProcessPass(Scene3D* scene);
 		virtual ~PostProcessPass() override;
-		void executeRenderPass(Framebuffer* framebufferToProcess);
+		void executePostProcessPass(Framebuffer* framebufferToProcess);
 
 		inline void EnableBlur(bool choice) { m_Blur = choice; }
 
 	private:
 		Shader* m_PostProcessShader;
-		Quad m_NDC_Plane;
 		Framebuffer m_ScreenRenderTarget; // Only used if multi-sampling is enabled so it can blit to a non-multisampled buffer
 
 		// Post Processing Tweaks

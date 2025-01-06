@@ -1,5 +1,8 @@
 #pragma once
 
+#include "graphics/renderer/renderpass/deferred/DeferredGeometryPass.h"
+#include "graphics/renderer/renderpass/deferred/DeferredLightingPass.h"
+#include "graphics/renderer/renderpass/deferred/PostGBufferForwardPass.h"
 #include "graphics/renderer/renderpass/forward/ForwardLightingPass.h"
 #include "graphics/renderer/renderpass/ShadowmapPass.h"
 #include "graphics/renderer/renderpass/PostProcessPass.h"
@@ -19,11 +22,20 @@ namespace tiger {
 	private:
 		GLCache* m_GLCache;
 		Scene3D* m_ActiveScene;
-		// Render passes
+
+		// Other passes
 		ShadowmapPass m_ShadowmapPass;
-		ForwardLightingPass m_LightingPass;
 		PostProcessPass m_PostProcessPass;
+
+		// Forward passes
+		ForwardLightingPass m_ForwardLightingPass;
 		ForwardProbePass m_EnvironmentProbePass;
+
+		// Deferred passes
+		DeferredGeometryPass m_DeferredGeometryPass;
+		DeferredLightingPass m_DeferredLightingPass;
+		PostGBufferForward m_PostGBufferForwardPass;
+
 		Timer m_Timer;
 	};
 }

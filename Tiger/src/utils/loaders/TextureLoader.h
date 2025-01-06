@@ -12,7 +12,7 @@ namespace tiger {
 	public:
 		static void initializeDefaultTextures();
 
-		static Texture* load2DTexture(const std::string& path, bool isSRGB, TextureSettings* settings = nullptr);
+		static Texture* load2DTexture(const std::string& path, TextureSettings* settings = nullptr);
 		static Cubemap* loadCubemapTexture(const std::string& right, const std::string& left, const std::string& top, const std::string& bottom, const std::string& back, const std::string& front, bool isSRGB, CubemapSettings* settings = nullptr);
 
 		inline static Texture* getDefaultAlbedo() { return s_DefaultAlbedo; }

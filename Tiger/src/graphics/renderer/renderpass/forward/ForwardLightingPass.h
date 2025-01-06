@@ -13,7 +13,7 @@ namespace tiger
 		ForwardLightingPass(Scene3D* scene, Framebuffer* customFramebuffer);
 		virtual ~ForwardLightingPass() override;
 
-		LightingPassOutput executeRenderPass(ShadowmapPassOutput& shadowmapData, ICamera* camera, bool renderOnlyStatic, bool useIBL);
+		LightingPassOutput executeLightingPass(ShadowmapPassOutput& shadowmapData, ICamera* camera, bool renderOnlyStatic, bool useIBL);
 	private:
 		void bindShadowmap(Shader* shader, ShadowmapPassOutput& shadowmapData);
 

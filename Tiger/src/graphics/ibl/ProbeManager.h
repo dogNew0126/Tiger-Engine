@@ -26,7 +26,7 @@ namespace tiger {
 		inline void setReflectionProbeFallback(ReflectionProbe* probe) { m_ReflectionProbeFallback = probe; }
 
 		// Assumes shader is bound
-		void bindProbe(const glm::vec3& renderPosition, Shader* shader);
+		void bindProbes(const glm::vec3& renderPosition, Shader* shader);
 	private:
 		ProbeBlendSetting m_ProbeBlendSetting;
 		

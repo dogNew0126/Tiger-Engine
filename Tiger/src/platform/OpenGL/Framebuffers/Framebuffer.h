@@ -12,6 +12,7 @@ namespace tiger {
 		Framebuffer& addDepthRBO(bool multisampledBuffer);
 		Framebuffer& addDepthStencilRBO(bool multisampledBuffer);
 		Framebuffer& addDepthAttachment(bool multisampledBuffer);
+		Framebuffer& addDepthStencilAttachment(bool multisampledBuffer);
 
 		void bind();
 		void unbind();

@@ -25,7 +25,7 @@ namespace tiger
 			delete m_Framebuffer;
 	}
 
-	LightingPassOutput ForwardLightingPass::executeRenderPass(ShadowmapPassOutput& shadowmapData, ICamera* camera, bool renderOnlyStatic, bool useIBL){
+	LightingPassOutput ForwardLightingPass::executeLightingPass(ShadowmapPassOutput& shadowmapData, ICamera* camera, bool renderOnlyStatic, bool useIBL){
 		glViewport(0, 0, m_Framebuffer->getWidth(), m_Framebuffer->getHeight());
 		m_Framebuffer->bind();
 		m_Framebuffer->clear();
@@ -61,7 +61,7 @@ namespace tiger
 		// IBL code
 		if (useIBL) {
 			m_ModelShader->setUniform1i("computeIBL", 1);
-			probeManager->bindProbe(glm::vec3(0.0f, 0.0f, 0.0f), m_ModelShader);
+			probeManager->bindProbes(glm::vec3(0.0f, 0.0f, 0.0f), m_ModelShader);
 		}
 		else {
 			m_ModelShader->setUniform1i("computeIBL", 0);
@@ -96,6 +96,9 @@ namespace tiger
 
 		// Render transparent objects
 		m_GLCache->switchShader(m_ModelShader);
+		if (useIBL) {
+			probeManager->bindProbes(glm::vec3(0.0f, 0.0f, 0.0f), m_ModelShader);
+		}
 		modelRenderer->flushTransparent(m_ModelShader, m_RenderPassType);
 
 		// Render pass output

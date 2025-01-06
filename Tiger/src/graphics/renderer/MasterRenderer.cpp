@@ -6,7 +6,8 @@
 namespace tiger {
 
 	MasterRenderer::MasterRenderer(Scene3D* scene) : m_ActiveScene(scene),
-		m_ShadowmapPass(scene), m_LightingPass(scene, true), m_PostProcessPass(scene), m_EnvironmentProbePass(scene)
+		m_ShadowmapPass(scene), m_PostProcessPass(scene), m_ForwardLightingPass(scene, true), m_EnvironmentProbePass(scene),
+		m_DeferredGeometryPass(scene), m_DeferredLightingPass(scene), m_PostGBufferForwardPass(scene)
 	{
 		m_GLCache = GLCache::getInstance();
 	}
@@ -20,7 +21,8 @@ namespace tiger {
 	}
 
 	void MasterRenderer::render() {
-		// Shadow map passs
+		/* Forward Rendering */
+#if FORWARD_RENDER
 #if DEBUG_ENABLED
 		glFinish();
 		m_Timer.reset();
@@ -32,19 +34,44 @@ namespace tiger {
 #endif
 
 		// Lighting Pass
-		LightingPassOutput lightingOutput = m_LightingPass.executeRenderPass(shadowmapOutput, m_ActiveScene->getCamera(), false, true);
+		LightingPassOutput lightingOutput = m_ForwardLightingPass.executeLightingPass(shadowmapOutput, m_ActiveScene->getCamera(), false, true);
 
 		// Post Process Pass
 #if DEBUG_ENABLED
 		glFinish();
 		m_Timer.reset();
 #endif
-		m_PostProcessPass.executeRenderPass(lightingOutput.outputFramebuffer);
+		m_PostProcessPass.executePostProcessPass(lightingOutput.outputFramebuffer);
 #if DEBUG_ENABLED
 		glFinish();
 		RuntimePane::setPostProcessTimer((float)m_Timer.elapsed());
 #endif
-		//m_EnvironmentProbePass.pregenerateProbes();
+		
+		/* Deferred Rendering */
+#else
+#if DEBUG_ENABLED
+		glFinish();
+		m_Timer.reset();
+#endif
+		ShadowmapPassOutput shadowmapOutput = m_ShadowmapPass.generateShadowmaps(m_ActiveScene->getCamera(), false);
+#if DEBUG_ENABLED
+		glFinish();
+		RuntimePane::setShadowmapTimer((float)m_Timer.elapsed());
+#endif
+		GeometryPassOutput geometryOutput = m_DeferredGeometryPass.executeGeometryPass(m_ActiveScene->getCamera(), false);
+		LightingPassOutput deferredLightingOutput = m_DeferredLightingPass.executeLightingPass(shadowmapOutput, geometryOutput, m_ActiveScene->getCamera(), true);
+		LightingPassOutput postGBufferForward = m_PostGBufferForwardPass.executeLightingPass(shadowmapOutput, deferredLightingOutput, m_ActiveScene->getCamera(), false, true);
+#if DEBUG_ENABLED
+		glFinish();
+		m_Timer.reset();
+#endif
+		m_PostProcessPass.executePostProcessPass(postGBufferForward.outputFramebuffer);
+#if DEBUG_ENABLED
+		glFinish();
+		RuntimePane::setPostProcessTimer((float)m_Timer.elapsed());
+#endif
+#endif
+		
 	}
 
 

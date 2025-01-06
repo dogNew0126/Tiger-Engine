@@ -115,7 +115,7 @@ void main() {
 		ambient = (diffuseRatio * indirectDiffuse + indirectSpecular) * ao;
 	}
 
-	color = vec4(ambient + directLightIrradiance, 1.0);
+	color = vec4(ambient + directLightIrradiance, albedoAlpha);
 
 }
 

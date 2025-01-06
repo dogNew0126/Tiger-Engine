@@ -15,7 +15,7 @@ namespace tiger
 
 	PostProcessPass::~PostProcessPass() {}
 
-	void PostProcessPass::executeRenderPass(Framebuffer* framebufferToProcess) {
+	void PostProcessPass::executePostProcessPass(Framebuffer* framebufferToProcess) {
 		glViewport(0, 0, Window::getWidth(), Window::getHeight());
 
 		// If the input RenderTarget is multi-sampled. Resolve it by blitting it to a non-multi-sampled RenderTarget so we can post process it

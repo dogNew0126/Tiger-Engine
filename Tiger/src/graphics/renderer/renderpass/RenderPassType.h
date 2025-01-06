@@ -1,6 +1,7 @@
 #pragma once
 
 #include "platform/OpenGL/Framebuffers/Framebuffer.h"
+#include "platform/OpenGL/Framebuffers/GBuffer.h"
 
 namespace tiger {
 
@@ -8,7 +9,8 @@ namespace tiger {
 			ShadowmapPassType,
 			LightingPassType,
 			PostProcessPassType,
-			ProbePassType
+			ProbePassType,
+			GeometryPassType
 		};
 
 		struct ShadowmapPassOutput
@@ -20,6 +22,10 @@ namespace tiger {
 		struct LightingPassOutput
 		{
 			Framebuffer* outputFramebuffer;
+		};
+
+		struct GeometryPassOutput {
+			GBuffer* outputGBuffer;
 		};
 
 }

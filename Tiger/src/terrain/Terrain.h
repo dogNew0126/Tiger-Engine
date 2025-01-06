@@ -3,6 +3,8 @@
 #include "graphics/mesh/Mesh.h"
 #include "graphics/mesh/Model.h"
 
+#include "graphics/renderer/GLCache.h"
+
 namespace tiger {
 
 	class Terrain {
@@ -24,6 +26,8 @@ namespace tiger {
 		float clamp(float n, float lower, float upper);
 
 	private:
+		GLCache* m_GLCache;
+
 		// tweakable parameters
 		float m_TextureTilingAmount;
 		float m_TerrainSizeXZ, m_TerrainSizeY;

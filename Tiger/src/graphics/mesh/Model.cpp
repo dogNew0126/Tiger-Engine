@@ -125,7 +125,10 @@ namespace tiger {
 			mat->GetTexture(type, 0, &str); // Grab only the first texture (standard shader only supports one texture of each type, it doesn't know how you want to do special blending)
 
 			// Assumption made: material stuff is located in the same directory as the model object
-			return TextureLoader::load2DTexture((m_Directory + "/" + std::string(str.C_Str())).c_str(), isSRGB);
+			std::string fileToSearch = (m_Directory + "/" + std::string(str.C_Str())).c_str();
+			TextureSettings textureSettings;
+			textureSettings.IsSRGB = isSRGB;
+			return TextureLoader::load2DTexture(fileToSearch, &textureSettings);
 		}
 
 		return nullptr;

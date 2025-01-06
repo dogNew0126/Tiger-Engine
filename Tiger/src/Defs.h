@@ -1,6 +1,6 @@
 #pragma once
 
-// Developer Options
+// Debug Options
 #define DEBUG_ENABLED 1
 
 // Window Settings
@@ -9,8 +9,11 @@
 #define V_SYNC 0
 #define FULLSCREEN_MODE 0
 
+// Render Settings
+#define FORWARD_RENDER 0
+
 // AA Settings
-#define MSAA_SAMPLE_AMOUNT 4
+#define MSAA_SAMPLE_AMOUNT 4 // Only used in Forward Rendering
 
 // Texture Filtering Settings
 #define ANISOTROPIC_FILTERING_LEVEL 8.0f

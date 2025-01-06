@@ -186,6 +186,18 @@
     <ClCompile Include="src\graphics\ibl\ReflectionProbe.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\OpenGL\Framebuffers\GBuffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\renderer\renderpass\deferred\DeferredGeometryPass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\renderer\renderpass\deferred\DeferredLightingPass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\renderer\renderpass\deferred\PostGBufferForwardPass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Shader.h">
@@ -377,6 +389,18 @@
     <ClInclude Include="src\graphics\ibl\ReflectionProbe.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\OpenGL\Framebuffers\GBuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderer\renderpass\deferred\DeferredGeometryPass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderer\renderpass\deferred\DeferredLightingPass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderer\renderpass\deferred\PostGBufferForwardPass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\lightCube.frag" />
@@ -399,10 +423,12 @@
     <None Include="src\shaders\brdf_integration.frag" />
     <None Include="src\shaders\reflectionprobe_importance_sampling.vert" />
     <None Include="src\shaders\reflectionprobe_importance_sampling.frag" />
-    <None Include="src\shaders\deferred\pbr_model.vert" />
-    <None Include="src\shaders\deferred\pbr_model.frag" />
-    <None Include="src\shaders\deferred\pbr_terrain.frag" />
-    <None Include="src\shaders\deferred\pbr_terrain.vert" />
+    <None Include="src\shaders\deferred\pbr_model_geometry.vert" />
+    <None Include="src\shaders\deferred\pbr_model_geometry.frag" />
+    <None Include="src\shaders\deferred\pbr_terrain_geometry.frag" />
+    <None Include="src\shaders\deferred\pbr_terrain_geometry.vert" />
+    <None Include="src\shaders\deferred\pbr_lighting_pass.vert" />
+    <None Include="src\shaders\deferred\pbr_lighting_pass.frag" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vendor\Imgui\LICENSE.txt" />
