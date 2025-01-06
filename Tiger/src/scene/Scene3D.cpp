@@ -24,7 +24,6 @@ namespace tiger {
 	}
 
 	void Scene3D::init() {
-		m_GLCache->setMultisample(true);
 
 		//// Load renderables
 		//graphics::Quad windowPane;

@@ -5,7 +5,7 @@ namespace tiger {
 	class Framebuffer {
 	public:
 		Framebuffer(unsigned int width, unsigned int height);
-		~Framebuffer();
+		virtual ~Framebuffer();
 
 		void createFramebuffer();
 		Framebuffer& addTexture2DColorAttachment(bool multisampledBuffer);
@@ -32,15 +32,15 @@ namespace tiger {
 
 		inline bool isMultisampledColourBuffer() { return m_IsMultisampledColourBuffer; }
 
-	private:
+	protected:
 		unsigned int m_FBO;
 
 		bool m_IsMultisampledColourBuffer;
 
 		unsigned int m_ColourTexture;
+		unsigned int m_DepthTexture;
 		unsigned int m_DepthRBO;
 		unsigned int m_DepthStencilRBO;
-		unsigned int m_DepthTexture;
 
 		unsigned int m_Width, m_Height;
 	};

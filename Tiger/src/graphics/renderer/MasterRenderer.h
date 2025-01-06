@@ -1,9 +1,9 @@
 #pragma once
 
-#include "graphics/renderer/renderpass/LightingPass.h"
+#include "graphics/renderer/renderpass/forward/ForwardLightingPass.h"
 #include "graphics/renderer/renderpass/ShadowmapPass.h"
 #include "graphics/renderer/renderpass/PostProcessPass.h"
-#include "graphics/renderer/renderpass/ProbePass.h"
+#include "graphics/renderer/renderpass/forward/ForwardProbePass.h"
 #include "scene/Scene3D.h"
 #include "utils/Timer.h"
 
@@ -21,9 +21,9 @@ namespace tiger {
 		Scene3D* m_ActiveScene;
 		// Render passes
 		ShadowmapPass m_ShadowmapPass;
-		LightingPass m_LightingPass;
+		ForwardLightingPass m_LightingPass;
 		PostProcessPass m_PostProcessPass;
-		ProbePass m_EnvironmentProbePass;
+		ForwardProbePass m_EnvironmentProbePass;
 		Timer m_Timer;
 	};
 }

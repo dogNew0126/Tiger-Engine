@@ -1,19 +1,19 @@
 #pragma once
 
-#include <graphics/camera/CubemapCamera.h>
-#include <graphics/renderer/renderpass/RenderPass.h>
-#include <graphics/renderer/renderpass/ShadowmapPass.h>
-#include <graphics/Shader.h>
-#include <scene/Scene3D.h>
+#include "graphics/camera/CubemapCamera.h"
+#include "graphics/renderer/renderpass/RenderPass.h"
+#include "graphics/renderer/renderpass/ShadowmapPass.h"
+#include "graphics/Shader.h"
+#include "scene/Scene3D.h"
 
 namespace tiger
 {
 
-	class ProbePass : public RenderPass
+	class ForwardProbePass : public RenderPass
 	{
 	public:
-		ProbePass(Scene3D* scene);
-		virtual ~ProbePass() override;
+		ForwardProbePass(Scene3D* scene);
+		virtual ~ForwardProbePass() override;
 
 		void pregenerateIBL();
 		void pregenerateProbes();
