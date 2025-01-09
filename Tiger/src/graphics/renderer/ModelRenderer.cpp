@@ -83,7 +83,7 @@ namespace tiger {
 
 		shader->setUniformMat4("model", model);
 
-		if (pass != RenderPassType::ShadowmapPassType) {
+		if (pass == MaterialRequired) {
 			glm::mat3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(model)));
 			shader->setUniformMat3("normalMatrix", normalMatrix);
 		}

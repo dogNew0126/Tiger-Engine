@@ -144,7 +144,7 @@ void main() {
 	directLightIrradiance += CalculateSpotLightRadiance(albedo, normal, metallic, roughness, fragToView, baseReflectivity);
 
 	// Calculate ambient term
-	vec3 ambient = vec3(0.25) * albedo * ao;
+	vec3 ambient = vec3(0.5) * albedo * ao;
 	
 	// Result
 	color = vec4(ambient + directLightIrradiance, 1.0);

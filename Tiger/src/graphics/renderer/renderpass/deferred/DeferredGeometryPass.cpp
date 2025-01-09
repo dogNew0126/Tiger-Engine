@@ -4,14 +4,14 @@
 #include "utils/loaders/ShaderLoader.h"
 
 namespace tiger {
-	DeferredGeometryPass::DeferredGeometryPass(Scene3D* scene) : RenderPass(scene, RenderPassType::GeometryPassType), m_AllocatedGBuffer(true) {
+	DeferredGeometryPass::DeferredGeometryPass(Scene3D* scene) : RenderPass(scene), m_AllocatedGBuffer(true) {
 		m_ModelShader = ShaderLoader::loadShader("src/shaders/deferred/pbr_model_geometry.vert", "src/shaders/deferred/pbr_model_geometry.frag");
 		m_TerrainShader = ShaderLoader::loadShader("src/shaders/deferred/pbr_terrain_geometry.vert", "src/shaders/deferred/pbr_terrain_geometry.frag");
 
 		m_GBuffer = new GBuffer(Window::getWidth(), Window::getHeight());
 	}
 
-	DeferredGeometryPass::DeferredGeometryPass(Scene3D* scene, GBuffer* customGBuffer) : RenderPass(scene, RenderPassType::GeometryPassType), m_AllocatedGBuffer(false), m_GBuffer(customGBuffer) {
+	DeferredGeometryPass::DeferredGeometryPass(Scene3D* scene, GBuffer* customGBuffer) : RenderPass(scene), m_AllocatedGBuffer(false), m_GBuffer(customGBuffer) {
 		m_ModelShader = ShaderLoader::loadShader("src/shaders/deferred/pbr_model_geometry.vert", "src/shaders/deferred/pbr_model_geometry.frag");
 		m_TerrainShader = ShaderLoader::loadShader("src/shaders/deferred/pbr_terrain_geometry.vert", "src/shaders/deferred/pbr_terrain_geometry.frag");
 	}
@@ -53,7 +53,7 @@ namespace tiger {
 		// Render opaque objects (use stencil to denote models for the deferred lighting pass)
 		m_GLCache->setStencilWriteMask(0xFF);
 		m_GLCache->setStencilFunc(GL_ALWAYS, DeferredStencilValue::ModelStencilValue, 0xFF);
-		modelRenderer->flushOpaque(m_ModelShader, m_RenderPassType);
+		modelRenderer->flushOpaque(m_ModelShader, MaterialRequired);
 		m_GLCache->setStencilWriteMask(0x00);
 
 		// Setup terrain information
@@ -64,7 +64,7 @@ namespace tiger {
 		// Render the terrain (use stencil to denote the terrain for the deferred lighting pass)
 		m_GLCache->setStencilWriteMask(0xFF);
 		m_GLCache->setStencilFunc(GL_ALWAYS, DeferredStencilValue::TerrainStencilValue, 0xFF);
-		terrain->Draw(m_TerrainShader, m_RenderPassType);
+		terrain->Draw(m_TerrainShader, MaterialRequired);
 		m_GLCache->setStencilWriteMask(0x00);
 
 		// Reset state

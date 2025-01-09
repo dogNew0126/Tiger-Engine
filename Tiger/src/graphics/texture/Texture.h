@@ -13,6 +13,9 @@ namespace tiger {
 		// Texture wrapping options
 		GLenum TextureWrapSMode = GL_REPEAT;
 		GLenum TextureWrapTMode = GL_REPEAT;
+		bool HasBorder = false;
+		glm::vec4 BorderColour = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+
 
 		// Texture filtering options
 		GLenum TextureMinificationFilterMode = GL_LINEAR_MIPMAP_LINEAR; // Filtering mode when the texture moves further away and multiple texels map to one pixel (trilinear for best quality)
@@ -32,24 +35,30 @@ namespace tiger {
 
 		// Generation functions
 		void generate2DTexture(unsigned int width, unsigned int height, GLenum dataFormat, const void* data);
+		void generate2DMultisampleTexture(unsigned int width, unsigned int height);
 			
-		void bind(int unit = -1);
+		void bind(int unit = 0);
 		void unbind();
 
 		// Texture Tuning Functions
-		void setTextureWrapS(GLenum textureWrapMode, bool shouldBind = false);
-		void setTextureWrapT(GLenum textureWrapMode, bool shouldBind = false);
-		void setTextureMinFilter(GLenum textureFilterMode, bool shouldBind = false);
-		void setTextureMagFilter(GLenum textureFilterMode, bool shouldBind = false);
-		void setAnisotropicFilteringMode(float textureAnisotropyLevel, bool shouldBind = false);
+		void setTextureWrapS(GLenum textureWrapMode);
+		void setTextureWrapT(GLenum textureWrapMode);
+		void setHasBorder(bool hasBorder);
+		void setBorderColour(glm::vec4& borderColour);
+		void setTextureMinFilter(GLenum textureFilterMode);
+		void setTextureMagFilter(GLenum textureFilterMode);
+		void setAnisotropicFilteringMode(float textureAnisotropyLevel);
+		void setMipBias(int mipBias);
 			
 		// Pre-generation controls only
-		void setMipMode(bool shouldGenMips, int mipBias);
+		void setHasMips(bool hasMips);
 		inline void setTextureSettings(TextureSettings settings) { m_TextureSettings = settings; }
 
 		inline unsigned int getTextureId() { return m_TextureId; }
+		inline bool isGenerated() { return m_TextureId != 0; }
 		inline unsigned int getWidth() { return m_Width; }
 		inline unsigned int getHeight() { return m_Height; }
+		const TextureSettings& getTextureSettings() { return m_TextureSettings; }
 
 	private:
 		unsigned int m_TextureId;

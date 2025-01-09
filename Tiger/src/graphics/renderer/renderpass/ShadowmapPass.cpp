@@ -5,13 +5,13 @@
 
 namespace tiger {
 
-	ShadowmapPass::ShadowmapPass(Scene3D* scene) : RenderPass(scene, RenderPassType::ShadowmapPassType), m_AllocatedFramebuffer(true)
+	ShadowmapPass::ShadowmapPass(Scene3D* scene) : RenderPass(scene), m_AllocatedFramebuffer(true)
 	{
 		m_ShadowmapShader = ShaderLoader::loadShader("src/shaders/shadowmap.vert", "src/shaders/shadowmap.frag");
-		m_ShadowmapFramebuffer = new Framebuffer(SHADOWMAP_RESOLUTION_X, SHADOWMAP_RESOLUTION_Y);
-		m_ShadowmapFramebuffer->addDepthAttachment(false).createFramebuffer();
+		m_ShadowmapFramebuffer = new Framebuffer(SHADOWMAP_RESOLUTION_X, SHADOWMAP_RESOLUTION_Y, false);
+		m_ShadowmapFramebuffer->addDepthStencilTexture(NormalizedDepthOnly).createFramebuffer();
 	}
-	ShadowmapPass::ShadowmapPass(Scene3D* scene, Framebuffer* customFramebuffer) : RenderPass(scene, RenderPassType::ShadowmapPassType), m_AllocatedFramebuffer(false), m_ShadowmapFramebuffer(customFramebuffer)
+	ShadowmapPass::ShadowmapPass(Scene3D* scene, Framebuffer* customFramebuffer) : RenderPass(scene), m_AllocatedFramebuffer(false), m_ShadowmapFramebuffer(customFramebuffer)
 	{
 		m_ShadowmapShader = ShaderLoader::loadShader("src/shaders/shadowmap.vert", "src/shaders/shadowmap.frag");
 	}
@@ -48,11 +48,11 @@ namespace tiger {
 			m_ActiveScene->addModelsToRenderer();
 		}
 		// Render models
-		modelRenderer->flushOpaque(m_ShadowmapShader, m_RenderPassType);
-		modelRenderer->flushTransparent(m_ShadowmapShader, m_RenderPassType);
+		modelRenderer->flushOpaque(m_ShadowmapShader, NoMaterialRequired);
+		modelRenderer->flushTransparent(m_ShadowmapShader, NoMaterialRequired);
 
 		// Render terrain
-		terrain->Draw(m_ShadowmapShader, m_RenderPassType);
+		terrain->Draw(m_ShadowmapShader, NoMaterialRequired);
 
 		// Render pass output
 		ShadowmapPassOutput passOutput;

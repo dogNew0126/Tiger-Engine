@@ -36,8 +36,6 @@ uniform sampler2D albedoTexture;
 uniform sampler2D normalTexture;
 uniform sampler2D materialInfoTexture;
 uniform sampler2D depthTexture;
-uniform float nearPlane;
-uniform float farPlane;
 
 // IBL
 uniform int reflectionProbeMipCount;
@@ -100,7 +98,7 @@ void main() {
 	directLightIrradiance += CalculateSpotLightRadiance(albedo, normal, metallic, roughness, fragPos, fragToView, baseReflectivity);
 
 	// Calcualte ambient IBL for both diffuse and specular
-	vec3 ambient = vec3(0.03) * albedo * ao;
+	vec3 ambient = vec3(0.05) * albedo * ao;
 	
 	if (computeIBL) {
 		vec3 specularRatio = FresnelSchlick(max(dot(normal, fragToView), 0.0), baseReflectivity);

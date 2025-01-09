@@ -6,15 +6,15 @@
 namespace tiger
 {
 
-	ForwardLightingPass::ForwardLightingPass(Scene3D* scene, bool shouldMultisample) : RenderPass(scene, RenderPassType::LightingPassType), m_AllocatedFramebuffer(true)
+	ForwardLightingPass::ForwardLightingPass(Scene3D* scene, bool shouldMultisample) : RenderPass(scene), m_AllocatedFramebuffer(true)
 	{
 		m_ModelShader = ShaderLoader::loadShader("src/shaders/forward/pbr_model.vert", "src/shaders/forward/pbr_model.frag");
 		m_TerrainShader = ShaderLoader::loadShader("src/shaders/forward/pbr_terrain.vert", "src/shaders/forward/pbr_terrain.frag");
-		m_Framebuffer = new Framebuffer(Window::getWidth(), Window::getHeight());
-		m_Framebuffer->addTexture2DColorAttachment(shouldMultisample).addDepthStencilRBO(shouldMultisample).createFramebuffer();
+		m_Framebuffer = new Framebuffer(Window::getWidth(), Window::getHeight(), shouldMultisample);
+		m_Framebuffer->addColorTexture(FloatingPoint16).addDepthStencilRBO(NormalizedDepthStencil).createFramebuffer();
 	}
 
-	ForwardLightingPass::ForwardLightingPass(Scene3D* scene, Framebuffer* customFramebuffer) : RenderPass(scene, RenderPassType::LightingPassType), m_AllocatedFramebuffer(false), m_Framebuffer(customFramebuffer)
+	ForwardLightingPass::ForwardLightingPass(Scene3D* scene, Framebuffer* customFramebuffer) : RenderPass(scene), m_AllocatedFramebuffer(false), m_Framebuffer(customFramebuffer)
 	{
 		m_ModelShader = ShaderLoader::loadShader("src/shaders/forward/pbr_model.vert", "src/shaders/forward/pbr_model.frag");
 		m_TerrainShader = ShaderLoader::loadShader("src/shaders/forward/pbr_terrain.vert", "src/shaders/forward/pbr_terrain.frag");
@@ -30,7 +30,7 @@ namespace tiger
 		m_Framebuffer->bind();
 		m_Framebuffer->clear();
 
-		if (m_Framebuffer->isMultisampledColourBuffer()) {
+		if (m_Framebuffer->isMultisampled()) {
 			m_GLCache->setMultisample(true);
 		}
 		else {
@@ -76,7 +76,7 @@ namespace tiger
 		}
 
 		// Render the scene
-		modelRenderer->flushOpaque(m_ModelShader, m_RenderPassType);
+		modelRenderer->flushOpaque(m_ModelShader, MaterialRequired);
 
 		m_GLCache->switchShader(m_TerrainShader);
 		(lightManager->*lightBindFunction) (m_TerrainShader);
@@ -89,7 +89,7 @@ namespace tiger
 		m_TerrainShader->setUniformMat4("projection", camera->getProjectionMatrix());
 		bindShadowmap(m_TerrainShader, shadowmapData);
 
-		terrain->Draw(m_TerrainShader, m_RenderPassType);
+		terrain->Draw(m_TerrainShader, MaterialRequired);
 
 		// Render skybox
 		skybox->Draw(camera);
@@ -99,7 +99,7 @@ namespace tiger
 		if (useIBL) {
 			probeManager->bindProbes(glm::vec3(0.0f, 0.0f, 0.0f), m_ModelShader);
 		}
-		modelRenderer->flushTransparent(m_ModelShader, m_RenderPassType);
+		modelRenderer->flushTransparent(m_ModelShader, MaterialRequired);
 
 		// Render pass output
 		LightingPassOutput passOutput;
@@ -109,8 +109,7 @@ namespace tiger
 
 	void ForwardLightingPass::bindShadowmap(Shader* shader, ShadowmapPassOutput& shadowmapData) {
 
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, shadowmapData.shadowmapFramebuffer->getDepthTexture());
+		shadowmapData.shadowmapFramebuffer->getDepthStencilTexture()->bind();
 		shader->setUniform1i("shadowmap", 0);
 		shader->setUniformMat4("lightSpaceViewProjectionMatrix", shadowmapData.directionalLightViewProjMatrix);
 

@@ -6,7 +6,7 @@
 
 namespace tiger {
 
-	PostGBufferForward::PostGBufferForward(Scene3D* scene) : RenderPass(scene, RenderPassType::LightingPassType)
+	PostGBufferForward::PostGBufferForward(Scene3D* scene) : RenderPass(scene)
 	{
 		m_ModelShader = ShaderLoader::loadShader("src/shaders/forward/pbr_model.vert", "src/shaders/forward/pbr_model.frag");
 	}
@@ -60,7 +60,7 @@ namespace tiger {
 		}
 
 		// Render transparent objects
-		modelRenderer->flushTransparent(m_ModelShader, m_RenderPassType);
+		modelRenderer->flushTransparent(m_ModelShader, MaterialRequired);
 
 		// Render pass output
 		LightingPassOutput passOutput;
@@ -69,8 +69,7 @@ namespace tiger {
 	}
 
 	void PostGBufferForward::bindShadowmap(Shader* shader, ShadowmapPassOutput& shadowmapData) {
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, shadowmapData.shadowmapFramebuffer->getDepthTexture());
+		shadowmapData.shadowmapFramebuffer->getDepthStencilTexture()->bind();
 		shader->setUniform1i("shadowmap", 0);
 		shader->setUniformMat4("lightSpaceViewProjectionMatrix", shadowmapData.directionalLightViewProjMatrix);
 	}

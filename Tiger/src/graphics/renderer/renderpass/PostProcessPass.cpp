@@ -6,10 +6,10 @@
 namespace tiger
 {
 
-	PostProcessPass::PostProcessPass(Scene3D* scene) : RenderPass(scene, RenderPassType::PostProcessPassType), m_ScreenRenderTarget(Window::getWidth(), Window::getHeight())
+	PostProcessPass::PostProcessPass(Scene3D* scene) : RenderPass(scene), m_ScreenRenderTarget(Window::getWidth(), Window::getHeight(), false)
 	{
 		m_PostProcessShader = ShaderLoader::loadShader("src/shaders/postprocess.vert", "src/shaders/postprocess.frag");
-		m_ScreenRenderTarget.addTexture2DColorAttachment(false).addDepthStencilRBO(false).createFramebuffer();
+		m_ScreenRenderTarget.addColorTexture(FloatingPoint16).addDepthStencilRBO(NormalizedDepthOnly).createFramebuffer();
 		DebugPane::bindGammaCorrectionValue(&m_GammaCorrection);
 	}
 
@@ -20,7 +20,7 @@ namespace tiger
 
 		// If the input RenderTarget is multi-sampled. Resolve it by blitting it to a non-multi-sampled RenderTarget so we can post process it
 		Framebuffer* target = framebufferToProcess;
-		if (framebufferToProcess->isMultisampledColourBuffer()) {
+		if (framebufferToProcess->isMultisampled()) {
 			glBindFramebuffer(GL_READ_FRAMEBUFFER, framebufferToProcess->getFramebuffer());
 			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_ScreenRenderTarget.getFramebuffer());
 			glBlitFramebuffer(0, 0, framebufferToProcess->getWidth(), framebufferToProcess->getHeight(), 0, 0, m_ScreenRenderTarget.getWidth(), m_ScreenRenderTarget.getHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
@@ -39,8 +39,7 @@ namespace tiger
 		m_PostProcessShader->setUniform2f("read_offset", glm::vec2(1.0f / (float)target->getWidth(), 1.0f / (float)target->getHeight()));
 		m_PostProcessShader->setUniform1i("blur_enabled", m_Blur);
 		m_PostProcessShader->setUniform1i("screen_texture", 0);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, target->getColourBufferTexture());
+		target->getColourTexture()->bind();
 
 		Window::clear();
 		ModelRenderer* modelRenderer = m_ActiveScene->getModelRenderer();
