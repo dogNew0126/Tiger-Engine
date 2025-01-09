@@ -10,12 +10,6 @@ namespace tiger {
 	static InputManager s_InputManager;
 
 	class Window {
-	private:
-		const char* m_Title;
-		GLFWwindow* m_Window;
-
-		static bool s_HideCursor;
-		static int s_Width, s_Height;
 
 	public:
 
@@ -29,11 +23,19 @@ namespace tiger {
 		static inline bool getHideCursor() { return s_HideCursor; }
 		static inline int getWidth() { return s_Width; }
 		static inline int getHeight() { return s_Height; }
+		static inline int getResolutionWidth() { return (int)(s_Width * SUPERSAMPLING_FACTOR); }
+		static inline int getResolutionHeight() { return (int)(s_Height * SUPERSAMPLING_FACTOR); }
 
 	private:
 		bool init();
 
 		void setFullScreenResolution();
+
+	private:
+		const char* m_Title;
+		GLFWwindow* m_Window;
+		static bool s_HideCursor;
+		static int s_Width, s_Height;
 
 	};
 

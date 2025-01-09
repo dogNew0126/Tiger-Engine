@@ -7,13 +7,15 @@
 #define WINDOW_X_RESOLUTION 1366
 #define WINDOW_Y_RESOLUTION 768
 #define V_SYNC 0
-#define FULLSCREEN_MODE 0
+#define FULLSCREEN_MODE 0 // If set, window resolution is maximized to your screen resolution
 
 // Render Settings
 #define FORWARD_RENDER 0
 
 // AA Settings
 #define MSAA_SAMPLE_AMOUNT 4 // Only used in Forward Rendering
+#define FXAA_ENABLE 1 // Used for forward and deferred
+#define SUPERSAMPLING_FACTOR 1 // 1 means window resolution will be the render resolution
 
 // Texture Filtering Settings
 #define ANISOTROPIC_FILTERING_LEVEL 8.0f
