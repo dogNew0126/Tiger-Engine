@@ -76,6 +76,7 @@ namespace tiger
 		}
 
 		// Render the scene
+		modelRenderer->setupOpaqueRenderState();
 		modelRenderer->flushOpaque(m_ModelShader, MaterialRequired);
 
 		m_GLCache->switchShader(m_TerrainShader);
@@ -99,6 +100,7 @@ namespace tiger
 		if (useIBL) {
 			probeManager->bindProbes(glm::vec3(0.0f, 0.0f, 0.0f), m_ModelShader);
 		}
+		modelRenderer->setupTransparentRenderState();
 		modelRenderer->flushTransparent(m_ModelShader, MaterialRequired);
 
 		// Render pass output

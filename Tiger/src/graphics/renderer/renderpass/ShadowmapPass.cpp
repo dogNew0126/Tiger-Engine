@@ -48,7 +48,9 @@ namespace tiger {
 			m_ActiveScene->addModelsToRenderer();
 		}
 		// Render models
+		modelRenderer->setupOpaqueRenderState();
 		modelRenderer->flushOpaque(m_ShadowmapShader, NoMaterialRequired);
+		modelRenderer->setupTransparentRenderState();
 		modelRenderer->flushTransparent(m_ShadowmapShader, NoMaterialRequired);
 
 		// Render terrain
