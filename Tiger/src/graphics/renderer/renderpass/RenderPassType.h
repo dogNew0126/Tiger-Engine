@@ -25,4 +25,8 @@ namespace tiger {
 			GBuffer* outputGBuffer;
 		};
 
+		struct PreLightingPassOutput {
+			Texture* ssaoTexture;
+		};
+
 }

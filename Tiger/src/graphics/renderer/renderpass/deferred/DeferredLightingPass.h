@@ -13,7 +13,7 @@ namespace tiger {
 		DeferredLightingPass(Scene3D* scene, Framebuffer* framebuffer);
 		virtual ~DeferredLightingPass() override;
 
-		LightingPassOutput executeLightingPass(ShadowmapPassOutput& shadowmapData, GeometryPassOutput& geometryData, ICamera* camera, bool useIBL);
+		LightingPassOutput executeLightingPass(ShadowmapPassOutput& shadowmapData, GeometryPassOutput& geometryData, PreLightingPassOutput& preLightingOutput, ICamera* camera, bool useIBL);
 
 	private:
 		void bindShadowmap(Shader* shader, ShadowmapPassOutput& shadowmapData);

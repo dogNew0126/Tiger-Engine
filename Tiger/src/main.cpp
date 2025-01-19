@@ -37,7 +37,8 @@ int main() {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 #endif
 
-		window.clear();
+		tiger::Window::bind();
+		tiger::Window::clear();
 
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
@@ -48,8 +49,8 @@ int main() {
 		scene.onUpdate(deltaTime.getDeltaTime());
 		renderer.render();
 
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		// Display panes
+		tiger::Window::bind();
 		runtimePane.render();
 		debugPane.render();
 

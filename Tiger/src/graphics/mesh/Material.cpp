@@ -15,7 +15,7 @@ namespace tiger
 		// Texture unit 3 is reserved for the brdfLUT
 		int currentTextureUnit = 4;
 
-		shader->setUniform1i("material.texture_albedo", currentTextureUnit);
+		shader->setUniform("material.texture_albedo", currentTextureUnit);
 		if (m_AlbedoMap) {
 			m_AlbedoMap->bind(currentTextureUnit++);
 		}
@@ -23,7 +23,7 @@ namespace tiger
 			TextureLoader::getDefaultAlbedo()->bind(currentTextureUnit++);
 		}
 
-		shader->setUniform1i("material.texture_normal", currentTextureUnit);
+		shader->setUniform("material.texture_normal", currentTextureUnit);
 		if (m_NormalMap) {
 			m_NormalMap->bind(currentTextureUnit++);
 		}
@@ -31,7 +31,7 @@ namespace tiger
 			TextureLoader::getDefaultNormal()->bind(currentTextureUnit++);
 		}
 
-		shader->setUniform1i("material.texture_metallic", currentTextureUnit);
+		shader->setUniform("material.texture_metallic", currentTextureUnit);
 		if (m_MetallicMap) {
 			m_MetallicMap->bind(currentTextureUnit++);
 		}
@@ -39,7 +39,7 @@ namespace tiger
 			TextureLoader::getDefaultMetallic()->bind(currentTextureUnit++);
 		}
 
-		shader->setUniform1i("material.texture_roughness", currentTextureUnit);
+		shader->setUniform("material.texture_roughness", currentTextureUnit);
 		if (m_RoughnessMap) {
 			m_RoughnessMap->bind(currentTextureUnit++);
 		}
@@ -47,20 +47,12 @@ namespace tiger
 			TextureLoader::getDefaultRoughness()->bind(currentTextureUnit++);
 		}
 
-		shader->setUniform1i("material.texture_ao", currentTextureUnit);
+		shader->setUniform("material.texture_ao", currentTextureUnit);
 		if (m_AmbientOcclusionMap) {
 			m_AmbientOcclusionMap->bind(currentTextureUnit++);
 		}
 		else {
 			TextureLoader::getDefaultAO()->bind(currentTextureUnit++);
-		}
-
-		shader->setUniform1i("material.texture_emission", currentTextureUnit);
-		if (m_EmissionMap) {
-			m_EmissionMap->bind(currentTextureUnit++);
-		}
-		else {
-			TextureLoader::getDefaultEmission()->bind(currentTextureUnit++);
 		}
 	}
 }

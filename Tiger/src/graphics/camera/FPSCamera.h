@@ -36,6 +36,7 @@ namespace tiger {
 		inline virtual const glm::vec3& getPosition() const override { return m_Position; }
 		inline virtual const glm::vec3& getFront() const { return m_Front; }
 		inline virtual const glm::vec3& getUp() const { return m_Up; }
+		inline virtual void setPosition(const glm::vec3& position) { m_Position = position; };
 	private:
 		void updateCameraVectors();
 		void processCameraMovement(glm::vec3& direction, float deltaTime);

@@ -30,7 +30,7 @@ namespace tiger {
 	}
 
 	void DynamicLightManager::bindLightingUniforms(Shader* shader) {
-		shader->setUniform4i("numDirPointSpotLights", glm::ivec4(m_DirectionalLights.size(), m_PointLights.size(), m_SpotLights.size(), 0));
+		shader->setUniform("numDirPointSpotLights", glm::ivec4(m_DirectionalLights.size(), m_PointLights.size(), m_SpotLights.size(), 0));
 
 		int i = 0;
 		for (auto iter = m_DirectionalLights.begin(); iter != m_DirectionalLights.end(); iter++) {
@@ -67,7 +67,7 @@ namespace tiger {
 				iter->setupUniforms(shader, numStaticSpotLights++);
 		}
 
-		shader->setUniform4i("numDirPointSpotLights", glm::ivec4(numStaticDirLights, numStaticPointLights, numStaticSpotLights, 0));
+		shader->setUniform("numDirPointSpotLights", glm::ivec4(numStaticDirLights, numStaticPointLights, numStaticSpotLights, 0));
 	}
 
 

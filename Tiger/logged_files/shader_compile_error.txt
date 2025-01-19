@@ -1,2 +1,2 @@
-(src/shaders/terrain.vert): 0(13) : error C1038: declaration of "TexCoords" conflicts with previous declaration at 0(10)
+(src/shaders/ssao.frag): 0(56) : error C1503: undefined variable "sampleRadius2"
 

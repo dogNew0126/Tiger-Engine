@@ -327,6 +327,10 @@
     <None Include="src\shaders\skybox.frag" />
     <None Include="src\shaders\skybox.vert" />
     <None Include="src\shaders\forward\pbr_terrain.frag" />
+    <None Include="src\shaders\ssao.frag" />
+    <None Include="src\shaders\ssao.vert" />
+    <None Include="src\shaders\ssao_blur.frag" />
+    <None Include="src\shaders\ssao_blur.vert" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vendor\Imgui\LICENSE.txt" />

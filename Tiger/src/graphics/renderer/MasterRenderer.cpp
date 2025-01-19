@@ -37,16 +37,8 @@ namespace tiger {
 		LightingPassOutput lightingOutput = m_ForwardLightingPass.executeLightingPass(shadowmapOutput, m_ActiveScene->getCamera(), false, true);
 
 		// Post Process Pass
-#if DEBUG_ENABLED
-		glFinish();
-		m_Timer.reset();
-#endif
 		m_PostProcessPass.executePostProcessPass(lightingOutput.outputFramebuffer);
-#if DEBUG_ENABLED
-		glFinish();
-		RuntimePane::setPostProcessTimer((float)m_Timer.elapsed());
-#endif
-		
+
 		/* Deferred Rendering */
 #else
 #if DEBUG_ENABLED
@@ -59,17 +51,13 @@ namespace tiger {
 		RuntimePane::setShadowmapTimer((float)m_Timer.elapsed());
 #endif
 		GeometryPassOutput geometryOutput = m_DeferredGeometryPass.executeGeometryPass(m_ActiveScene->getCamera(), false);
-		LightingPassOutput deferredLightingOutput = m_DeferredLightingPass.executeLightingPass(shadowmapOutput, geometryOutput, m_ActiveScene->getCamera(), true);
+		PreLightingPassOutput preLightingOutput = m_PostProcessPass.executePreLightingPass(geometryOutput, m_ActiveScene->getCamera());
+		LightingPassOutput deferredLightingOutput = m_DeferredLightingPass.executeLightingPass(shadowmapOutput, geometryOutput, preLightingOutput, m_ActiveScene->getCamera(), true);
 		LightingPassOutput postGBufferForward = m_PostGBufferForwardPass.executeLightingPass(shadowmapOutput, deferredLightingOutput, m_ActiveScene->getCamera(), false, true);
-#if DEBUG_ENABLED
-		glFinish();
-		m_Timer.reset();
-#endif
+
 		m_PostProcessPass.executePostProcessPass(postGBufferForward.outputFramebuffer);
-#if DEBUG_ENABLED
-		glFinish();
-		RuntimePane::setPostProcessTimer((float)m_Timer.elapsed());
-#endif
+		//m_PostProcessPass.executePostProcessPass(preLightingOutput.ssaoFramebuffer);
+
 #endif
 		
 	}
