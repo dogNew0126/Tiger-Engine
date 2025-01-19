@@ -39,6 +39,7 @@ namespace tiger {
 		Terrain* terrain = m_ActiveScene->getTerrain();
 
 		m_GLCache->switchShader(m_ModelShader);
+		m_ModelShader->setUniform("viewPos", camera->getPosition());
 		m_ModelShader->setUniform("view", camera->getViewMatrix());
 		m_ModelShader->setUniform("projection", camera->getProjectionMatrix());
 

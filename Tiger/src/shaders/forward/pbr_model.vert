@@ -10,7 +10,11 @@ out mat3 TBN;
 out vec3 FragPos;
 out vec4 FragPosLightClipSpace;
 out vec2 TexCoords;
+out vec3 FragPosTangentSpace;
+out vec3 ViewPosTangentSpace;
 
+uniform bool hasDisplacement;
+uniform vec3 viewPos;
 uniform mat3 normalMatrix;
 uniform mat4 model;
 uniform mat4 view;
@@ -26,9 +30,14 @@ void main() {
 
     TBN = mat3(T, B, N);
 
+	TexCoords = texCoords;
 	FragPos = vec3(model * vec4(position, 1.0f));
 	FragPosLightClipSpace = lightSpaceViewProjectionMatrix * vec4(FragPos, 1.0);
 
-	TexCoords = texCoords;
+	if (hasDisplacement) {
+		mat3 inverseTBN = transpose(TBN); // Calculate matrix to go from world -> tangent (orthogonal matrix's transpose = inverse)
+		FragPosTangentSpace = inverseTBN * FragPos;
+		ViewPosTangentSpace = inverseTBN * viewPos;
+	}
 	gl_Position = projection * view * vec4(FragPos, 1.0);
 }

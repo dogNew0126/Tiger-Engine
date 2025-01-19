@@ -38,3 +38,7 @@
 
 // SSAO Options
 #define SSAO_KERNEL_SIZE 32
+
+// Parallax Options
+#define PARALLAX_MIN_STEPS 1
+#define PARALLAX_MAX_STEPS 20

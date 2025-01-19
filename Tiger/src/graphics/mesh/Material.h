@@ -8,7 +8,7 @@ namespace tiger {
 	class Material {
 	public:
 		Material(Texture* albedoMap = nullptr, Texture* normalMap = nullptr, Texture* metallicMap = nullptr, Texture* roughnessMap = nullptr,
-			Texture* ambientOcclusionMap = nullptr, Texture* emissionMap = nullptr);
+			Texture* ambientOcclusionMap = nullptr, Texture* displacementMap = nullptr);
 
 		void BindMaterialInformation(Shader* shader) const;
 
@@ -17,10 +17,14 @@ namespace tiger {
 		inline void setMetallicMap(Texture* texture) { m_MetallicMap = texture; }
 		inline void setRoughnessMap(Texture* texture) { m_RoughnessMap = texture; }
 		inline void setAmbientOcclusionMap(Texture* texture) { m_AmbientOcclusionMap = texture; }
-		inline void setEmissionMap(Texture* texture) { m_EmissionMap = texture; }
+		inline void setDisplacementMap(Texture* texture) { m_DisplacementMap = texture; }
+
+		inline void setDisplacmentStrength(float strength) { m_ParallaxStrength = strength; }
 
 	private:
-		Texture* m_AlbedoMap, * m_NormalMap, * m_MetallicMap, * m_RoughnessMap, * m_AmbientOcclusionMap, * m_EmissionMap;
+		Texture* m_AlbedoMap, * m_NormalMap, * m_MetallicMap, * m_RoughnessMap, * m_AmbientOcclusionMap, * m_DisplacementMap;
+		float m_ParallaxStrength;
+		int m_ParallaxMinSteps, m_ParallelMaxSteps; // Will need to increase when parallax strength increases
 	};
 
 }
