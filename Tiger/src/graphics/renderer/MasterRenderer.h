@@ -36,6 +36,6 @@ namespace tiger {
 		DeferredLightingPass m_DeferredLightingPass;
 		PostGBufferForward m_PostGBufferForwardPass;
 
-		Timer m_Timer;
+		Timer m_ProfilingTimer;
 	};
 }

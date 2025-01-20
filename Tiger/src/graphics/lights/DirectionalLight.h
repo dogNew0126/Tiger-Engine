@@ -10,7 +10,7 @@ namespace tiger {
 		friend DynamicLightManager;
 
 	public:
-		DirectionalLight(const glm::vec3& lightColour, const glm::vec3& dir);
+		DirectionalLight(float lightIntensity, const glm::vec3& lightColour, const glm::vec3& dir);
 
 		virtual void setupUniforms(Shader* shader, int currentLightIndex) override;
 

@@ -33,7 +33,7 @@ namespace tiger {
 	}
 
 	glm::mat4 FPSCamera::getProjectionMatrix() const {
-		return glm::perspective(glm::radians(m_CurrentFOV), (float)Window::getResolutionWidth() / (float)Window::getResolutionHeight(), NEAR_PLANE, FAR_PLANE);
+		return glm::perspective(glm::radians(m_CurrentFOV), (float)Window::getRenderResolutionWidth() / (float)Window::getRenderResolutionHeight(), NEAR_PLANE, FAR_PLANE);
 	}
 
 	void FPSCamera::processInput(float deltaTime) {

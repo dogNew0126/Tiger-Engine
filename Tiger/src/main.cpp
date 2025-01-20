@@ -19,7 +19,7 @@ int main() {
 
 	// Prepare the UI
 	tiger::RuntimePane runtimePane(glm::vec2(270.0f, 175.0f));
-	tiger::DebugPane debugPane(glm::vec2(270.0f, 230.0f));
+	tiger::DebugPane debugPane(glm::vec2(270.0f, 400.0f));
 
 	// Initialize the renderer
 	renderer.init();

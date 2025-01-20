@@ -10,11 +10,12 @@ namespace tiger {
 		friend DynamicLightManager;
 
 	public:
-		PointLight(const glm::vec3& lightColour, const glm::vec3& pos);
+		PointLight(float lightIntensity, const glm::vec3& lightColour, float attenuationRadius, const glm::vec3& pos);
 
 		virtual void setupUniforms(Shader* shader, int currentLightIndex) override;
 
 	private:
+		float m_AttenuationRadius;
 		glm::vec3 m_Position;
 	};
 

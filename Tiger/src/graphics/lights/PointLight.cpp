@@ -3,12 +3,11 @@
 
 namespace tiger {
 
-		PointLight::PointLight(const glm::vec3& lightColour, const glm::vec3& pos)
-			: Light(lightColour), m_Position(pos) {}
+	PointLight::PointLight(float lightIntensity, const glm::vec3& lightColour, float attenuationRadius, const glm::vec3& pos)
+		: Light(lightIntensity, lightColour), m_AttenuationRadius(attenuationRadius), m_Position(pos) {}
 
-		// TODO: Assert that the shader is bound in debug
-		void PointLight::setupUniforms(Shader* shader, int currentLightIndex) {
-			shader->setUniform(("pointLights[" + std::to_string(currentLightIndex) + "].lightColour").c_str(), m_LightColour);
-			shader->setUniform(("pointLights[" + std::to_string(currentLightIndex) + "].position").c_str(), m_Position);
-		}
+	void PointLight::setupUniforms(Shader* shader, int currentLightIndex) {
+		shader->setUniform(("pointLights[" + std::to_string(currentLightIndex) + "].lightColour").c_str(), m_LightColour);
+		shader->setUniform(("pointLights[" + std::to_string(currentLightIndex) + "].position").c_str(), m_Position);
+	}
 }
