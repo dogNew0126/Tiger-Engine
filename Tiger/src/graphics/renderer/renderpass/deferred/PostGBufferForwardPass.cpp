@@ -8,7 +8,7 @@ namespace tiger {
 
 	PostGBufferForward::PostGBufferForward(Scene3D* scene) : RenderPass(scene)
 	{
-		m_ModelShader = ShaderLoader::loadShader("src/shaders/forward/pbr_model.vert", "src/shaders/forward/pbr_model.frag");
+		m_ModelShader = ShaderLoader::loadShader("src/shaders/forward/PBR_Model.glsl");
 	}
 
 	PostGBufferForward::~PostGBufferForward() {}

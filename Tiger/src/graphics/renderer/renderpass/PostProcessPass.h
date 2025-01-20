@@ -32,8 +32,9 @@ namespace tiger
 		Framebuffer m_ResolveRenderTarget; // Only used if multi-sampling is enabled so it can be resolved
 
 		// Post Processing Tweaks
-		bool m_FxaaEnabled = true;
 		float m_GammaCorrection = 2.2f;
+		float m_Exposure = 1.0f;
+		bool m_FxaaEnabled = true;
 		bool m_SsaoEnabled = true;
 		float m_SsaoSampleRadius = 2.0;
 		float m_SsaoStrength = 3.0f;

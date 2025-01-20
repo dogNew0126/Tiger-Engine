@@ -1,1 +1,0 @@
-(shader initialization): Failed to Compile Geometry Shader

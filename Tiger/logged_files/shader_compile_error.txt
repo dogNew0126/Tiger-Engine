@@ -1,2 +1,0 @@
-(src/shaders/ssao.frag): 0(56) : error C1503: undefined variable "sampleRadius2"
-

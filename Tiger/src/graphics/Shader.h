@@ -4,15 +4,10 @@ namespace tiger {
 
 	class Shader {
 	private: 
-		unsigned int m_ShaderID;
-		const char* m_VertPath, * m_FragPath, * m_GeomPath, * m_HullShader, * m_DomainShader;;
 
 	public:
 
-		Shader(const char *vertPath, const char *fragPath);
-		Shader(const char* vertPath, const char* fragPath, const char* geoPath);
-		Shader(const char* vertPath, const char* fragPath, const char* hullPath, const char* domainPath);
-		Shader(const char* vertPath, const char* fragPath, const char* geoPath, const char* hullPath, const char* domainPath);
+		Shader(const std::string& path);
 		~Shader();
 
 		void setUniform(const char* name, float value);
@@ -43,7 +38,13 @@ namespace tiger {
 
 		int getUniformLocation(const char* name);
 
-		unsigned int load();
+		static GLenum shaderTypeFromString(const std::string& type);
+		std::unordered_map<GLenum, std::string> preProcessShaderBinary(std::string& source);
+		void compile(const std::unordered_map<GLenum, std::string>& shaderSources);
+
+	private:
+		unsigned int m_ShaderID;
+		std::string m_ShaderFilePath;
 	};
 
 }
