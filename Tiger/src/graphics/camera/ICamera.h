@@ -13,5 +13,6 @@ namespace tiger
 		virtual const glm::vec3& getUp() const = 0;
 
 		virtual void setPosition(const glm::vec3& position) = 0;
+		virtual void invertPitch() = 0;
 	};
 }

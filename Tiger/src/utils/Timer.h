@@ -3,15 +3,16 @@
 namespace tiger {
 
 	class Timer {
-	private:
-		double startTime;
+
 	public:
 
 		Timer();
 
 		void reset();
+		void rewind(double time);
 
-		// Getter
-		inline double elapsed() const { return glfwGetTime() - startTime; }
+		double elapsed() const;
+	private:
+		double m_StartTime;
 	};
 }

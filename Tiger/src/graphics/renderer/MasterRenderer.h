@@ -7,6 +7,7 @@
 #include "graphics/renderer/renderpass/ShadowmapPass.h"
 #include "graphics/renderer/renderpass/PostProcessPass.h"
 #include "graphics/renderer/renderpass/forward/ForwardProbePass.h"
+#include "graphics/renderer/renderpass/WaterPass.h"
 #include "scene/Scene3D.h"
 #include "utils/Timer.h"
 
@@ -26,6 +27,7 @@ namespace tiger {
 		// Other passes
 		ShadowmapPass m_ShadowmapPass;
 		PostProcessPass m_PostProcessPass;
+		WaterPass m_WaterPass;
 
 		// Forward passes
 		ForwardLightingPass m_ForwardLightingPass;

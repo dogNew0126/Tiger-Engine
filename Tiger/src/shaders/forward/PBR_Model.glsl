@@ -16,6 +16,9 @@ out vec3 ViewPosTangentSpace;
 uniform bool hasDisplacement;
 uniform vec3 viewPos;
 
+uniform bool usesClipPlane;
+uniform vec4 clipPlane;
+
 uniform mat3 normalMatrix;
 uniform mat4 model;
 uniform mat4 view;
@@ -34,6 +37,10 @@ void main() {
 		mat3 inverseTBN = transpose(TBN); // Calculate matrix to go from world -> tangent (orthogonal matrix's transpose = inverse)
 		FragPosTangentSpace = inverseTBN * FragPos;
 		ViewPosTangentSpace = inverseTBN * viewPos;
+	}
+
+	if (usesClipPlane) {
+		gl_ClipDistance[0] = dot(vec4(FragPos, 1.0), clipPlane);
 	}
 
 	gl_Position = projection * view * vec4(FragPos, 1.0);

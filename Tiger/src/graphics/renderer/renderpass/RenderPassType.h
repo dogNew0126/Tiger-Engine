@@ -21,6 +21,11 @@ namespace tiger {
 			Framebuffer* outputFramebuffer;
 		};
 
+		struct WaterPassOutput
+		{
+			Framebuffer* outputFramebuffer;
+		};
+
 		struct GeometryPassOutput {
 			GBuffer* outputGBuffer;
 		};

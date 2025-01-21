@@ -170,6 +170,7 @@
     <ClCompile Include="src\graphics\renderer\renderpass\PostProcessPass.cpp" />
     <ClCompile Include="src\graphics\renderer\renderpass\RenderPass.cpp" />
     <ClCompile Include="src\graphics\renderer\renderpass\ShadowmapPass.cpp" />
+    <ClCompile Include="src\graphics\renderer\renderpass\WaterPass.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
     <ClCompile Include="src\graphics\Skybox.cpp" />
     <ClCompile Include="src\graphics\texture\Cubemap.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="src\ui\DebugPane.cpp" />
     <ClCompile Include="src\ui\Pane.cpp" />
     <ClCompile Include="src\ui\RuntimePane.cpp" />
+    <ClCompile Include="src\ui\WaterPane.cpp" />
     <ClCompile Include="src\utils\FireUtils.cpp" />
     <ClCompile Include="src\utils\loaders\ShaderLoader.cpp" />
     <ClCompile Include="src\utils\loaders\TextureLoader.cpp" />
@@ -260,6 +262,7 @@
     <ClInclude Include="src\graphics\renderer\renderpass\RenderPass.h" />
     <ClInclude Include="src\graphics\renderer\renderpass\RenderPassType.h" />
     <ClInclude Include="src\graphics\renderer\renderpass\ShadowmapPass.h" />
+    <ClInclude Include="src\graphics\renderer\renderpass\WaterPass.h" />
     <ClInclude Include="src\graphics\Shader.h" />
     <ClInclude Include="src\graphics\Skybox.h" />
     <ClInclude Include="src\graphics\texture\Cubemap.h" />
@@ -280,6 +283,7 @@
     <ClInclude Include="src\ui\DebugPane.h" />
     <ClInclude Include="src\ui\Pane.h" />
     <ClInclude Include="src\ui\RuntimePane.h" />
+    <ClInclude Include="src\ui\WaterPane.h" />
     <ClInclude Include="src\utils\FileUtils.h" />
     <ClInclude Include="src\utils\loaders\ShaderLoader.h" />
     <ClInclude Include="src\utils\loaders\TextureLoader.h" />
@@ -322,6 +326,7 @@
     <None Include="src\shaders\Skybox.glsl" />
     <None Include="src\shaders\SSAO.glsl" />
     <None Include="src\shaders\SSAO_Blur.glsl" />
+    <None Include="src\shaders\Water.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vendor\Imgui\LICENSE.txt" />

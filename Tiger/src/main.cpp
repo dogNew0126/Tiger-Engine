@@ -6,6 +6,7 @@
 #include "utils/loaders/TextureLoader.h"
 #include "scene/Scene3D.h"
 #include "ui/RuntimePane.h"
+#include "ui/WaterPane.h"
 #include "ui/DebugPane.h"
 
 int main() {
@@ -20,6 +21,7 @@ int main() {
 	// Prepare the UI
 	tiger::RuntimePane runtimePane(glm::vec2(270.0f, 175.0f));
 	tiger::DebugPane debugPane(glm::vec2(270.0f, 400.0f));
+	tiger::WaterPane waterPane(glm::vec2(270.0f, 400.0f));
 
 	// Initialize the renderer
 	renderer.init();
@@ -50,9 +52,13 @@ int main() {
 		renderer.render();
 
 		// Display panes
-		tiger::Window::bind();
-		runtimePane.render();
-		debugPane.render();
+		if (!tiger::Window::getHideUI())
+		{
+			tiger::Window::bind();
+			runtimePane.render();
+			debugPane.render();
+			waterPane.render();
+		}
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

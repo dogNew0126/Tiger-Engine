@@ -198,6 +198,12 @@
     <ClCompile Include="src\graphics\renderer\renderpass\deferred\PostGBufferForwardPass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\renderer\renderpass\WaterPass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\WaterPane.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Shader.h">
@@ -398,6 +404,12 @@
     <ClInclude Include="src\graphics\renderer\renderpass\deferred\PostGBufferForwardPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\renderer\renderpass\WaterPass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\WaterPane.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\BRDF_Integration.glsl" />
@@ -424,6 +436,7 @@
     <None Include="src\shaders\post_process\ssao\SSAO_Blur.glsl" />
     <None Include="src\shaders\post_process\vignette\Vignette.glsl" />
     <None Include="src\shaders\post_process\chromatic_aberration\ChromaticAberration.glsl" />
+    <None Include="src\shaders\Water.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vendor\Imgui\LICENSE.txt" />

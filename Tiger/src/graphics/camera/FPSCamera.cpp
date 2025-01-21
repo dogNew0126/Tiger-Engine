@@ -76,6 +76,12 @@ namespace tiger {
 		processCameraRotation(mouseXDelta, mouseYDelta, true);
 	}
 
+	void FPSCamera::invertPitch()
+	{
+		m_CurrentPitch = -m_CurrentPitch;
+		updateCameraVectors();
+	}
+
 	void FPSCamera::processCameraMovement(glm::vec3& direction, float deltaTime) {
 		float velocity = m_CurrentMovementSpeed * deltaTime;
 		m_Position += direction * velocity;
